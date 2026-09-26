@@ -3,11 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
   <title>OmniConvert - Free Online Unit & Developer Converter Tools</title>
+  <meta name="description" content="Free online unit converter tools for developers, designers, and daily tasks. Convert PX to REM, HEX to RGB, live currency exchange rates, US sales tax, and metric units instantly.">
+  <meta name="keywords" content="px to rem converter, hex to rgb, currency converter, US sales tax calculator, unit converter, developer tools">
+  <meta name="author" content="OmniConvert">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="OmniConvert - Free Online Unit & Developer Tools">
+  <meta property="og:description" content="Fast, precise, and 100% free online conversion tools processed right in your browser.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon SVG (Lightning Icon ⚡) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
   <!-- Google Font: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -42,12 +58,12 @@
   <!-- TOP NAVBAR -->
   <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-purple-100/80 px-6 py-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
+      <a href="index.html" class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 via-indigo-400 to-pink-400 flex items-center justify-center font-black text-xl text-white shadow-md shadow-indigo-200">
           ⚡
         </div>
         <span class="text-xl font-extrabold tracking-tight text-slate-800">Omni<span class="gradient-text">Convert</span></span>
-      </div>
+      </a>
       
       <!-- Nav Tabs (Desktop) -->
       <nav class="hidden md:flex items-center gap-1 bg-purple-50/80 p-1.5 rounded-2xl border border-purple-100">
@@ -366,14 +382,14 @@
 
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER WITH LEGAL LINKS -->
   <footer class="border-t border-purple-100/80 bg-white/50 mt-12 py-8 text-center text-xs text-slate-500 font-medium">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
       <p>© 2026 OmniConvert. All rights reserved.</p>
       <div class="flex gap-6">
-        <a href="#" class="hover:text-slate-800 transition">Privacy Policy</a>
-        <a href="#" class="hover:text-slate-800 transition">Terms of Service</a>
-        <a href="#" class="hover:text-slate-800 transition">Contact Us</a>
+        <a href="privacy.html" class="hover:text-slate-800 transition">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-slate-800 transition">Terms of Service</a>
+        <a href="contact.html" class="hover:text-slate-800 transition">Contact Us</a>
       </div>
     </div>
   </footer>
