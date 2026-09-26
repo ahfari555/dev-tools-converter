@@ -1,101 +1,400 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dev & Design Web Converter Tools</title>
+  <title>OmniConvert - Professional Online Tools</title>
+  <!-- Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#f0f9ff', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen p-6">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white">
 
-  <header class="max-w-4xl mx-auto text-center my-8">
-    <h1 class="text-4xl font-extrabold text-indigo-400 mb-2">Dev & Designer Converter Tools</h1>
-    <p class="text-slate-400">Kumpulan alat konversi serbaguna untuk pengembang dan desainer web.</p>
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-cyan-500/20">
+          ⚡
+        </div>
+        <span class="text-xl font-bold tracking-tight text-white">Omni<span class="gradient-text">Convert</span></span>
+      </div>
+      
+      <!-- Nav Tabs (Desktop) -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-800/60 p-1.5 rounded-xl border border-slate-700/50">
+        <button onclick="switchTab('dev')" id="tab-dev" class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">💻 Dev & Design</button>
+        <button onclick="switchTab('finance')" id="tab-finance" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all duration-200">💰 Keuangan</button>
+        <button onclick="switchTab('units')" id="tab-units" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all duration-200">📐 Satuan Harian</button>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live API
+        </span>
+      </div>
+    </div>
   </header>
 
-  <main class="max-w-4xl mx-auto space-y-8">
+  <!-- MOBILE NAV -->
+  <div class="md:hidden flex overflow-x-auto gap-2 p-4 bg-slate-900/90 border-b border-slate-800 no-scrollbar">
+    <button onclick="switchTab('dev')" id="mob-tab-dev" class="px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">💻 Dev & Design</button>
+    <button onclick="switchTab('finance')" id="mob-tab-finance" class="px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap text-slate-400 bg-slate-800">💰 Keuangan</button>
+    <button onclick="switchTab('units')" id="mob-tab-units" class="px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap text-slate-400 bg-slate-800">📐 Satuan Harian</button>
+  </div>
 
-    <!-- TOOL 1: PX to REM / EM Converter -->
-    <section class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-      <h2 class="text-2xl font-bold mb-4 text-indigo-300">1. PX ke REM / EM Converter</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-        <div>
-          <label class="block text-sm font-medium mb-1">Base Font Size (PX):</label>
-          <input type="number" id="basePx" value="16" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" oninput="convertPx()">
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Input Pixels (PX):</label>
-          <input type="number" id="inputPx" value="16" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white" oninput="convertPx()">
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Hasil Konversi:</label>
-          <div class="flex gap-2">
-            <input type="text" id="resultRem" readonly class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-indigo-400 font-mono font-bold">
-            <button onclick="copyToClipboard('resultRem')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded text-sm font-medium">Copy</button>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- HERO SECTION -->
+  <section class="max-w-7xl mx-auto px-6 pt-10 pb-6 text-center">
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
+      Serba Cepat. Presisi. <span class="gradient-text">Gratis Tanpa Batas.</span>
+    </h1>
+    <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">
+      Kumpulan alat konversi modern untuk developer, desainer, dan bisnis harian. Semua diproses langsung di browsermu dengan aman.
+    </p>
+  </section>
 
-    <!-- TOOL 2: HEX to RGB / HSL Color Converter -->
-    <section class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-      <h2 class="text-2xl font-bold mb-4 text-indigo-300">2. Color Converter (HEX ke RGB & HSL)</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="block text-sm font-medium mb-1">Pilih / Masukkan HEX Color:</label>
-          <div class="flex gap-2">
-            <input type="color" id="colorPicker" value="#6366f1" class="h-10 w-12 rounded cursor-pointer border-0 bg-transparent" onchange="convertColorFromPicker()">
-            <input type="text" id="hexInput" value="#6366f1" class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white font-mono" oninput="convertColor()">
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-6 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+    <!-- LEFT / MAIN CONTENT AREA (3 COLS) -->
+    <div class="lg:col-span-3 space-y-8">
+
+      <!-- ================= CATEGORY 1: DEV & DESIGN ================= -->
+      <div id="sec-dev" class="space-y-8">
+
+        <!-- TOOL: PX to REM -->
+        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl hover:border-cyan-500/30 transition duration-300">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <span class="p-2 bg-cyan-500/10 text-cyan-400 rounded-lg text-lg">📏</span> PX to REM / EM
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">Konversi piksel CSS ke satuan fleksibel rem/em</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 bg-slate-800 text-slate-300 rounded-md font-mono">CSS Unit</span>
           </div>
-        </div>
-        <div class="space-y-3">
-          <div>
-            <label class="block text-xs font-medium text-slate-400 mb-1">RGB Format:</label>
-            <div class="flex gap-2">
-              <input type="text" id="rgbResult" readonly class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-indigo-400 font-mono">
-              <button onclick="copyToClipboard('rgbResult')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded text-sm font-medium">Copy</button>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Base Font Size (PX)</label>
+              <input type="number" id="basePx" value="16" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition" oninput="convertPx()">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Target Pixels (PX)</label>
+              <input type="number" id="inputPx" value="24" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition" oninput="convertPx()">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Hasil (REM)</label>
+              <div class="relative">
+                <input type="text" id="resultRem" readonly class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-4 py-3 text-cyan-400 font-mono font-bold pr-20">
+                <button onclick="copyToClipboard('resultRem')" class="absolute right-2 top-2 bottom-2 bg-cyan-600 hover:bg-cyan-500 text-white px-3 text-xs font-semibold rounded-lg transition">Copy</button>
+              </div>
             </div>
           </div>
-          <div>
-            <label class="block text-xs font-medium text-slate-400 mb-1">HSL Format:</label>
-            <div class="flex gap-2">
-              <input type="text" id="hslResult" readonly class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-indigo-400 font-mono">
-              <button onclick="copyToClipboard('hslResult')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded text-sm font-medium">Copy</button>
+        </div>
+
+        <!-- TOOL: COLOR CONVERTER -->
+        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl hover:border-indigo-500/30 transition duration-300">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <span class="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg text-lg">🎨</span> Color Converter
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">Ubah HEX ke RGB, HSL, dan pratinjau warna instan</p>
+            </div>
+            <div id="colorPreview" class="w-10 h-10 rounded-xl border border-white/20 shadow-inner transition-all duration-300"></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Pilih Warna / Input HEX</label>
+              <div class="flex gap-3">
+                <input type="color" id="colorPicker" value="#6366f1" class="h-12 w-16 rounded-xl cursor-pointer border-0 bg-transparent" onchange="convertColorFromPicker()">
+                <input type="text" id="hexInput" value="#6366f1" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white font-mono uppercase focus:outline-none focus:border-indigo-500 transition" oninput="convertColor()">
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">RGB Output</label>
+                <div class="relative">
+                  <input type="text" id="rgbResult" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-indigo-300 font-mono text-sm pr-16">
+                  <button onclick="copyToClipboard('rgbResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 text-xs font-medium rounded-lg transition">Copy</button>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">HSL Output</label>
+                <div class="relative">
+                  <input type="text" id="hslResult" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-indigo-300 font-mono text-sm pr-16">
+                  <button onclick="copyToClipboard('hslResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 text-xs font-medium rounded-lg transition">Copy</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- TOOL 3: Text Case Converter -->
-    <section class="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-      <h2 class="text-2xl font-bold mb-4 text-indigo-300">3. Text Case & URL Slug Converter</h2>
-      <textarea id="caseInput" rows="3" placeholder="Ketik atau paste teks di sini..." class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-white mb-4"></textarea>
-      <div class="flex flex-wrap gap-2 mb-4">
-        <button onclick="transformText('upper')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded text-sm">UPPERCASE</button>
-        <button onclick="transformText('lower')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded text-sm">lowercase</button>
-        <button onclick="transformText('title')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded text-sm">Title Case</button>
-        <button onclick="transformText('slug')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded text-sm">url-slug-case</button>
+        <!-- TOOL: TEXT CASE -->
+        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl hover:border-purple-500/30 transition duration-300">
+          <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            <span class="p-2 bg-purple-500/10 text-purple-400 rounded-lg text-lg">🔤</span> Text Case & Slug Generator
+          </h2>
+          <p class="text-xs text-slate-400 mb-6">Ubah format teks kapitalisasi dan buat URL Slug ramah SEO</p>
+
+          <textarea id="caseInput" rows="3" placeholder="Ketik atau paste teks di sini..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition mb-4"></textarea>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            <button onclick="transformText('upper')" class="bg-slate-800 hover:bg-purple-600 hover:text-white text-slate-300 px-3.5 py-2 rounded-lg text-xs font-medium transition">UPPERCASE</button>
+            <button onclick="transformText('lower')" class="bg-slate-800 hover:bg-purple-600 hover:text-white text-slate-300 px-3.5 py-2 rounded-lg text-xs font-medium transition">lowercase</button>
+            <button onclick="transformText('title')" class="bg-slate-800 hover:bg-purple-600 hover:text-white text-slate-300 px-3.5 py-2 rounded-lg text-xs font-medium transition">Title Case</button>
+            <button onclick="transformText('slug')" class="bg-purple-600/30 text-purple-300 border border-purple-500/40 hover:bg-purple-600 hover:text-white px-3.5 py-2 rounded-lg text-xs font-medium transition">url-slug-case</button>
+          </div>
+
+          <div class="relative">
+            <input type="text" id="caseResult" readonly placeholder="Hasil konversi..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-purple-300 font-mono text-sm pr-20">
+            <button onclick="copyToClipboard('caseResult')" class="absolute right-2 top-2 bottom-2 bg-purple-600 hover:bg-purple-500 text-white px-3 text-xs font-semibold rounded-lg transition">Copy</button>
+          </div>
+        </div>
+
       </div>
-      <div class="flex gap-2">
-        <input type="text" id="caseResult" readonly class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-indigo-400 font-mono" placeholder="Hasil konversi teks akan muncul di sini...">
-        <button onclick="copyToClipboard('caseResult')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded text-sm font-medium">Copy</button>
+
+      <!-- ================= CATEGORY 2: FINANCE ================= -->
+      <div id="sec-finance" class="space-y-8 hidden">
+
+        <!-- TOOL: CURRENCY CONVERTER -->
+        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl border-emerald-500/20">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg text-lg">💵</span> Real-time Currency Converter
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">Kurs mata uang langsung yang terupdate otomatis</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-full font-medium">Live Rates</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Jumlah Nilai</label>
+              <input type="number" id="currencyAmount" value="100" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition" oninput="convertCurrency()">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Mata Uang</label>
+              <div class="flex gap-2 items-center">
+                <select id="fromCurrency" class="bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-3 text-white text-sm w-full focus:outline-none focus:border-emerald-500" onchange="convertCurrency()">
+                  <option value="USD">USD ($)</option>
+                  <option value="IDR">IDR (Rp)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="SGD">SGD ($)</option>
+                  <option value="JPY">JPY (¥)</option>
+                </select>
+                <span class="text-slate-500">➔</span>
+                <select id="toCurrency" class="bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-3 text-white text-sm w-full focus:outline-none focus:border-emerald-500" onchange="convertCurrency()">
+                  <option value="IDR">IDR (Rp)</option>
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="SGD">SGD ($)</option>
+                  <option value="JPY">JPY (¥)</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Hasil Estimasi</label>
+              <input type="text" id="currencyResult" readonly placeholder="Memuat kurs..." class="w-full bg-slate-950 border border-emerald-500/40 rounded-xl px-4 py-3 text-emerald-400 font-mono font-bold">
+            </div>
+          </div>
+        </div>
+
+        <!-- TOOL: TAX & DISCOUNT -->
+        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl">
+          <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg text-lg">🏷️</span> Kalkulator PPN / Pajak & Diskon
+          </h2>
+          <p class="text-xs text-slate-400 mb-6">Hitung potongan belanja serta penambahan pajak PPN secara presisi</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Harga Awal (Rp)</label>
+              <input type="number" id="priceInput" value="150000" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none" oninput="calculateTaxAndDiscount()">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">Diskon (%)</label>
+              <input type="number" id="discountInput" value="15" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none" oninput="calculateTaxAndDiscount()">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-2">PPN (%)</label>
+              <input type="number" id="taxInput" value="11" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none" oninput="calculateTaxAndDiscount()">
+            </div>
+          </div>
+
+          <div class="p-5 bg-slate-950/80 rounded-xl border border-slate-800/80 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div>
+              <span class="text-slate-400 text-xs block mb-1">Penghematan Diskon</span>
+              <span id="discountSavings" class="font-bold text-emerald-400 text-lg">Rp 0</span>
+            </div>
+            <div>
+              <span class="text-slate-400 text-xs block mb-1">Nominal Pajak PPN</span>
+              <span id="taxAmount" class="font-bold text-amber-400 text-lg">Rp 0</span>
+            </div>
+            <div class="md:border-l md:border-slate-800 md:pl-4">
+              <span class="text-slate-400 text-xs block mb-1">Total Akhir Bayar</span>
+              <span id="finalPrice" class="font-extrabold text-cyan-400 text-xl">Rp 0</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </section>
+
+      <!-- ================= CATEGORY 3: UNITS ================= -->
+      <div id="sec-units" class="space-y-8 hidden">
+
+        <!-- TOOL: LENGTH & WEIGHT -->
+        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl">
+          <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+            <span class="p-2 bg-amber-500/10 text-amber-400 rounded-lg text-lg">⚖️</span> Konversi Satuan Suhu & Berat
+          </h2>
+          <p class="text-xs text-slate-400 mb-6">Konversi cepat Celcius ke Fahrenheit & Kilogram ke Pounds</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Suhu -->
+            <div class="space-y-4 p-4 bg-slate-900/50 rounded-xl border border-slate-800">
+              <h3 class="font-semibold text-sm text-amber-400">Thermometer (°C ↔ °F)</h3>
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Celcius (°C)</label>
+                <input type="number" id="tempC" value="30" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg p-2.5 text-white" oninput="convertTemp()">
+              </div>
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Fahrenheit (°F)</label>
+                <input type="text" id="tempF" readonly class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-amber-300 font-mono font-bold">
+              </div>
+            </div>
+
+            <!-- Berat -->
+            <div class="space-y-4 p-4 bg-slate-900/50 rounded-xl border border-slate-800">
+              <h3 class="font-semibold text-sm text-amber-400">Berat (KG ↔ LBS)</h3>
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Kilogram (KG)</label>
+                <input type="number" id="weightKg" value="70" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg p-2.5 text-white" oninput="convertWeight()">
+              </div>
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Pounds (LBS)</label>
+                <input type="text" id="weightLbs" readonly class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-amber-300 font-mono font-bold">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT / SIDEBAR MONETIZATION & ADS AREA (1 COL) -->
+    <aside class="space-y-6">
+
+      <!-- SPONSORED / ADS CARD 1 -->
+      <div class="glass-card p-5 rounded-2xl border border-cyan-500/20 relative overflow-hidden group">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-500/20 transition"></div>
+        <span class="text-[10px] font-bold tracking-wider uppercase bg-slate-800 text-slate-400 px-2 py-0.5 rounded mb-3 inline-block">Sponsor / Ad Space</span>
+        <h3 class="text-sm font-bold text-white mb-1">Butuh Hosting Web Super Cepat?</h3>
+        <p class="text-xs text-slate-400 mb-3">Dapatkan diskon hingga 75% domain & hosting NVMe untuk websitemu.</p>
+        <a href="#" class="block text-center bg-gradient-to-r from-cyan-500 to-indigo-600 hover:opacity-90 text-white text-xs font-semibold py-2 rounded-lg transition shadow-md shadow-cyan-500/20">Cek Penawaran 🔥</a>
+      </div>
+
+      <!-- DONATION / SUPPORT CARD -->
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">☕</div>
+        <h3 class="text-sm font-bold text-white mb-1">Suka dengan Alat Ini?</h3>
+        <p class="text-xs text-slate-400 mb-4">Bantu dukung pengembangan server & fitur baru gratis dengan berdonasi kopi.</p>
+        <a href="https://saweria.co" target="_blank" class="inline-flex items-center justify-center gap-2 w-full bg-slate-800 hover:bg-slate-700 text-pink-300 border border-pink-500/30 text-xs font-semibold py-2.5 rounded-lg transition">Dukung via Saweria</a>
+      </div>
+
+      <!-- ADSENSE PLACEHOLDER BANNER -->
+      <div class="glass-card p-4 rounded-2xl border border-dashed border-slate-700 text-center min-h-[250px] flex flex-col items-center justify-center">
+        <span class="text-xs text-slate-500 font-mono">Google AdSense Banner<br>(300x250 Sidebar)</span>
+      </div>
+
+    </aside>
 
   </main>
 
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-slate-900/50 mt-12 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p>© 2026 OmniConvert. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-slate-300 transition">Privacy Policy</a>
+        <a href="#" class="hover:text-slate-300 transition">Terms of Service</a>
+        <a href="#" class="hover:text-slate-300 transition">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
   <script>
+    // Tab Navigation
+    function switchTab(tab) {
+      ['dev', 'finance', 'units'].forEach(t => {
+        document.getElementById(`sec-${t}`).classList.add('hidden');
+        
+        // Desktop Tab Styles
+        const btn = document.getElementById(`tab-${t}`);
+        if(btn) {
+          btn.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white";
+        }
+        
+        // Mobile Tab Styles
+        const mobBtn = document.getElementById(`mob-tab-${t}`);
+        if(mobBtn) {
+          mobBtn.className = "px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap text-slate-400 bg-slate-800";
+        }
+      });
+
+      document.getElementById(`sec-${tab}`).classList.remove('hidden');
+
+      const activeBtn = document.getElementById(`tab-${tab}`);
+      if(activeBtn) activeBtn.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+
+      const activeMobBtn = document.getElementById(`mob-tab-${tab}`);
+      if(activeMobBtn) activeMobBtn.className = "px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+    }
+
+    // 1. PX to REM
     function convertPx() {
       const base = parseFloat(document.getElementById('basePx').value) || 16;
       const px = parseFloat(document.getElementById('inputPx').value) || 0;
       const rem = (px / base).toFixed(4).replace(/\.?0+$/, "");
-      document.getElementById('resultRem').value = `${rem}rem`;
+      document.getElementById('resultRem').value = `${rem} rem`;
     }
 
+    // 2. Color Converter
     function convertColorFromPicker() {
-      const color = document.getElementById('colorPicker').value;
-      document.getElementById('hexInput').value = color;
+      document.getElementById('hexInput').value = document.getElementById('colorPicker').value;
       convertColor();
     }
 
@@ -104,25 +403,21 @@
       if (!hex.startsWith('#')) hex = '#' + hex;
       if (/^#[0-9A-F]{6}$/i.test(hex)) {
         document.getElementById('colorPicker').value = hex;
+        document.getElementById('colorPreview').style.backgroundColor = hex;
         
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
+        const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
         document.getElementById('rgbResult').value = `rgb(${r}, ${g}, ${b})`;
 
-        const rNorm = r / 255, gNorm = g / 255, bNorm = b / 255;
-        const max = Math.max(rNorm, gNorm, bNorm), min = Math.min(rNorm, gNorm, bNorm);
+        const rN = r / 255, gN = g / 255, bN = b / 255;
+        const max = Math.max(rN, gN, bN), min = Math.min(rN, gN, bN);
         let h, s, l = (max + min) / 2;
-
-        if (max === min) {
-          h = s = 0;
-        } else {
+        if (max === min) { h = s = 0; } else {
           const d = max - min;
           s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
           switch (max) {
-            case rNorm: h = (gNorm - bNorm) / d + (gNorm < bNorm ? 6 : 0); break;
-            case gNorm: h = (bNorm - rNorm) / d + 2; break;
-            case bNorm: h = (rNorm - gNorm) / d + 4; break;
+            case rN: h = (gN - bN) / d + (gN < bN ? 6 : 0); break;
+            case gN: h = (bN - rN) / d + 2; break;
+            case bN: h = (rN - gN) / d + 4; break;
           }
           h /= 6;
         }
@@ -130,6 +425,7 @@
       }
     }
 
+    // 3. Text Case & Slug
     function transformText(type) {
       const text = document.getElementById('caseInput').value;
       let result = '';
@@ -144,6 +440,57 @@
       document.getElementById('caseResult').value = result;
     }
 
+    // 4. Currency
+    async function convertCurrency() {
+      const amount = parseFloat(document.getElementById('currencyAmount').value) || 0;
+      const from = document.getElementById('fromCurrency').value;
+      const to = document.getElementById('toCurrency').value;
+      const resultEl = document.getElementById('currencyResult');
+
+      if (from === to) {
+        resultEl.value = `${amount.toLocaleString()} ${to}`;
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+        const data = await res.json();
+        const rate = data.rates[to];
+        const converted = (amount * rate).toLocaleString(undefined, { maximumFractionDigits: 2 });
+        resultEl.value = `${converted} ${to}`;
+      } catch (err) {
+        resultEl.value = "Gagal memuat kurs";
+      }
+    }
+
+    // 5. Tax & Discount
+    function calculateTaxAndDiscount() {
+      const price = parseFloat(document.getElementById('priceInput').value) || 0;
+      const discountPercent = parseFloat(document.getElementById('discountInput').value) || 0;
+      const taxPercent = parseFloat(document.getElementById('taxInput').value) || 0;
+
+      const discountAmount = price * (discountPercent / 100);
+      const priceAfterDiscount = price - discountAmount;
+      const taxAmount = priceAfterDiscount * (taxPercent / 100);
+      const total = priceAfterDiscount + taxAmount;
+
+      document.getElementById('discountSavings').innerText = `Rp ${discountAmount.toLocaleString('id-ID')}`;
+      document.getElementById('taxAmount').innerText = `Rp ${taxAmount.toLocaleString('id-ID')}`;
+      document.getElementById('finalPrice').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+    }
+
+    // 6. Temp & Weight
+    function convertTemp() {
+      const c = parseFloat(document.getElementById('tempC').value) || 0;
+      document.getElementById('tempF').value = `${((c * 9/5) + 32).toFixed(1)} °F`;
+    }
+
+    function convertWeight() {
+      const kg = parseFloat(document.getElementById('weightKg').value) || 0;
+      document.getElementById('weightLbs').value = `${(kg * 2.20462).toFixed(2)} lbs`;
+    }
+
+    // Clipboard Copy
     function copyToClipboard(id) {
       const input = document.getElementById(id);
       if (input.value) {
@@ -152,8 +499,13 @@
       }
     }
 
+    // Init
     convertPx();
     convertColor();
+    convertCurrency();
+    calculateTaxAndDiscount();
+    convertTemp();
+    convertWeight();
   </script>
 </body>
 </html>
