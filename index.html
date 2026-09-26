@@ -10,8 +10,8 @@
 
   <!-- SEO Meta Tags -->
   <title>OmniConvert - Free Online Unit & Developer Converter Tools</title>
-  <meta name="description" content="Free online unit converter tools for developers, designers, and daily tasks. Convert PX to REM, HEX to RGB, live currency exchange rates, US sales tax, and metric units instantly.">
-  <meta name="keywords" content="px to rem converter, hex to rgb, currency converter, US sales tax calculator, unit converter, developer tools">
+  <meta name="description" content="Free online unit converter tools for developers, designers, and daily tasks. Convert PX to REM, Base64, JSON formatter, aspect ratio, live currency exchange rates, US sales tax, and metric units instantly.">
+  <meta name="keywords" content="px to rem converter, base64 encoder decoder, json formatter, aspect ratio calculator, hex to rgb, currency converter, US sales tax calculator, unit converter, developer tools">
   <meta name="author" content="OmniConvert">
   <meta name="robots" content="index, follow">
 
@@ -110,7 +110,7 @@
       <!-- ================= CATEGORY 1: DEV & DESIGN ================= -->
       <div id="sec-dev" class="space-y-8">
 
-        <!-- TOOL: PX to REM -->
+        <!-- TOOL 1: PX to REM -->
         <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
           <div class="flex items-center justify-between mb-6">
             <div>
@@ -141,7 +141,93 @@
           </div>
         </div>
 
-        <!-- TOOL: COLOR CONVERTER -->
+        <!-- NEW TOOL 2: BASE64 ENCODER / DECODER -->
+        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
+                <span class="p-2.5 bg-blue-100 text-blue-600 rounded-2xl text-lg">🔒</span> Base64 Encoder & Decoder
+              </h2>
+              <p class="text-xs text-slate-500 mt-1 font-medium">Encode plain text to Base64 format or decode it back instantly</p>
+            </div>
+            <span class="text-xs px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-mono font-semibold border border-blue-100">Encoding</span>
+          </div>
+
+          <div class="space-y-4">
+            <textarea id="base64Input" rows="3" placeholder="Type or paste plain text or Base64 code here..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-300 font-mono text-sm transition"></textarea>
+            
+            <div class="flex gap-3">
+              <button onclick="processBase64('encode')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-sm">Encode to Base64</button>
+              <button onclick="processBase64('decode')" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Decode from Base64</button>
+            </div>
+
+            <div class="relative">
+              <textarea id="base64Output" readonly rows="3" placeholder="Result will appear here..." class="w-full bg-blue-50/50 border border-blue-200 rounded-2xl p-4 text-blue-900 font-mono text-sm font-medium focus:outline-none"></textarea>
+              <button onclick="copyToClipboard('base64Output')" class="absolute right-3 top-3 bg-white border border-blue-200 text-blue-600 hover:bg-blue-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW TOOL 3: JSON FORMATTER & VALIDATOR -->
+        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
+                <span class="p-2.5 bg-emerald-100 text-emerald-600 rounded-2xl text-lg">⚙️</span> JSON Formatter & Validator
+              </h2>
+              <p class="text-xs text-slate-500 mt-1 font-medium">Format, beautify, and validate JSON data structures</p>
+            </div>
+            <span id="jsonStatus" class="text-xs px-3 py-1 bg-slate-100 text-slate-600 rounded-full font-mono font-semibold">Ready</span>
+          </div>
+
+          <div class="space-y-4">
+            <textarea id="jsonInput" rows="4" placeholder='Paste unformatted JSON here (e.g. {"name":"Omni","active":true})' class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 font-mono text-sm transition"></textarea>
+            
+            <div class="flex gap-3">
+              <button onclick="formatJSON()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-sm">Beautify JSON</button>
+              <button onclick="minifyJSON()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Minify JSON</button>
+            </div>
+
+            <div class="relative">
+              <textarea id="jsonOutput" readonly rows="5" placeholder="Formatted JSON output..." class="w-full bg-emerald-50/50 border border-emerald-200 rounded-2xl p-4 text-emerald-950 font-mono text-sm font-medium focus:outline-none"></textarea>
+              <button onclick="copyToClipboard('jsonOutput')" class="absolute right-3 top-3 bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW TOOL 4: ASPECT RATIO CALCULATOR -->
+        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
+                <span class="p-2.5 bg-pink-100 text-pink-600 rounded-2xl text-lg">📐</span> Aspect Ratio Calculator
+              </h2>
+              <p class="text-xs text-slate-500 mt-1 font-medium">Calculate missing dimensions while preserving image & video aspect ratios</p>
+            </div>
+            <span class="text-xs px-3 py-1 bg-pink-50 text-pink-700 rounded-full font-mono font-semibold border border-pink-100">Design</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Original Width (W1)</label>
+              <input type="number" id="ratioW1" value="1920" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calcAspectRatio()">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Original Height (H1)</label>
+              <input type="number" id="ratioH1" value="1080" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calcAspectRatio()">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">New Width (W2)</label>
+              <input type="number" id="ratioW2" value="1280" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calcAspectRatio()">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">New Height (H2)</label>
+              <input type="text" id="ratioH2Result" readonly class="w-full bg-pink-50/70 border border-pink-200 rounded-2xl px-4 py-3 text-pink-700 font-mono font-extrabold">
+            </div>
+          </div>
+        </div>
+
+        <!-- TOOL 5: COLOR CONVERTER -->
         <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
           <div class="flex items-center justify-between mb-6">
             <div>
@@ -181,7 +267,7 @@
           </div>
         </div>
 
-        <!-- TOOL: TEXT CASE -->
+        <!-- TOOL 6: TEXT CASE -->
         <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
           <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2.5">
             <span class="p-2.5 bg-purple-100 text-purple-600 rounded-2xl text-lg">🔤</span> Text Case Converter & URL Slug Generator
@@ -444,7 +530,66 @@
       document.getElementById('resultRem').value = `${rem} rem`;
     }
 
-    // 2. Color Converter
+    // 2. Base64 Encoder / Decoder
+    function processBase64(mode) {
+      const input = document.getElementById('base64Input').value;
+      const output = document.getElementById('base64Output');
+      try {
+        if (mode === 'encode') {
+          output.value = btoa(unescape(encodeURIComponent(input)));
+        } else {
+          output.value = decodeURIComponent(escape(atob(input)));
+        }
+      } catch (err) {
+        output.value = "Error: Invalid input for Base64 " + mode;
+      }
+    }
+
+    // 3. JSON Formatter & Minifier
+    function formatJSON() {
+      const input = document.getElementById('jsonInput').value;
+      const status = document.getElementById('jsonStatus');
+      try {
+        const parsed = JSON.parse(input);
+        document.getElementById('jsonOutput').value = JSON.stringify(parsed, null, 2);
+        status.innerText = "Valid JSON";
+        status.className = "text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full font-mono font-semibold";
+      } catch (err) {
+        document.getElementById('jsonOutput').value = "Invalid JSON structure:\n" + err.message;
+        status.innerText = "Invalid JSON";
+        status.className = "text-xs px-3 py-1 bg-rose-100 text-rose-700 rounded-full font-mono font-semibold";
+      }
+    }
+
+    function minifyJSON() {
+      const input = document.getElementById('jsonInput').value;
+      const status = document.getElementById('jsonStatus');
+      try {
+        const parsed = JSON.parse(input);
+        document.getElementById('jsonOutput').value = JSON.stringify(parsed);
+        status.innerText = "Minified";
+        status.className = "text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full font-mono font-semibold";
+      } catch (err) {
+        document.getElementById('jsonOutput').value = "Invalid JSON structure:\n" + err.message;
+        status.innerText = "Invalid JSON";
+        status.className = "text-xs px-3 py-1 bg-rose-100 text-rose-700 rounded-full font-mono font-semibold";
+      }
+    }
+
+    // 4. Aspect Ratio Calculator
+    function calcAspectRatio() {
+      const w1 = parseFloat(document.getElementById('ratioW1').value) || 0;
+      const h1 = parseFloat(document.getElementById('ratioH1').value) || 0;
+      const w2 = parseFloat(document.getElementById('ratioW2').value) || 0;
+      if (w1 > 0 && h1 > 0 && w2 > 0) {
+        const h2 = (w2 * h1) / w1;
+        document.getElementById('ratioH2Result').value = `${Math.round(h2)} px`;
+      } else {
+        document.getElementById('ratioH2Result').value = "0 px";
+      }
+    }
+
+    // 5. Color Converter
     function convertColorFromPicker() {
       document.getElementById('hexInput').value = document.getElementById('colorPicker').value;
       convertColor();
@@ -477,7 +622,7 @@
       }
     }
 
-    // 3. Text Case & Slug
+    // 6. Text Case & Slug
     function transformText(type) {
       const text = document.getElementById('caseInput').value;
       let result = '';
@@ -492,7 +637,7 @@
       document.getElementById('caseResult').value = result;
     }
 
-    // 4. US Currency
+    // 7. US Currency
     async function convertCurrency() {
       const amount = parseFloat(document.getElementById('currencyAmount').value) || 0;
       const from = document.getElementById('fromCurrency').value;
@@ -515,7 +660,7 @@
       }
     }
 
-    // 5. US Tax, Discount & Tip Calculator
+    // 8. US Tax, Discount & Tip Calculator
     function calculateTaxAndDiscount() {
       const price = parseFloat(document.getElementById('priceInput').value) || 0;
       const discountPercent = parseFloat(document.getElementById('discountInput').value) || 0;
@@ -536,7 +681,7 @@
       document.getElementById('finalPrice').innerText = fmt(total);
     }
 
-    // 6. US Units Converters
+    // 9. US Units Converters
     function convertTempUS() {
       const f = parseFloat(document.getElementById('tempF_input').value) || 0;
       const c = (f - 32) * (5/9);
@@ -566,6 +711,7 @@
 
     // Init
     convertPx();
+    calcAspectRatio();
     convertColor();
     convertCurrency();
     calculateTaxAndDiscount();
