@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://dev-tools-converter-alpha.vercel.app/sitemap.xml
