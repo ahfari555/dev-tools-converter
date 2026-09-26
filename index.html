@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +32,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
@@ -41,13 +42,30 @@
   </script>
   <style>
     body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    html.light body {
       background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #faf5ff 100%);
+      color: #1e293b;
+    }
+    html.dark body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #111827 100%);
+      color: #f8fafc;
     }
     .pastel-card {
+      transition: all 0.3s ease;
+    }
+    html.light .pastel-card {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.6);
       box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.15);
+    }
+    html.dark .pastel-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
     .gradient-text {
       background: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #a855f7 100%);
@@ -57,48 +75,63 @@
     }
   </style>
 </head>
-<body class="text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-purple-200 selection:text-purple-900">
+<body class="font-sans min-h-screen flex flex-col antialiased selection:bg-purple-200 selection:text-purple-900">
 
   <!-- TOP NAVBAR -->
-  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-purple-100/80 px-6 py-4">
+  <header class="sticky top-0 z-50 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md border-b border-purple-100/80 dark:border-slate-800 px-6 py-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 via-indigo-400 to-pink-400 flex items-center justify-center font-black text-xl text-white shadow-md shadow-indigo-200">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 via-indigo-400 to-pink-400 flex items-center justify-center font-black text-xl text-white shadow-md shadow-indigo-200 dark:shadow-none">
           ⚡
         </div>
-        <span class="text-xl font-extrabold tracking-tight text-slate-800">Omni<span class="gradient-text">Convert</span></span>
+        <span class="text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">Omni<span class="gradient-text">Convert</span></span>
       </a>
       
       <!-- Nav Tabs (Desktop) -->
-      <nav class="hidden md:flex items-center gap-1 bg-purple-50/80 p-1.5 rounded-2xl border border-purple-100">
-        <button onclick="switchTab('dev')" id="tab-dev" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white text-indigo-600 shadow-sm border border-purple-100">💻 Dev & Design</button>
-        <button onclick="switchTab('finance')" id="tab-finance" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 hover:text-slate-800 transition-all duration-200">💵 Finance & Tax</button>
-        <button onclick="switchTab('units')" id="tab-units" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 hover:text-slate-800 transition-all duration-200">📐 US & Metric Units</button>
+      <nav class="hidden md:flex items-center gap-1 bg-purple-50/80 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-purple-100 dark:border-slate-700">
+        <button onclick="switchTab('dev')" id="tab-dev" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm border border-purple-100 dark:border-transparent">💻 Dev & Design</button>
+        <button onclick="switchTab('finance')" id="tab-finance" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-all duration-200">💵 Finance & Tax</button>
+        <button onclick="switchTab('units')" id="tab-units" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-all duration-200">📐 US & Metric Units</button>
       </nav>
 
       <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200/60">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Rates
+        <!-- Dark Mode Toggle Button -->
+        <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <span id="themeIcon">🌙</span>
+        </button>
+
+        <!-- Share Button -->
+        <button onclick="shareWebsite()" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-100 transition border border-indigo-100 dark:border-indigo-800">
+          🚀 Share
+        </button>
+
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live
         </span>
       </div>
     </div>
   </header>
 
   <!-- MOBILE NAV -->
-  <div class="md:hidden flex overflow-x-auto gap-2 p-4 bg-white/80 border-b border-purple-100 no-scrollbar">
-    <button onclick="switchTab('dev')" id="mob-tab-dev" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 text-indigo-700">💻 Dev & Design</button>
-    <button onclick="switchTab('finance')" id="mob-tab-finance" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 bg-slate-50">💵 Finance & Tax</button>
-    <button onclick="switchTab('units')" id="mob-tab-units" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 bg-slate-50">📐 US & Metric Units</button>
+  <div class="md:hidden flex overflow-x-auto gap-2 p-4 bg-white/80 dark:bg-slate-900/80 border-b border-purple-100 dark:border-slate-800 no-scrollbar">
+    <button onclick="switchTab('dev')" id="mob-tab-dev" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 dark:bg-indigo-600 text-indigo-700 dark:text-white">💻 Dev & Design</button>
+    <button onclick="switchTab('finance')" id="mob-tab-finance" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800">💵 Finance & Tax</button>
+    <button onclick="switchTab('units')" id="mob-tab-units" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800">📐 US & Metric Units</button>
   </div>
 
-  <!-- HERO SECTION -->
-  <section class="max-w-7xl mx-auto px-6 pt-10 pb-6 text-center">
-    <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-800 mb-3">
+  <!-- HERO SECTION WITH SEARCH BAR -->
+  <section class="max-w-7xl mx-auto px-6 pt-8 pb-4 text-center">
+    <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-white mb-3">
       Fast. Precise. <span class="gradient-text">100% Free Online Tools.</span>
     </h1>
-    <p class="text-slate-500 text-sm md:text-base max-w-2xl mx-auto font-medium">
+    <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-medium mb-6">
       Essential developer, financial, and unit conversion tools designed for creators and daily productivity. 100% private and browser-based.
     </p>
+
+    <!-- UNIVERSAL SEARCH BAR -->
+    <div class="max-w-md mx-auto relative">
+      <input type="text" id="toolSearch" oninput="filterTools()" placeholder="🔍 Search any tool (e.g. PX, Base64, Tax, Currency)..." class="w-full bg-white dark:bg-slate-800/90 border border-purple-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm transition">
+    </div>
   </section>
 
   <!-- MAIN CONTAINER -->
@@ -111,156 +144,156 @@
       <div id="sec-dev" class="space-y-8">
 
         <!-- TOOL 1: PX to REM -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="px rem em css converter unit font size">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
-                <span class="p-2.5 bg-sky-100 text-sky-600 rounded-2xl text-lg">📏</span> PX to REM / EM Converter
+              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+                <span class="p-2.5 bg-sky-100 dark:bg-sky-900/60 text-sky-600 dark:text-sky-300 rounded-2xl text-lg">📏</span> PX to REM / EM Converter
               </h2>
-              <p class="text-xs text-slate-500 mt-1 font-medium">Convert CSS pixels to relative units for modern web design</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Convert CSS pixels to relative units for modern web design</p>
             </div>
-            <span class="text-xs px-3 py-1 bg-sky-50 text-sky-700 rounded-full font-mono font-semibold border border-sky-100">CSS Unit</span>
+            <span class="text-xs px-3 py-1 bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 rounded-full font-mono font-semibold border border-sky-100 dark:border-sky-800">CSS Unit</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Base Font Size (PX)</label>
-              <input type="number" id="basePx" value="16" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Base Font Size (PX)</label>
+              <input type="number" id="basePx" value="16" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Target Pixels (PX)</label>
-              <input type="number" id="inputPx" value="24" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Target Pixels (PX)</label>
+              <input type="number" id="inputPx" value="24" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Result (REM)</label>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Result (REM)</label>
               <div class="relative">
-                <input type="text" id="resultRem" readonly class="w-full bg-sky-50/70 border border-sky-200 rounded-2xl px-4 py-3 text-sky-700 font-mono font-extrabold pr-20">
+                <input type="text" id="resultRem" readonly class="w-full bg-sky-50/70 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 rounded-2xl px-4 py-3 text-sky-700 dark:text-sky-300 font-mono font-extrabold pr-20">
                 <button onclick="copyToClipboard('resultRem')" class="absolute right-2 top-2 bottom-2 bg-sky-500 hover:bg-sky-600 text-white px-3.5 text-xs font-semibold rounded-xl transition shadow-sm">Copy</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- NEW TOOL 2: BASE64 ENCODER / DECODER -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+        <!-- TOOL 2: BASE64 ENCODER / DECODER -->
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="base64 encode decode binary string text crypto">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
-                <span class="p-2.5 bg-blue-100 text-blue-600 rounded-2xl text-lg">🔒</span> Base64 Encoder & Decoder
+              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+                <span class="p-2.5 bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 rounded-2xl text-lg">🔒</span> Base64 Encoder & Decoder
               </h2>
-              <p class="text-xs text-slate-500 mt-1 font-medium">Encode plain text to Base64 format or decode it back instantly</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Encode plain text to Base64 format or decode it back instantly</p>
             </div>
-            <span class="text-xs px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-mono font-semibold border border-blue-100">Encoding</span>
+            <span class="text-xs px-3 py-1 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 rounded-full font-mono font-semibold border border-blue-100 dark:border-blue-800">Encoding</span>
           </div>
 
           <div class="space-y-4">
-            <textarea id="base64Input" rows="3" placeholder="Type or paste plain text or Base64 code here..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-300 font-mono text-sm transition"></textarea>
+            <textarea id="base64Input" rows="3" placeholder="Type or paste plain text or Base64 code here..." class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-300 font-mono text-sm transition"></textarea>
             
             <div class="flex gap-3">
               <button onclick="processBase64('encode')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-sm">Encode to Base64</button>
-              <button onclick="processBase64('decode')" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Decode from Base64</button>
+              <button onclick="processBase64('decode')" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Decode from Base64</button>
             </div>
 
             <div class="relative">
-              <textarea id="base64Output" readonly rows="3" placeholder="Result will appear here..." class="w-full bg-blue-50/50 border border-blue-200 rounded-2xl p-4 text-blue-900 font-mono text-sm font-medium focus:outline-none"></textarea>
-              <button onclick="copyToClipboard('base64Output')" class="absolute right-3 top-3 bg-white border border-blue-200 text-blue-600 hover:bg-blue-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
+              <textarea id="base64Output" readonly rows="3" placeholder="Result will appear here..." class="w-full bg-blue-50/50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 rounded-2xl p-4 text-blue-900 dark:text-blue-200 font-mono text-sm font-medium focus:outline-none"></textarea>
+              <button onclick="copyToClipboard('base64Output')" class="absolute right-3 top-3 bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-700 text-blue-600 dark:text-blue-300 hover:bg-blue-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
             </div>
           </div>
         </div>
 
-        <!-- NEW TOOL 3: JSON FORMATTER & VALIDATOR -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+        <!-- TOOL 3: JSON FORMATTER & VALIDATOR -->
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="json formatter validator beautify minify parse object array">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
-                <span class="p-2.5 bg-emerald-100 text-emerald-600 rounded-2xl text-lg">⚙️</span> JSON Formatter & Validator
+              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+                <span class="p-2.5 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 rounded-2xl text-lg">⚙️</span> JSON Formatter & Validator
               </h2>
-              <p class="text-xs text-slate-500 mt-1 font-medium">Format, beautify, and validate JSON data structures</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Format, beautify, and validate JSON data structures</p>
             </div>
-            <span id="jsonStatus" class="text-xs px-3 py-1 bg-slate-100 text-slate-600 rounded-full font-mono font-semibold">Ready</span>
+            <span id="jsonStatus" class="text-xs px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full font-mono font-semibold">Ready</span>
           </div>
 
           <div class="space-y-4">
-            <textarea id="jsonInput" rows="4" placeholder='Paste unformatted JSON here (e.g. {"name":"Omni","active":true})' class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 font-mono text-sm transition"></textarea>
+            <textarea id="jsonInput" rows="4" placeholder='Paste unformatted JSON here (e.g. {"name":"Omni","active":true})' class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 font-mono text-sm transition"></textarea>
             
             <div class="flex gap-3">
               <button onclick="formatJSON()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-sm">Beautify JSON</button>
-              <button onclick="minifyJSON()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Minify JSON</button>
+              <button onclick="minifyJSON()" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Minify JSON</button>
             </div>
 
             <div class="relative">
-              <textarea id="jsonOutput" readonly rows="5" placeholder="Formatted JSON output..." class="w-full bg-emerald-50/50 border border-emerald-200 rounded-2xl p-4 text-emerald-950 font-mono text-sm font-medium focus:outline-none"></textarea>
-              <button onclick="copyToClipboard('jsonOutput')" class="absolute right-3 top-3 bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
+              <textarea id="jsonOutput" readonly rows="5" placeholder="Formatted JSON output..." class="w-full bg-emerald-50/50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-4 text-emerald-950 dark:text-emerald-200 font-mono text-sm font-medium focus:outline-none"></textarea>
+              <button onclick="copyToClipboard('jsonOutput')" class="absolute right-3 top-3 bg-white dark:bg-slate-800 border border-emerald-200 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
             </div>
           </div>
         </div>
 
-        <!-- NEW TOOL 4: ASPECT RATIO CALCULATOR -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+        <!-- TOOL 4: ASPECT RATIO CALCULATOR -->
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="aspect ratio calculator width height image video 16:9 4:3 dimension">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
-                <span class="p-2.5 bg-pink-100 text-pink-600 rounded-2xl text-lg">📐</span> Aspect Ratio Calculator
+              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+                <span class="p-2.5 bg-pink-100 dark:bg-pink-900/60 text-pink-600 dark:text-pink-300 rounded-2xl text-lg">📐</span> Aspect Ratio Calculator
               </h2>
-              <p class="text-xs text-slate-500 mt-1 font-medium">Calculate missing dimensions while preserving image & video aspect ratios</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Calculate missing dimensions while preserving image & video aspect ratios</p>
             </div>
-            <span class="text-xs px-3 py-1 bg-pink-50 text-pink-700 rounded-full font-mono font-semibold border border-pink-100">Design</span>
+            <span class="text-xs px-3 py-1 bg-pink-50 dark:bg-pink-950 text-pink-700 dark:text-pink-300 rounded-full font-mono font-semibold border border-pink-100 dark:border-pink-800">Design</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Original Width (W1)</label>
-              <input type="number" id="ratioW1" value="1920" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calcAspectRatio()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Original Width (W1)</label>
+              <input type="number" id="ratioW1" value="1920" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calcAspectRatio()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Original Height (H1)</label>
-              <input type="number" id="ratioH1" value="1080" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calcAspectRatio()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Original Height (H1)</label>
+              <input type="number" id="ratioH1" value="1080" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calcAspectRatio()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">New Width (W2)</label>
-              <input type="number" id="ratioW2" value="1280" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calcAspectRatio()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">New Width (W2)</label>
+              <input type="number" id="ratioW2" value="1280" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calcAspectRatio()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">New Height (H2)</label>
-              <input type="text" id="ratioH2Result" readonly class="w-full bg-pink-50/70 border border-pink-200 rounded-2xl px-4 py-3 text-pink-700 font-mono font-extrabold">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">New Height (H2)</label>
+              <input type="text" id="ratioH2Result" readonly class="w-full bg-pink-50/70 dark:bg-pink-950/60 border border-pink-200 dark:border-pink-800 rounded-2xl px-4 py-3 text-pink-700 dark:text-pink-300 font-mono font-extrabold">
             </div>
           </div>
         </div>
 
         <!-- TOOL 5: COLOR CONVERTER -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="hex rgb hsl color picker converter code design">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
-                <span class="p-2.5 bg-indigo-100 text-indigo-600 rounded-2xl text-lg">🎨</span> HEX to RGB & HSL Converter
+              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+                <span class="p-2.5 bg-indigo-100 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 rounded-2xl text-lg">🎨</span> HEX to RGB & HSL Converter
               </h2>
-              <p class="text-xs text-slate-500 mt-1 font-medium">Convert HEX color codes to RGB/HSL with real-time preview</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Convert HEX color codes to RGB/HSL with real-time preview</p>
             </div>
             <div id="colorPreview" class="w-10 h-10 rounded-2xl border-2 border-white shadow-md transition-all duration-300"></div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Pick or Input HEX Code</label>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Pick or Input HEX Code</label>
               <div class="flex gap-3">
                 <input type="color" id="colorPicker" value="#6366f1" class="h-12 w-16 rounded-2xl cursor-pointer border-0 bg-transparent" onchange="convertColorFromPicker()">
-                <input type="text" id="hexInput" value="#6366f1" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-mono uppercase focus:outline-none focus:ring-2 focus:ring-indigo-300 font-semibold transition" oninput="convertColor()">
+                <input type="text" id="hexInput" value="#6366f1" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-mono uppercase focus:outline-none focus:ring-2 focus:ring-indigo-300 font-semibold transition" oninput="convertColor()">
               </div>
             </div>
 
             <div class="space-y-3">
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1">RGB Output</label>
+                <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">RGB Output</label>
                 <div class="relative">
-                  <input type="text" id="rgbResult" readonly class="w-full bg-indigo-50/50 border border-indigo-100 rounded-xl px-4 py-2 text-indigo-800 font-mono text-sm font-semibold pr-16">
-                  <button onclick="copyToClipboard('rgbResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white border border-indigo-200 text-indigo-600 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
+                  <input type="text" id="rgbResult" readonly class="w-full bg-indigo-50/50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-800 rounded-xl px-4 py-2 text-indigo-800 dark:text-indigo-300 font-mono text-sm font-semibold pr-16">
+                  <button onclick="copyToClipboard('rgbResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
                 </div>
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1">HSL Output</label>
+                <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">HSL Output</label>
                 <div class="relative">
-                  <input type="text" id="hslResult" readonly class="w-full bg-indigo-50/50 border border-indigo-100 rounded-xl px-4 py-2 text-indigo-800 font-mono text-sm font-semibold pr-16">
-                  <button onclick="copyToClipboard('hslResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white border border-indigo-200 text-indigo-600 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
+                  <input type="text" id="hslResult" readonly class="w-full bg-indigo-50/50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-800 rounded-xl px-4 py-2 text-indigo-800 dark:text-indigo-300 font-mono text-sm font-semibold pr-16">
+                  <button onclick="copyToClipboard('hslResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
                 </div>
               </div>
             </div>
@@ -268,23 +301,23 @@
         </div>
 
         <!-- TOOL 6: TEXT CASE -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
-          <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2.5">
-            <span class="p-2.5 bg-purple-100 text-purple-600 rounded-2xl text-lg">🔤</span> Text Case Converter & URL Slug Generator
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="text case uppercase lowercase titlecase slug generator url transform">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2.5">
+            <span class="p-2.5 bg-purple-100 dark:bg-purple-900/60 text-purple-600 dark:text-purple-300 rounded-2xl text-lg">🔤</span> Text Case Converter & URL Slug Generator
           </h2>
-          <p class="text-xs text-slate-500 mb-6 font-medium">Transform text capitalization and generate clean URL slugs</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">Transform text capitalization and generate clean URL slugs</p>
 
-          <textarea id="caseInput" rows="3" placeholder="Paste or type your text here..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-300 font-medium transition mb-4"></textarea>
+          <textarea id="caseInput" rows="3" placeholder="Paste or type your text here..." class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-300 font-medium transition mb-4"></textarea>
 
           <div class="flex flex-wrap gap-2 mb-4">
-            <button onclick="transformText('upper')" class="bg-slate-100 hover:bg-purple-500 hover:text-white text-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition">UPPERCASE</button>
-            <button onclick="transformText('lower')" class="bg-slate-100 hover:bg-purple-500 hover:text-white text-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition">lowercase</button>
-            <button onclick="transformText('title')" class="bg-slate-100 hover:bg-purple-500 hover:text-white text-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition">Title Case</button>
-            <button onclick="transformText('slug')" class="bg-purple-100 text-purple-700 border border-purple-200 hover:bg-purple-500 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold transition">url-slug-case</button>
+            <button onclick="transformText('upper')" class="bg-slate-100 dark:bg-slate-800 hover:bg-purple-500 hover:text-white text-slate-700 dark:text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold transition">UPPERCASE</button>
+            <button onclick="transformText('lower')" class="bg-slate-100 dark:bg-slate-800 hover:bg-purple-500 hover:text-white text-slate-700 dark:text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold transition">lowercase</button>
+            <button onclick="transformText('title')" class="bg-slate-100 dark:bg-slate-800 hover:bg-purple-500 hover:text-white text-slate-700 dark:text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold transition">Title Case</button>
+            <button onclick="transformText('slug')" class="bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 hover:bg-purple-500 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold transition">url-slug-case</button>
           </div>
 
           <div class="relative">
-            <input type="text" id="caseResult" readonly placeholder="Output string..." class="w-full bg-purple-50/60 border border-purple-200 rounded-2xl px-4 py-3 text-purple-900 font-mono text-sm font-semibold pr-20">
+            <input type="text" id="caseResult" readonly placeholder="Output string..." class="w-full bg-purple-50/60 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 rounded-2xl px-4 py-3 text-purple-900 dark:text-purple-200 font-mono text-sm font-semibold pr-20">
             <button onclick="copyToClipboard('caseResult')" class="absolute right-2 top-2 bottom-2 bg-purple-500 hover:bg-purple-600 text-white px-3.5 text-xs font-semibold rounded-xl transition shadow-sm">Copy</button>
           </div>
         </div>
@@ -295,26 +328,26 @@
       <div id="sec-finance" class="space-y-8 hidden">
 
         <!-- TOOL: CURRENCY CONVERTER -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl shadow-sm">
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl shadow-sm" data-keywords="currency converter usd eur gbp usd exchange live rate money dollar">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
-                <span class="p-2.5 bg-emerald-100 text-emerald-600 rounded-2xl text-lg">💵</span> Live USD Currency Converter
+              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+                <span class="p-2.5 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 rounded-2xl text-lg">💵</span> Live USD Currency Converter
               </h2>
-              <p class="text-xs text-slate-500 mt-1 font-medium">Convert US Dollars against global foreign currencies with live API rates</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Convert US Dollars against global foreign currencies with live API rates</p>
             </div>
-            <span class="text-xs px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-semibold">Live Rates</span>
+            <span class="text-xs px-3 py-1 bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-full font-semibold">Live Rates</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Amount</label>
-              <input type="number" id="currencyAmount" value="100" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-300 font-semibold transition" oninput="convertCurrency()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Amount</label>
+              <input type="number" id="currencyAmount" value="100" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-300 font-semibold transition" oninput="convertCurrency()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">From / To</label>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">From / To</label>
               <div class="flex gap-2 items-center">
-                <select id="fromCurrency" class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 text-slate-800 text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
+                <select id="fromCurrency" class="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-3 py-3 text-slate-800 dark:text-white text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
                   <option value="USD">USD ($)</option>
                   <option value="EUR">EUR (€)</option>
                   <option value="GBP">GBP (£)</option>
@@ -323,7 +356,7 @@
                   <option value="JPY">JPY (¥)</option>
                 </select>
                 <span class="text-slate-400 font-bold">➔</span>
-                <select id="toCurrency" class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 text-slate-800 text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
+                <select id="toCurrency" class="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-3 py-3 text-slate-800 dark:text-white text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
                   <option value="EUR">EUR (€)</option>
                   <option value="USD">USD ($)</option>
                   <option value="GBP">GBP (£)</option>
@@ -334,54 +367,54 @@
               </div>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Converted Amount</label>
-              <input type="text" id="currencyResult" readonly placeholder="Fetching rates..." class="w-full bg-emerald-50/70 border border-emerald-200 rounded-2xl px-4 py-3 text-emerald-700 font-mono font-extrabold">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Converted Amount</label>
+              <input type="text" id="currencyResult" readonly placeholder="Fetching rates..." class="w-full bg-emerald-50/70 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded-2xl px-4 py-3 text-emerald-700 dark:text-emerald-300 font-mono font-extrabold">
             </div>
           </div>
         </div>
 
         <!-- TOOL: TAX & TIP CALCULATOR -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl shadow-sm">
-          <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2.5">
-            <span class="p-2.5 bg-emerald-100 text-emerald-600 rounded-2xl text-lg">🏷️</span> US Sales Tax, Tip & Discount Calculator
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl shadow-sm" data-keywords="us sales tax tip discount calculator shopping bill cost">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2.5">
+            <span class="p-2.5 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 rounded-2xl text-lg">🏷️</span> US Sales Tax, Tip & Discount Calculator
           </h2>
-          <p class="text-xs text-slate-500 mb-6 font-medium">Calculate shopping discounts, US state sales tax, and restaurant tips</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">Calculate shopping discounts, US state sales tax, and restaurant tips</p>
 
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Bill Amount ($)</label>
-              <input type="number" id="priceInput" value="85" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Bill Amount ($)</label>
+              <input type="number" id="priceInput" value="85" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Discount (%)</label>
-              <input type="number" id="discountInput" value="10" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Discount (%)</label>
+              <input type="number" id="discountInput" value="10" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Sales Tax (%)</label>
-              <input type="number" id="taxInput" value="7.25" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Sales Tax (%)</label>
+              <input type="number" id="taxInput" value="7.25" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-2">Tip Rate (%)</label>
-              <input type="number" id="tipInput" value="18" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Tip Rate (%)</label>
+              <input type="number" id="tipInput" value="18" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
             </div>
           </div>
 
-          <div class="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+          <div class="p-5 bg-emerald-50/50 dark:bg-emerald-950/40 rounded-2xl border border-emerald-100 dark:border-emerald-800 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
             <div>
-              <span class="text-slate-500 text-xs font-medium block mb-1">Discount Savings</span>
-              <span id="discountSavings" class="font-bold text-emerald-600 text-base">$0.00</span>
+              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Discount Savings</span>
+              <span id="discountSavings" class="font-bold text-emerald-600 dark:text-emerald-400 text-base">$0.00</span>
             </div>
             <div>
-              <span class="text-slate-500 text-xs font-medium block mb-1">Sales Tax Amount</span>
-              <span id="taxAmount" class="font-bold text-amber-600 text-base">$0.00</span>
+              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Sales Tax Amount</span>
+              <span id="taxAmount" class="font-bold text-amber-600 dark:text-amber-400 text-base">$0.00</span>
             </div>
             <div>
-              <span class="text-slate-500 text-xs font-medium block mb-1">Tip Amount</span>
-              <span id="tipAmount" class="font-bold text-indigo-600 text-base">$0.00</span>
+              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Tip Amount</span>
+              <span id="tipAmount" class="font-bold text-indigo-600 dark:text-indigo-400 text-base">$0.00</span>
             </div>
-            <div class="md:border-l md:border-emerald-200 md:pl-4">
-              <span class="text-slate-500 text-xs font-medium block mb-1">Total Final Cost</span>
-              <span id="finalPrice" class="font-black text-slate-900 text-xl">$0.00</span>
+            <div class="md:border-l md:border-emerald-200 dark:md:border-emerald-800 md:pl-4">
+              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Total Final Cost</span>
+              <span id="finalPrice" class="font-black text-slate-900 dark:text-white text-xl">$0.00</span>
             </div>
           </div>
         </div>
@@ -392,49 +425,49 @@
       <div id="sec-units" class="space-y-8 hidden">
 
         <!-- TOOL: US IMPERIAL CONVERTERS -->
-        <div class="pastel-card p-6 md:p-8 rounded-3xl shadow-sm">
-          <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2.5">
-            <span class="p-2.5 bg-amber-100 text-amber-600 rounded-2xl text-lg">⚖️</span> US Customary & Metric Unit Converter
+        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl shadow-sm" data-keywords="us imperial metric unit converter fahrenheit celsius pounds kg inches cm weight height temperature">
+          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2.5">
+            <span class="p-2.5 bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 rounded-2xl text-lg">⚖️</span> US Customary & Metric Unit Converter
           </h2>
-          <p class="text-xs text-slate-500 mb-6 font-medium">Convert temperature, weights, and height between US Imperial and Metric systems</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">Convert temperature, weights, and height between US Imperial and Metric systems</p>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Temperature -->
-            <div class="space-y-4 p-5 bg-amber-50/40 rounded-2xl border border-amber-100">
-              <h3 class="font-bold text-sm text-amber-800">Fahrenheit ↔ Celsius</h3>
+            <div class="space-y-4 p-5 bg-amber-50/40 dark:bg-amber-950/40 rounded-2xl border border-amber-100 dark:border-amber-800">
+              <h3 class="font-bold text-sm text-amber-800 dark:text-amber-300">Fahrenheit ↔ Celsius</h3>
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">Fahrenheit (°F)</label>
-                <input type="number" id="tempF_input" value="72" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 font-semibold" oninput="convertTempUS()">
+                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Fahrenheit (°F)</label>
+                <input type="number" id="tempF_input" value="72" class="w-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-800 dark:text-white font-semibold" oninput="convertTempUS()">
               </div>
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">Celsius (°C)</label>
-                <input type="text" id="tempC_output" readonly class="w-full bg-amber-100/60 border border-amber-200 rounded-xl p-2.5 text-amber-900 font-mono font-bold">
+                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Celsius (°C)</label>
+                <input type="text" id="tempC_output" readonly class="w-full bg-amber-100/60 dark:bg-amber-900/60 border border-amber-200 dark:border-amber-800 rounded-xl p-2.5 text-amber-900 dark:text-amber-200 font-mono font-bold">
               </div>
             </div>
 
             <!-- Weight -->
-            <div class="space-y-4 p-5 bg-amber-50/40 rounded-2xl border border-amber-100">
-              <h3 class="font-bold text-sm text-amber-800">Pounds (lbs) ↔ Kilograms</h3>
+            <div class="space-y-4 p-5 bg-amber-50/40 dark:bg-amber-950/40 rounded-2xl border border-amber-100 dark:border-amber-800">
+              <h3 class="font-bold text-sm text-amber-800 dark:text-amber-300">Pounds (lbs) ↔ Kilograms</h3>
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">Pounds (lbs)</label>
-                <input type="number" id="weightLbs_input" value="150" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 font-semibold" oninput="convertWeightUS()">
+                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Pounds (lbs)</label>
+                <input type="number" id="weightLbs_input" value="150" class="w-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-800 dark:text-white font-semibold" oninput="convertWeightUS()">
               </div>
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">Kilograms (kg)</label>
-                <input type="text" id="weightKg_output" readonly class="w-full bg-amber-100/60 border border-amber-200 rounded-xl p-2.5 text-amber-900 font-mono font-bold">
+                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Kilograms (kg)</label>
+                <input type="text" id="weightKg_output" readonly class="w-full bg-amber-100/60 dark:bg-amber-900/60 border border-amber-200 dark:border-amber-800 rounded-xl p-2.5 text-amber-900 dark:text-amber-200 font-mono font-bold">
               </div>
             </div>
 
             <!-- Height/Length -->
-            <div class="space-y-4 p-5 bg-amber-50/40 rounded-2xl border border-amber-100">
-              <h3 class="font-bold text-sm text-amber-800">Inches ↔ Centimeters</h3>
+            <div class="space-y-4 p-5 bg-amber-50/40 dark:bg-amber-950/40 rounded-2xl border border-amber-100 dark:border-amber-800">
+              <h3 class="font-bold text-sm text-amber-800 dark:text-amber-300">Inches ↔ Centimeters</h3>
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">Height in Inches (in)</label>
-                <input type="number" id="lengthInches_input" value="70" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 font-semibold" oninput="convertLengthUS()">
+                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Height in Inches (in)</label>
+                <input type="number" id="lengthInches_input" value="70" class="w-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-800 dark:text-white font-semibold" oninput="convertLengthUS()">
               </div>
               <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">Centimeters (cm)</label>
-                <input type="text" id="lengthCm_output" readonly class="w-full bg-amber-100/60 border border-amber-200 rounded-xl p-2.5 text-amber-900 font-mono font-bold">
+                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Centimeters (cm)</label>
+                <input type="text" id="lengthCm_output" readonly class="w-full bg-amber-100/60 dark:bg-amber-900/60 border border-amber-200 dark:border-amber-800 rounded-xl p-2.5 text-amber-900 dark:text-amber-200 font-mono font-bold">
               </div>
             </div>
           </div>
@@ -448,23 +481,23 @@
     <aside class="space-y-6">
 
       <!-- SPONSORED / ADS CARD 1 -->
-      <div class="pastel-card p-5 rounded-3xl border border-sky-200 relative overflow-hidden group">
-        <span class="text-[10px] font-bold tracking-wider uppercase bg-sky-100 text-sky-700 px-2.5 py-0.5 rounded-full mb-3 inline-block">Sponsor Deal</span>
-        <h3 class="text-sm font-bold text-slate-800 mb-1">Need Fast Cloud Hosting?</h3>
-        <p class="text-xs text-slate-500 mb-3 font-medium">Get up to 75% OFF NVMe cloud hosting with free SSL & domain.</p>
+      <div class="pastel-card p-5 rounded-3xl border border-sky-200 dark:border-slate-700 relative overflow-hidden group">
+        <span class="text-[10px] font-bold tracking-wider uppercase bg-sky-100 dark:bg-sky-900 text-sky-700 dark:text-sky-300 px-2.5 py-0.5 rounded-full mb-3 inline-block">Sponsor Deal</span>
+        <h3 class="text-sm font-bold text-slate-800 dark:text-white mb-1">Need Fast Cloud Hosting?</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 font-medium">Get up to 75% OFF NVMe cloud hosting with free SSL & domain.</p>
         <a href="#" class="block text-center bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400 hover:opacity-90 text-white text-xs font-bold py-2.5 rounded-2xl transition shadow-sm">Claim Discount 🔥</a>
       </div>
 
       <!-- DONATION / SUPPORT CARD -->
       <div class="pastel-card p-5 rounded-3xl text-center">
-        <div class="w-12 h-12 bg-pink-100 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl shadow-sm">☕</div>
-        <h3 class="text-sm font-bold text-slate-800 mb-1">Enjoying OmniConvert?</h3>
-        <p class="text-xs text-slate-500 mb-4 font-medium">Support our server costs to keep these tools 100% free forever.</p>
-        <a href="https://buymeacoffee.com" target="_blank" class="inline-flex items-center justify-center gap-2 w-full bg-white hover:bg-pink-50 text-pink-600 border border-pink-200 text-xs font-bold py-2.5 rounded-2xl transition">Buy Me a Coffee ☕</a>
+        <div class="w-12 h-12 bg-pink-100 dark:bg-pink-950 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl shadow-sm">☕</div>
+        <h3 class="text-sm font-bold text-slate-800 dark:text-white mb-1">Enjoying OmniConvert?</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 font-medium">Support our server costs to keep these tools 100% free forever.</p>
+        <a href="https://buymeacoffee.com" target="_blank" class="inline-flex items-center justify-center gap-2 w-full bg-white dark:bg-slate-800 hover:bg-pink-50 dark:hover:bg-slate-700 text-pink-600 dark:text-pink-400 border border-pink-200 dark:border-slate-700 text-xs font-bold py-2.5 rounded-2xl transition">Buy Me a Coffee ☕</a>
       </div>
 
       <!-- ADSENSE DISPLAY BANNER UNIT -->
-      <div class="pastel-card p-4 rounded-3xl border border-dashed border-slate-300 text-center min-h-[250px] flex flex-col items-center justify-center overflow-hidden">
+      <div class="pastel-card p-4 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 text-center min-h-[250px] flex flex-col items-center justify-center overflow-hidden">
         <!-- Google AdSense Responsive Unit -->
         <ins class="adsbygoogle"
              style="display:block"
@@ -482,44 +515,114 @@
   </main>
 
   <!-- FOOTER WITH LEGAL LINKS -->
-  <footer class="border-t border-purple-100/80 bg-white/50 mt-12 py-8 text-center text-xs text-slate-500 font-medium">
+  <footer class="border-t border-purple-100/80 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 mt-12 py-8 text-center text-xs text-slate-500 dark:text-slate-400 font-medium">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
       <p>© 2026 OmniConvert. All rights reserved.</p>
       <div class="flex gap-6">
-        <a href="privacy.html" class="hover:text-slate-800 transition">Privacy Policy</a>
-        <a href="terms.html" class="hover:text-slate-800 transition">Terms of Service</a>
-        <a href="contact.html" class="hover:text-slate-800 transition">Contact Us</a>
+        <a href="privacy.html" class="hover:text-slate-800 dark:hover:text-white transition">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-slate-800 dark:hover:text-white transition">Terms of Service</a>
+        <a href="contact.html" class="hover:text-slate-800 dark:hover:text-white transition">Contact Us</a>
       </div>
     </div>
   </footer>
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
+    // 0. Dark / Light Mode Toggle
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+        document.getElementById('themeIcon').innerText = '☀️';
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+        document.getElementById('themeIcon').innerText = '🌙';
+      }
+    }
+
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        localStorage.setItem('theme', 'light');
+        document.getElementById('themeIcon').innerText = '🌙';
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        document.getElementById('themeIcon').innerText = '☀️';
+      }
+    }
+
+    // Universal Search Bar
+    function filterTools() {
+      const query = document.getElementById('toolSearch').value.toLowerCase().trim();
+      
+      // Temporary show all tabs so search works across all sections
+      if (query !== "") {
+        ['dev', 'finance', 'units'].forEach(t => document.getElementById(`sec-${t}`).classList.remove('hidden'));
+      }
+
+      const cards = document.querySelectorAll('.tool-card');
+      cards.forEach(card => {
+        const keywords = card.getAttribute('data-keywords') || "";
+        const title = card.querySelector('h2') ? card.querySelector('h2').innerText.toLowerCase() : "";
+        
+        if (title.includes(query) || keywords.includes(query)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      if (query === "") {
+        switchTab('dev'); // Reset to default active tab when search is cleared
+      }
+    }
+
+    // Share Website
+    function shareWebsite() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'OmniConvert - Free Online Tools',
+          text: 'Check out these fast, 100% free online conversion tools for web developers & daily productivity!',
+          url: window.location.href,
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Website URL copied to clipboard!');
+      }
+    }
+
     // Tab Navigation
     function switchTab(tab) {
+      // Clear search if active
+      document.getElementById('toolSearch').value = "";
+      document.querySelectorAll('.tool-card').forEach(c => c.style.display = "block");
+
       ['dev', 'finance', 'units'].forEach(t => {
         document.getElementById(`sec-${t}`).classList.add('hidden');
         
-        // Desktop Tab Styles
         const btn = document.getElementById(`tab-${t}`);
         if(btn) {
-          btn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-500 hover:text-slate-800";
+          btn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white";
         }
         
-        // Mobile Tab Styles
         const mobBtn = document.getElementById(`mob-tab-${t}`);
         if(mobBtn) {
-          mobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 bg-slate-50";
+          mobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800";
         }
       });
 
       document.getElementById(`sec-${tab}`).classList.remove('hidden');
 
       const activeBtn = document.getElementById(`tab-${tab}`);
-      if(activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white text-indigo-600 shadow-sm border border-purple-100";
+      if(activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm border border-purple-100 dark:border-transparent";
 
       const activeMobBtn = document.getElementById(`mob-tab-${tab}`);
-      if(activeMobBtn) activeMobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 text-indigo-700";
+      if(activeMobBtn) activeMobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 dark:bg-indigo-600 text-indigo-700 dark:text-white";
     }
 
     // 1. PX to REM
@@ -553,11 +656,11 @@
         const parsed = JSON.parse(input);
         document.getElementById('jsonOutput').value = JSON.stringify(parsed, null, 2);
         status.innerText = "Valid JSON";
-        status.className = "text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full font-mono font-semibold";
+        status.className = "text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded-full font-mono font-semibold";
       } catch (err) {
         document.getElementById('jsonOutput').value = "Invalid JSON structure:\n" + err.message;
         status.innerText = "Invalid JSON";
-        status.className = "text-xs px-3 py-1 bg-rose-100 text-rose-700 rounded-full font-mono font-semibold";
+        status.className = "text-xs px-3 py-1 bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-full font-mono font-semibold";
       }
     }
 
@@ -568,11 +671,11 @@
         const parsed = JSON.parse(input);
         document.getElementById('jsonOutput').value = JSON.stringify(parsed);
         status.innerText = "Minified";
-        status.className = "text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full font-mono font-semibold";
+        status.className = "text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded-full font-mono font-semibold";
       } catch (err) {
         document.getElementById('jsonOutput').value = "Invalid JSON structure:\n" + err.message;
         status.innerText = "Invalid JSON";
-        status.className = "text-xs px-3 py-1 bg-rose-100 text-rose-700 rounded-full font-mono font-semibold";
+        status.className = "text-xs px-3 py-1 bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-full font-mono font-semibold";
       }
     }
 
@@ -710,6 +813,7 @@
     }
 
     // Init
+    initTheme();
     convertPx();
     calcAspectRatio();
     convertColor();
