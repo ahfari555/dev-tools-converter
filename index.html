@@ -1,82 +1,83 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OmniConvert - Professional Online Tools</title>
-  <!-- Font Inter -->
+  <title>OmniConvert - Free Online Unit & Developer Converter Tools</title>
+  <!-- Google Font: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-          colors: {
-            brand: { 50: '#f0f9ff', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490' }
-          }
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
         }
       }
     }
   </script>
   <style>
-    .glass-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    body {
+      background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #faf5ff 100%);
+    }
+    .pastel-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.15);
     }
     .gradient-text {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #a855f7 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white">
+<body class="text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-purple-200 selection:text-purple-900">
 
   <!-- TOP NAVBAR -->
-  <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 px-6 py-4">
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-purple-100/80 px-6 py-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-cyan-500/20">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 via-indigo-400 to-pink-400 flex items-center justify-center font-black text-xl text-white shadow-md shadow-indigo-200">
           ⚡
         </div>
-        <span class="text-xl font-bold tracking-tight text-white">Omni<span class="gradient-text">Convert</span></span>
+        <span class="text-xl font-extrabold tracking-tight text-slate-800">Omni<span class="gradient-text">Convert</span></span>
       </div>
       
       <!-- Nav Tabs (Desktop) -->
-      <nav class="hidden md:flex items-center gap-1 bg-slate-800/60 p-1.5 rounded-xl border border-slate-700/50">
-        <button onclick="switchTab('dev')" id="tab-dev" class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">💻 Dev & Design</button>
-        <button onclick="switchTab('finance')" id="tab-finance" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all duration-200">💰 Keuangan</button>
-        <button onclick="switchTab('units')" id="tab-units" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white transition-all duration-200">📐 Satuan Harian</button>
+      <nav class="hidden md:flex items-center gap-1 bg-purple-50/80 p-1.5 rounded-2xl border border-purple-100">
+        <button onclick="switchTab('dev')" id="tab-dev" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white text-indigo-600 shadow-sm border border-purple-100">💻 Dev & Design</button>
+        <button onclick="switchTab('finance')" id="tab-finance" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 hover:text-slate-800 transition-all duration-200">💵 Finance & Tax</button>
+        <button onclick="switchTab('units')" id="tab-units" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 hover:text-slate-800 transition-all duration-200">📐 US & Metric Units</button>
       </nav>
 
       <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live API
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200/60">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Rates
         </span>
       </div>
     </div>
   </header>
 
   <!-- MOBILE NAV -->
-  <div class="md:hidden flex overflow-x-auto gap-2 p-4 bg-slate-900/90 border-b border-slate-800 no-scrollbar">
-    <button onclick="switchTab('dev')" id="mob-tab-dev" class="px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">💻 Dev & Design</button>
-    <button onclick="switchTab('finance')" id="mob-tab-finance" class="px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap text-slate-400 bg-slate-800">💰 Keuangan</button>
-    <button onclick="switchTab('units')" id="mob-tab-units" class="px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap text-slate-400 bg-slate-800">📐 Satuan Harian</button>
+  <div class="md:hidden flex overflow-x-auto gap-2 p-4 bg-white/80 border-b border-purple-100 no-scrollbar">
+    <button onclick="switchTab('dev')" id="mob-tab-dev" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 text-indigo-700">💻 Dev & Design</button>
+    <button onclick="switchTab('finance')" id="mob-tab-finance" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 bg-slate-50">💵 Finance & Tax</button>
+    <button onclick="switchTab('units')" id="mob-tab-units" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 bg-slate-50">📐 US & Metric Units</button>
   </div>
 
   <!-- HERO SECTION -->
   <section class="max-w-7xl mx-auto px-6 pt-10 pb-6 text-center">
-    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
-      Serba Cepat. Presisi. <span class="gradient-text">Gratis Tanpa Batas.</span>
+    <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-800 mb-3">
+      Fast. Precise. <span class="gradient-text">100% Free Online Tools.</span>
     </h1>
-    <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto">
-      Kumpulan alat konversi modern untuk developer, desainer, dan bisnis harian. Semua diproses langsung di browsermu dengan aman.
+    <p class="text-slate-500 text-sm md:text-base max-w-2xl mx-auto font-medium">
+      Essential developer, financial, and unit conversion tools designed for creators and daily productivity. 100% private and browser-based.
     </p>
   </section>
 
@@ -90,70 +91,70 @@
       <div id="sec-dev" class="space-y-8">
 
         <!-- TOOL: PX to REM -->
-        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl hover:border-cyan-500/30 transition duration-300">
+        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                <span class="p-2 bg-cyan-500/10 text-cyan-400 rounded-lg text-lg">📏</span> PX to REM / EM
+              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
+                <span class="p-2.5 bg-sky-100 text-sky-600 rounded-2xl text-lg">📏</span> PX to REM / EM Converter
               </h2>
-              <p class="text-xs text-slate-400 mt-1">Konversi piksel CSS ke satuan fleksibel rem/em</p>
+              <p class="text-xs text-slate-500 mt-1 font-medium">Convert CSS pixels to relative units for modern web design</p>
             </div>
-            <span class="text-xs px-2.5 py-1 bg-slate-800 text-slate-300 rounded-md font-mono">CSS Unit</span>
+            <span class="text-xs px-3 py-1 bg-sky-50 text-sky-700 rounded-full font-mono font-semibold border border-sky-100">CSS Unit</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Base Font Size (PX)</label>
-              <input type="number" id="basePx" value="16" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition" oninput="convertPx()">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Base Font Size (PX)</label>
+              <input type="number" id="basePx" value="16" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Target Pixels (PX)</label>
-              <input type="number" id="inputPx" value="24" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition" oninput="convertPx()">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Target Pixels (PX)</label>
+              <input type="number" id="inputPx" value="24" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Hasil (REM)</label>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Result (REM)</label>
               <div class="relative">
-                <input type="text" id="resultRem" readonly class="w-full bg-slate-950 border border-cyan-500/30 rounded-xl px-4 py-3 text-cyan-400 font-mono font-bold pr-20">
-                <button onclick="copyToClipboard('resultRem')" class="absolute right-2 top-2 bottom-2 bg-cyan-600 hover:bg-cyan-500 text-white px-3 text-xs font-semibold rounded-lg transition">Copy</button>
+                <input type="text" id="resultRem" readonly class="w-full bg-sky-50/70 border border-sky-200 rounded-2xl px-4 py-3 text-sky-700 font-mono font-extrabold pr-20">
+                <button onclick="copyToClipboard('resultRem')" class="absolute right-2 top-2 bottom-2 bg-sky-500 hover:bg-sky-600 text-white px-3.5 text-xs font-semibold rounded-xl transition shadow-sm">Copy</button>
               </div>
             </div>
           </div>
         </div>
 
         <!-- TOOL: COLOR CONVERTER -->
-        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl hover:border-indigo-500/30 transition duration-300">
+        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                <span class="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg text-lg">🎨</span> Color Converter
+              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
+                <span class="p-2.5 bg-indigo-100 text-indigo-600 rounded-2xl text-lg">🎨</span> HEX to RGB & HSL Converter
               </h2>
-              <p class="text-xs text-slate-400 mt-1">Ubah HEX ke RGB, HSL, dan pratinjau warna instan</p>
+              <p class="text-xs text-slate-500 mt-1 font-medium">Convert HEX color codes to RGB/HSL with real-time preview</p>
             </div>
-            <div id="colorPreview" class="w-10 h-10 rounded-xl border border-white/20 shadow-inner transition-all duration-300"></div>
+            <div id="colorPreview" class="w-10 h-10 rounded-2xl border-2 border-white shadow-md transition-all duration-300"></div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Pilih Warna / Input HEX</label>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Pick or Input HEX Code</label>
               <div class="flex gap-3">
-                <input type="color" id="colorPicker" value="#6366f1" class="h-12 w-16 rounded-xl cursor-pointer border-0 bg-transparent" onchange="convertColorFromPicker()">
-                <input type="text" id="hexInput" value="#6366f1" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white font-mono uppercase focus:outline-none focus:border-indigo-500 transition" oninput="convertColor()">
+                <input type="color" id="colorPicker" value="#6366f1" class="h-12 w-16 rounded-2xl cursor-pointer border-0 bg-transparent" onchange="convertColorFromPicker()">
+                <input type="text" id="hexInput" value="#6366f1" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-mono uppercase focus:outline-none focus:ring-2 focus:ring-indigo-300 font-semibold transition" oninput="convertColor()">
               </div>
             </div>
 
             <div class="space-y-3">
               <div>
-                <label class="block text-xs font-medium text-slate-400 mb-1">RGB Output</label>
+                <label class="block text-xs font-semibold text-slate-500 mb-1">RGB Output</label>
                 <div class="relative">
-                  <input type="text" id="rgbResult" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-indigo-300 font-mono text-sm pr-16">
-                  <button onclick="copyToClipboard('rgbResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 text-xs font-medium rounded-lg transition">Copy</button>
+                  <input type="text" id="rgbResult" readonly class="w-full bg-indigo-50/50 border border-indigo-100 rounded-xl px-4 py-2 text-indigo-800 font-mono text-sm font-semibold pr-16">
+                  <button onclick="copyToClipboard('rgbResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white border border-indigo-200 text-indigo-600 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
                 </div>
               </div>
               <div>
-                <label class="block text-xs font-medium text-slate-400 mb-1">HSL Output</label>
+                <label class="block text-xs font-semibold text-slate-500 mb-1">HSL Output</label>
                 <div class="relative">
-                  <input type="text" id="hslResult" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-indigo-300 font-mono text-sm pr-16">
-                  <button onclick="copyToClipboard('hslResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 text-xs font-medium rounded-lg transition">Copy</button>
+                  <input type="text" id="hslResult" readonly class="w-full bg-indigo-50/50 border border-indigo-100 rounded-xl px-4 py-2 text-indigo-800 font-mono text-sm font-semibold pr-16">
+                  <button onclick="copyToClipboard('hslResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white border border-indigo-200 text-indigo-600 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
                 </div>
               </div>
             </div>
@@ -161,24 +162,24 @@
         </div>
 
         <!-- TOOL: TEXT CASE -->
-        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl hover:border-purple-500/30 transition duration-300">
-          <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
-            <span class="p-2 bg-purple-500/10 text-purple-400 rounded-lg text-lg">🔤</span> Text Case & Slug Generator
+        <div class="pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg">
+          <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2.5">
+            <span class="p-2.5 bg-purple-100 text-purple-600 rounded-2xl text-lg">🔤</span> Text Case Converter & URL Slug Generator
           </h2>
-          <p class="text-xs text-slate-400 mb-6">Ubah format teks kapitalisasi dan buat URL Slug ramah SEO</p>
+          <p class="text-xs text-slate-500 mb-6 font-medium">Transform text capitalization and generate clean URL slugs</p>
 
-          <textarea id="caseInput" rows="3" placeholder="Ketik atau paste teks di sini..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition mb-4"></textarea>
+          <textarea id="caseInput" rows="3" placeholder="Paste or type your text here..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-300 font-medium transition mb-4"></textarea>
 
           <div class="flex flex-wrap gap-2 mb-4">
-            <button onclick="transformText('upper')" class="bg-slate-800 hover:bg-purple-600 hover:text-white text-slate-300 px-3.5 py-2 rounded-lg text-xs font-medium transition">UPPERCASE</button>
-            <button onclick="transformText('lower')" class="bg-slate-800 hover:bg-purple-600 hover:text-white text-slate-300 px-3.5 py-2 rounded-lg text-xs font-medium transition">lowercase</button>
-            <button onclick="transformText('title')" class="bg-slate-800 hover:bg-purple-600 hover:text-white text-slate-300 px-3.5 py-2 rounded-lg text-xs font-medium transition">Title Case</button>
-            <button onclick="transformText('slug')" class="bg-purple-600/30 text-purple-300 border border-purple-500/40 hover:bg-purple-600 hover:text-white px-3.5 py-2 rounded-lg text-xs font-medium transition">url-slug-case</button>
+            <button onclick="transformText('upper')" class="bg-slate-100 hover:bg-purple-500 hover:text-white text-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition">UPPERCASE</button>
+            <button onclick="transformText('lower')" class="bg-slate-100 hover:bg-purple-500 hover:text-white text-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition">lowercase</button>
+            <button onclick="transformText('title')" class="bg-slate-100 hover:bg-purple-500 hover:text-white text-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition">Title Case</button>
+            <button onclick="transformText('slug')" class="bg-purple-100 text-purple-700 border border-purple-200 hover:bg-purple-500 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold transition">url-slug-case</button>
           </div>
 
           <div class="relative">
-            <input type="text" id="caseResult" readonly placeholder="Hasil konversi..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-purple-300 font-mono text-sm pr-20">
-            <button onclick="copyToClipboard('caseResult')" class="absolute right-2 top-2 bottom-2 bg-purple-600 hover:bg-purple-500 text-white px-3 text-xs font-semibold rounded-lg transition">Copy</button>
+            <input type="text" id="caseResult" readonly placeholder="Output string..." class="w-full bg-purple-50/60 border border-purple-200 rounded-2xl px-4 py-3 text-purple-900 font-mono text-sm font-semibold pr-20">
+            <button onclick="copyToClipboard('caseResult')" class="absolute right-2 top-2 bottom-2 bg-purple-500 hover:bg-purple-600 text-white px-3.5 text-xs font-semibold rounded-xl transition shadow-sm">Copy</button>
           </div>
         </div>
 
@@ -188,83 +189,93 @@
       <div id="sec-finance" class="space-y-8 hidden">
 
         <!-- TOOL: CURRENCY CONVERTER -->
-        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl border-emerald-500/20">
+        <div class="pastel-card p-6 md:p-8 rounded-3xl shadow-sm">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg text-lg">💵</span> Real-time Currency Converter
+              <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2.5">
+                <span class="p-2.5 bg-emerald-100 text-emerald-600 rounded-2xl text-lg">💵</span> Live USD Currency Converter
               </h2>
-              <p class="text-xs text-slate-400 mt-1">Kurs mata uang langsung yang terupdate otomatis</p>
+              <p class="text-xs text-slate-500 mt-1 font-medium">Convert US Dollars against global foreign currencies with live API rates</p>
             </div>
-            <span class="text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-full font-medium">Live Rates</span>
+            <span class="text-xs px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full font-semibold">Live Rates</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Jumlah Nilai</label>
-              <input type="number" id="currencyAmount" value="100" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition" oninput="convertCurrency()">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Amount</label>
+              <input type="number" id="currencyAmount" value="100" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-300 font-semibold transition" oninput="convertCurrency()">
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Mata Uang</label>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">From / To</label>
               <div class="flex gap-2 items-center">
-                <select id="fromCurrency" class="bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-3 text-white text-sm w-full focus:outline-none focus:border-emerald-500" onchange="convertCurrency()">
+                <select id="fromCurrency" class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 text-slate-800 text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
                   <option value="USD">USD ($)</option>
-                  <option value="IDR">IDR (Rp)</option>
                   <option value="EUR">EUR (€)</option>
-                  <option value="SGD">SGD ($)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="CAD">CAD ($)</option>
+                  <option value="MXN">MXN ($)</option>
                   <option value="JPY">JPY (¥)</option>
                 </select>
-                <span class="text-slate-500">➔</span>
-                <select id="toCurrency" class="bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-3 text-white text-sm w-full focus:outline-none focus:border-emerald-500" onchange="convertCurrency()">
-                  <option value="IDR">IDR (Rp)</option>
-                  <option value="USD">USD ($)</option>
+                <span class="text-slate-400 font-bold">➔</span>
+                <select id="toCurrency" class="bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 text-slate-800 text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
                   <option value="EUR">EUR (€)</option>
-                  <option value="SGD">SGD ($)</option>
+                  <option value="USD">USD ($)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="CAD">CAD ($)</option>
+                  <option value="MXN">MXN ($)</option>
                   <option value="JPY">JPY (¥)</option>
                 </select>
               </div>
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Hasil Estimasi</label>
-              <input type="text" id="currencyResult" readonly placeholder="Memuat kurs..." class="w-full bg-slate-950 border border-emerald-500/40 rounded-xl px-4 py-3 text-emerald-400 font-mono font-bold">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Converted Amount</label>
+              <input type="text" id="currencyResult" readonly placeholder="Fetching rates..." class="w-full bg-emerald-50/70 border border-emerald-200 rounded-2xl px-4 py-3 text-emerald-700 font-mono font-extrabold">
             </div>
           </div>
         </div>
 
-        <!-- TOOL: TAX & DISCOUNT -->
-        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl">
-          <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
-            <span class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg text-lg">🏷️</span> Kalkulator PPN / Pajak & Diskon
+        <!-- TOOL: TAX & TIP CALCULATOR -->
+        <div class="pastel-card p-6 md:p-8 rounded-3xl shadow-sm">
+          <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2.5">
+            <span class="p-2.5 bg-emerald-100 text-emerald-600 rounded-2xl text-lg">🏷️</span> US Sales Tax, Tip & Discount Calculator
           </h2>
-          <p class="text-xs text-slate-400 mb-6">Hitung potongan belanja serta penambahan pajak PPN secara presisi</p>
+          <p class="text-xs text-slate-500 mb-6 font-medium">Calculate shopping discounts, US state sales tax, and restaurant tips</p>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Harga Awal (Rp)</label>
-              <input type="number" id="priceInput" value="150000" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none" oninput="calculateTaxAndDiscount()">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Bill Amount ($)</label>
+              <input type="number" id="priceInput" value="85" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">Diskon (%)</label>
-              <input type="number" id="discountInput" value="15" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none" oninput="calculateTaxAndDiscount()">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Discount (%)</label>
+              <input type="number" id="discountInput" value="10" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-2">PPN (%)</label>
-              <input type="number" id="taxInput" value="11" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-3 text-white focus:outline-none" oninput="calculateTaxAndDiscount()">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Sales Tax (%)</label>
+              <input type="number" id="taxInput" value="7.25" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Tip Rate (%)</label>
+              <input type="number" id="tipInput" value="18" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
             </div>
           </div>
 
-          <div class="p-5 bg-slate-950/80 rounded-xl border border-slate-800/80 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div class="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
             <div>
-              <span class="text-slate-400 text-xs block mb-1">Penghematan Diskon</span>
-              <span id="discountSavings" class="font-bold text-emerald-400 text-lg">Rp 0</span>
+              <span class="text-slate-500 text-xs font-medium block mb-1">Discount Savings</span>
+              <span id="discountSavings" class="font-bold text-emerald-600 text-base">$0.00</span>
             </div>
             <div>
-              <span class="text-slate-400 text-xs block mb-1">Nominal Pajak PPN</span>
-              <span id="taxAmount" class="font-bold text-amber-400 text-lg">Rp 0</span>
+              <span class="text-slate-500 text-xs font-medium block mb-1">Sales Tax Amount</span>
+              <span id="taxAmount" class="font-bold text-amber-600 text-base">$0.00</span>
             </div>
-            <div class="md:border-l md:border-slate-800 md:pl-4">
-              <span class="text-slate-400 text-xs block mb-1">Total Akhir Bayar</span>
-              <span id="finalPrice" class="font-extrabold text-cyan-400 text-xl">Rp 0</span>
+            <div>
+              <span class="text-slate-500 text-xs font-medium block mb-1">Tip Amount</span>
+              <span id="tipAmount" class="font-bold text-indigo-600 text-base">$0.00</span>
+            </div>
+            <div class="md:border-l md:border-emerald-200 md:pl-4">
+              <span class="text-slate-500 text-xs font-medium block mb-1">Total Final Cost</span>
+              <span id="finalPrice" class="font-black text-slate-900 text-xl">$0.00</span>
             </div>
           </div>
         </div>
@@ -274,37 +285,50 @@
       <!-- ================= CATEGORY 3: UNITS ================= -->
       <div id="sec-units" class="space-y-8 hidden">
 
-        <!-- TOOL: LENGTH & WEIGHT -->
-        <div class="glass-card p-6 md:p-8 rounded-2xl shadow-xl">
-          <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
-            <span class="p-2 bg-amber-500/10 text-amber-400 rounded-lg text-lg">⚖️</span> Konversi Satuan Suhu & Berat
+        <!-- TOOL: US IMPERIAL CONVERTERS -->
+        <div class="pastel-card p-6 md:p-8 rounded-3xl shadow-sm">
+          <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2.5">
+            <span class="p-2.5 bg-amber-100 text-amber-600 rounded-2xl text-lg">⚖️</span> US Customary & Metric Unit Converter
           </h2>
-          <p class="text-xs text-slate-400 mb-6">Konversi cepat Celcius ke Fahrenheit & Kilogram ke Pounds</p>
+          <p class="text-xs text-slate-500 mb-6 font-medium">Convert temperature, weights, and height between US Imperial and Metric systems</p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Suhu -->
-            <div class="space-y-4 p-4 bg-slate-900/50 rounded-xl border border-slate-800">
-              <h3 class="font-semibold text-sm text-amber-400">Thermometer (°C ↔ °F)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Temperature -->
+            <div class="space-y-4 p-5 bg-amber-50/40 rounded-2xl border border-amber-100">
+              <h3 class="font-bold text-sm text-amber-800">Fahrenheit ↔ Celsius</h3>
               <div>
-                <label class="block text-xs text-slate-400 mb-1">Celcius (°C)</label>
-                <input type="number" id="tempC" value="30" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg p-2.5 text-white" oninput="convertTemp()">
+                <label class="block text-xs font-medium text-slate-500 mb-1">Fahrenheit (°F)</label>
+                <input type="number" id="tempF_input" value="72" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 font-semibold" oninput="convertTempUS()">
               </div>
               <div>
-                <label class="block text-xs text-slate-400 mb-1">Fahrenheit (°F)</label>
-                <input type="text" id="tempF" readonly class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-amber-300 font-mono font-bold">
+                <label class="block text-xs font-medium text-slate-500 mb-1">Celsius (°C)</label>
+                <input type="text" id="tempC_output" readonly class="w-full bg-amber-100/60 border border-amber-200 rounded-xl p-2.5 text-amber-900 font-mono font-bold">
               </div>
             </div>
 
-            <!-- Berat -->
-            <div class="space-y-4 p-4 bg-slate-900/50 rounded-xl border border-slate-800">
-              <h3 class="font-semibold text-sm text-amber-400">Berat (KG ↔ LBS)</h3>
+            <!-- Weight -->
+            <div class="space-y-4 p-5 bg-amber-50/40 rounded-2xl border border-amber-100">
+              <h3 class="font-bold text-sm text-amber-800">Pounds (lbs) ↔ Kilograms</h3>
               <div>
-                <label class="block text-xs text-slate-400 mb-1">Kilogram (KG)</label>
-                <input type="number" id="weightKg" value="70" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg p-2.5 text-white" oninput="convertWeight()">
+                <label class="block text-xs font-medium text-slate-500 mb-1">Pounds (lbs)</label>
+                <input type="number" id="weightLbs_input" value="150" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 font-semibold" oninput="convertWeightUS()">
               </div>
               <div>
-                <label class="block text-xs text-slate-400 mb-1">Pounds (LBS)</label>
-                <input type="text" id="weightLbs" readonly class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-amber-300 font-mono font-bold">
+                <label class="block text-xs font-medium text-slate-500 mb-1">Kilograms (kg)</label>
+                <input type="text" id="weightKg_output" readonly class="w-full bg-amber-100/60 border border-amber-200 rounded-xl p-2.5 text-amber-900 font-mono font-bold">
+              </div>
+            </div>
+
+            <!-- Height/Length -->
+            <div class="space-y-4 p-5 bg-amber-50/40 rounded-2xl border border-amber-100">
+              <h3 class="font-bold text-sm text-amber-800">Inches ↔ Centimeters</h3>
+              <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">Height in Inches (in)</label>
+                <input type="number" id="lengthInches_input" value="70" class="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 font-semibold" oninput="convertLengthUS()">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">Centimeters (cm)</label>
+                <input type="text" id="lengthCm_output" readonly class="w-full bg-amber-100/60 border border-amber-200 rounded-xl p-2.5 text-amber-900 font-mono font-bold">
               </div>
             </div>
           </div>
@@ -318,25 +342,24 @@
     <aside class="space-y-6">
 
       <!-- SPONSORED / ADS CARD 1 -->
-      <div class="glass-card p-5 rounded-2xl border border-cyan-500/20 relative overflow-hidden group">
-        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-500/20 transition"></div>
-        <span class="text-[10px] font-bold tracking-wider uppercase bg-slate-800 text-slate-400 px-2 py-0.5 rounded mb-3 inline-block">Sponsor / Ad Space</span>
-        <h3 class="text-sm font-bold text-white mb-1">Butuh Hosting Web Super Cepat?</h3>
-        <p class="text-xs text-slate-400 mb-3">Dapatkan diskon hingga 75% domain & hosting NVMe untuk websitemu.</p>
-        <a href="#" class="block text-center bg-gradient-to-r from-cyan-500 to-indigo-600 hover:opacity-90 text-white text-xs font-semibold py-2 rounded-lg transition shadow-md shadow-cyan-500/20">Cek Penawaran 🔥</a>
+      <div class="pastel-card p-5 rounded-3xl border border-sky-200 relative overflow-hidden group">
+        <span class="text-[10px] font-bold tracking-wider uppercase bg-sky-100 text-sky-700 px-2.5 py-0.5 rounded-full mb-3 inline-block">Sponsor Deal</span>
+        <h3 class="text-sm font-bold text-slate-800 mb-1">Need Fast Cloud Hosting?</h3>
+        <p class="text-xs text-slate-500 mb-3 font-medium">Get up to 75% OFF NVMe cloud hosting with free SSL & domain.</p>
+        <a href="#" class="block text-center bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400 hover:opacity-90 text-white text-xs font-bold py-2.5 rounded-2xl transition shadow-sm">Claim Discount 🔥</a>
       </div>
 
       <!-- DONATION / SUPPORT CARD -->
-      <div class="glass-card p-5 rounded-2xl text-center">
-        <div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">☕</div>
-        <h3 class="text-sm font-bold text-white mb-1">Suka dengan Alat Ini?</h3>
-        <p class="text-xs text-slate-400 mb-4">Bantu dukung pengembangan server & fitur baru gratis dengan berdonasi kopi.</p>
-        <a href="https://saweria.co" target="_blank" class="inline-flex items-center justify-center gap-2 w-full bg-slate-800 hover:bg-slate-700 text-pink-300 border border-pink-500/30 text-xs font-semibold py-2.5 rounded-lg transition">Dukung via Saweria</a>
+      <div class="pastel-card p-5 rounded-3xl text-center">
+        <div class="w-12 h-12 bg-pink-100 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl shadow-sm">☕</div>
+        <h3 class="text-sm font-bold text-slate-800 mb-1">Enjoying OmniConvert?</h3>
+        <p class="text-xs text-slate-500 mb-4 font-medium">Support our server costs to keep these tools 100% free forever.</p>
+        <a href="https://buymeacoffee.com" target="_blank" class="inline-flex items-center justify-center gap-2 w-full bg-white hover:bg-pink-50 text-pink-600 border border-pink-200 text-xs font-bold py-2.5 rounded-2xl transition">Buy Me a Coffee ☕</a>
       </div>
 
       <!-- ADSENSE PLACEHOLDER BANNER -->
-      <div class="glass-card p-4 rounded-2xl border border-dashed border-slate-700 text-center min-h-[250px] flex flex-col items-center justify-center">
-        <span class="text-xs text-slate-500 font-mono">Google AdSense Banner<br>(300x250 Sidebar)</span>
+      <div class="pastel-card p-4 rounded-3xl border border-dashed border-slate-300 text-center min-h-[250px] flex flex-col items-center justify-center">
+        <span class="text-xs text-slate-400 font-mono font-semibold">Google AdSense Banner<br>(300x250 Medium Rectangle)</span>
       </div>
 
     </aside>
@@ -344,13 +367,13 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-slate-900/50 mt-12 py-8 text-center text-xs text-slate-500">
+  <footer class="border-t border-purple-100/80 bg-white/50 mt-12 py-8 text-center text-xs text-slate-500 font-medium">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
       <p>© 2026 OmniConvert. All rights reserved.</p>
       <div class="flex gap-6">
-        <a href="#" class="hover:text-slate-300 transition">Privacy Policy</a>
-        <a href="#" class="hover:text-slate-300 transition">Terms of Service</a>
-        <a href="#" class="hover:text-slate-300 transition">Contact Us</a>
+        <a href="#" class="hover:text-slate-800 transition">Privacy Policy</a>
+        <a href="#" class="hover:text-slate-800 transition">Terms of Service</a>
+        <a href="#" class="hover:text-slate-800 transition">Contact Us</a>
       </div>
     </div>
   </footer>
@@ -365,23 +388,23 @@
         // Desktop Tab Styles
         const btn = document.getElementById(`tab-${t}`);
         if(btn) {
-          btn.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white";
+          btn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-500 hover:text-slate-800";
         }
         
         // Mobile Tab Styles
         const mobBtn = document.getElementById(`mob-tab-${t}`);
         if(mobBtn) {
-          mobBtn.className = "px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap text-slate-400 bg-slate-800";
+          mobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 bg-slate-50";
         }
       });
 
       document.getElementById(`sec-${tab}`).classList.remove('hidden');
 
       const activeBtn = document.getElementById(`tab-${tab}`);
-      if(activeBtn) activeBtn.className = "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+      if(activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white text-indigo-600 shadow-sm border border-purple-100";
 
       const activeMobBtn = document.getElementById(`mob-tab-${tab}`);
-      if(activeMobBtn) activeMobBtn.className = "px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+      if(activeMobBtn) activeMobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 text-indigo-700";
     }
 
     // 1. PX to REM
@@ -440,7 +463,7 @@
       document.getElementById('caseResult').value = result;
     }
 
-    // 4. Currency
+    // 4. US Currency
     async function convertCurrency() {
       const amount = parseFloat(document.getElementById('currencyAmount').value) || 0;
       const from = document.getElementById('fromCurrency').value;
@@ -448,7 +471,7 @@
       const resultEl = document.getElementById('currencyResult');
 
       if (from === to) {
-        resultEl.value = `${amount.toLocaleString()} ${to}`;
+        resultEl.value = `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })} ${to}`;
         return;
       }
 
@@ -456,38 +479,51 @@
         const res = await fetch(`https://open.er-api.com/v6/latest/${from}`);
         const data = await res.json();
         const rate = data.rates[to];
-        const converted = (amount * rate).toLocaleString(undefined, { maximumFractionDigits: 2 });
+        const converted = (amount * rate).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         resultEl.value = `${converted} ${to}`;
       } catch (err) {
-        resultEl.value = "Gagal memuat kurs";
+        resultEl.value = "Error fetching rates";
       }
     }
 
-    // 5. Tax & Discount
+    // 5. US Tax, Discount & Tip Calculator
     function calculateTaxAndDiscount() {
       const price = parseFloat(document.getElementById('priceInput').value) || 0;
       const discountPercent = parseFloat(document.getElementById('discountInput').value) || 0;
       const taxPercent = parseFloat(document.getElementById('taxInput').value) || 0;
+      const tipPercent = parseFloat(document.getElementById('tipInput').value) || 0;
 
       const discountAmount = price * (discountPercent / 100);
       const priceAfterDiscount = price - discountAmount;
       const taxAmount = priceAfterDiscount * (taxPercent / 100);
-      const total = priceAfterDiscount + taxAmount;
+      const tipAmount = priceAfterDiscount * (tipPercent / 100);
+      const total = priceAfterDiscount + taxAmount + tipAmount;
 
-      document.getElementById('discountSavings').innerText = `Rp ${discountAmount.toLocaleString('id-ID')}`;
-      document.getElementById('taxAmount').innerText = `Rp ${taxAmount.toLocaleString('id-ID')}`;
-      document.getElementById('finalPrice').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+      const fmt = (num) => '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      document.getElementById('discountSavings').innerText = fmt(discountAmount);
+      document.getElementById('taxAmount').innerText = fmt(taxAmount);
+      document.getElementById('tipAmount').innerText = fmt(tipAmount);
+      document.getElementById('finalPrice').innerText = fmt(total);
     }
 
-    // 6. Temp & Weight
-    function convertTemp() {
-      const c = parseFloat(document.getElementById('tempC').value) || 0;
-      document.getElementById('tempF').value = `${((c * 9/5) + 32).toFixed(1)} °F`;
+    // 6. US Units Converters
+    function convertTempUS() {
+      const f = parseFloat(document.getElementById('tempF_input').value) || 0;
+      const c = (f - 32) * (5/9);
+      document.getElementById('tempC_output').value = `${c.toFixed(1)} °C`;
     }
 
-    function convertWeight() {
-      const kg = parseFloat(document.getElementById('weightKg').value) || 0;
-      document.getElementById('weightLbs').value = `${(kg * 2.20462).toFixed(2)} lbs`;
+    function convertWeightUS() {
+      const lbs = parseFloat(document.getElementById('weightLbs_input').value) || 0;
+      const kg = lbs * 0.453592;
+      document.getElementById('weightKg_output').value = `${kg.toFixed(2)} kg`;
+    }
+
+    function convertLengthUS() {
+      const inches = parseFloat(document.getElementById('lengthInches_input').value) || 0;
+      const cm = inches * 2.54;
+      document.getElementById('lengthCm_output').value = `${cm.toFixed(1)} cm`;
     }
 
     // Clipboard Copy
@@ -495,7 +531,7 @@
       const input = document.getElementById(id);
       if (input.value) {
         navigator.clipboard.writeText(input.value);
-        alert('Teks berhasil disalin!');
+        alert('Copied to clipboard!');
       }
     }
 
@@ -504,8 +540,9 @@
     convertColor();
     convertCurrency();
     calculateTaxAndDiscount();
-    convertTemp();
-    convertWeight();
+    convertTempUS();
+    convertWeightUS();
+    convertLengthUS();
   </script>
 </body>
 </html>
