@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dev Tools & Utility Converters - Free Online Calculation Tools</title>
+    <title>DevTools Converter - All-in-One Utility Suite</title>
     <meta
       name="description"
-      content="Comprehensive suite of free online calculation tools: Tax & Discount Calculator, Temperature Converter, Weight Converter, and Length Converter with instant calculations."
+      content="Free online utility tools: Tax & Discount Calculator, Temperature Converter, Weight Converter, and Length Converter."
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -27,298 +27,310 @@
         },
       };
     </script>
-    <!-- AdSense Auto Ads / Script Placeholder -->
-    <!-- Insert your google adsense script tag here -->
   </head>
-  <body class="font-sans min-h-screen flex flex-col antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
+  <body class="font-sans min-h-screen flex flex-col antialiased bg-slate-900 text-slate-100 selection:bg-blue-500 selection:text-white">
     
-    <!-- Navigation Bar -->
-    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur border-b border-gray-200 dark:border-gray-700">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-50 bg-slate-800/90 backdrop-blur border-b border-slate-700/80 shadow-md">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="index.html" class="flex items-center space-x-3">
-          <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-white shadow-lg shadow-blue-500/30">
+            D
+          </div>
+          <span class="text-xl font-extrabold bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
             DevTools Converter
           </span>
         </a>
-        <nav class="flex items-center space-x-6 text-sm font-medium">
-          <a href="#tax-discount" class="hover:text-blue-600 transition">Tax & Discount</a>
-          <a href="#temperature" class="hover:text-blue-600 transition">Temperature</a>
-          <a href="#weight" class="hover:text-blue-600 transition">Weight</a>
-          <a href="#length" class="hover:text-blue-600 transition">Length</a>
-        </nav>
+        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+          v2.0 Refactored
+        </span>
       </div>
     </header>
 
-    <!-- Main Content Grid -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-      <!-- Hero Banner -->
-      <section class="text-center max-w-3xl mx-auto space-y-4">
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
-          Fast, Accurate & Modern Conversion Tools
+      <!-- Hero Header -->
+      <section class="text-center space-y-2 py-4">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+          Developer & Daily Utilities
         </h1>
-        <p class="text-gray-600 dark:text-gray-400 text-lg">
-          Perform complex financial calculations and unit conversions seamlessly directly from your browser with instant zero-latency processing.
+        <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+          Pilih alat konversi yang Anda butuhkan melalui tab di bawah ini.
         </p>
       </section>
 
-      <!-- Top Ad Banner Placement -->
-      <div class="w-full my-6 flex justify-center min-h-[90px] bg-gray-100 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 items-center text-xs text-gray-400">
-        <!-- Google AdSense Horizontal Leaderboard Tag -->
+      <!-- AdSense Top Leaderboard Banner -->
+      <div class="w-full flex justify-center min-h-[90px] bg-slate-800/50 rounded-xl border border-slate-700/60 items-center text-xs text-slate-500">
+        <!-- Google AdSense Code -->
         <span>Advertisement Area</span>
       </div>
 
-      <!-- SECTION 1: TAX & DISCOUNT CALCULATOR -->
-      <section id="tax-discount" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
-        <div class="max-w-3xl">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Tax & Discount Calculator</h2>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Calculate sales tax, merchant fees, and percentage discounts simultaneously.</p>
+      <!-- MAIN TAB SWITCHER & PANEL CONTAINER -->
+      <div class="bg-slate-800/90 rounded-2xl border border-slate-700/80 shadow-2xl p-4 sm:p-8 backdrop-blur-sm">
+        
+        <!-- Tab Navigation Buttons -->
+        <div class="flex flex-wrap sm:flex-nowrap gap-2 pb-6 border-b border-slate-700/80" id="tab-headers">
+          <button
+            onclick="switchTab('tax-discount')"
+            id="tab-btn-tax-discount"
+            class="tab-btn active-tab flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2"
+          >
+            <span>💰 Tax & Discount</span>
+          </button>
+          <button
+            onclick="switchTab('temperature')"
+            id="tab-btn-temperature"
+            class="tab-btn inactive-tab flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2"
+          >
+            <span>🌡️ Temperature</span>
+          </button>
+          <button
+            onclick="switchTab('weight')"
+            id="tab-btn-weight"
+            class="tab-btn inactive-tab flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2"
+          >
+            <span>⚖️ Weight</span>
+          </button>
+          <button
+            onclick="switchTab('length')"
+            id="tab-btn-length"
+            class="tab-btn inactive-tab flex-1 min-w-[120px] py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2"
+          >
+            <span>📏 Length</span>
+          </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Input Form -->
-          <div class="space-y-4">
-            <div>
-              <label for="calc-price" class="block text-sm font-medium mb-1">Original Price ($)</label>
-              <input type="number" id="calc-price" value="100" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label for="calc-discount" class="block text-sm font-medium mb-1">Discount (%)</label>
-                <input type="number" id="calc-discount" value="10" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
+        <!-- TAB CONTENT PANELS -->
+        <div class="pt-6">
+          
+          <!-- TAB 1: TAX & DISCOUNT -->
+          <div id="panel-tax-discount" class="tab-panel space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- Inputs -->
+              <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-100 flex items-center space-x-2">
+                  <span>Calculate Discount & Sales Tax</span>
+                </h3>
+                <div>
+                  <label for="calc-price" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Original Price ($)</label>
+                  <input type="number" id="calc-price" value="100" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="calc-discount" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Discount (%)</label>
+                    <input type="number" id="calc-discount" value="10" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+                  </div>
+                  <div>
+                    <label for="calc-tax" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Tax / VAT (%)</label>
+                    <input type="number" id="calc-tax" value="11" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+                  </div>
+                </div>
               </div>
-              <div>
-                <label for="calc-tax" class="block text-sm font-medium mb-1">Tax / VAT (%)</label>
-                <input type="number" id="calc-tax" value="11" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
+
+              <!-- Output Results -->
+              <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-700/80 space-y-4 flex flex-col justify-center">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Discount Saved:</span>
+                  <span class="font-bold text-emerald-400 text-base">$<span id="res-discount-amount">0.00</span></span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Tax Amount:</span>
+                  <span class="font-bold text-amber-400 text-base">$<span id="res-tax-amount">0.00</span></span>
+                </div>
+                <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
+                  <span class="font-bold text-slate-200">Final Price:</span>
+                  <span class="font-extrabold text-2xl text-blue-400">$<span id="res-final-price">0.00</span></span>
+                </div>
               </div>
             </div>
+
+            <!-- SEO Content -->
+            <article class="pt-6 border-t border-slate-700/60 text-xs text-slate-400 leading-relaxed space-y-2">
+              <h4 class="text-sm font-bold text-slate-200">About Tax & Discount Calculation</h4>
+              <p>Calculating discounts before sales tax ensures accurate billing. Sales taxes or VAT are typically computed against the net price after promotional reductions.</p>
+            </article>
           </div>
 
-          <!-- Output Results -->
-          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Discount Saved:</span>
-              <span class="font-semibold text-emerald-600 dark:text-emerald-400">$<span id="res-discount-amount">0.00</span></span>
+          <!-- TAB 2: TEMPERATURE -->
+          <div id="panel-temperature" class="tab-panel hidden space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-100">Temperature Converter</h3>
+                <div>
+                  <label for="temp-input" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Value</label>
+                  <input type="number" id="temp-input" value="25" oninput="convertTempUS()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+                </div>
+                <div>
+                  <label for="temp-from" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">From Scale</label>
+                  <select id="temp-from" onchange="convertTempUS()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
+                    <option value="C">Celsius (°C)</option>
+                    <option value="F">Fahrenheit (°F)</option>
+                    <option value="K">Kelvin (K)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-700/80 space-y-3 flex flex-col justify-center">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Celsius (°C):</span>
+                  <span class="font-bold text-slate-100" id="res-temp-c">25.00 °C</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Fahrenheit (°F):</span>
+                  <span class="font-bold text-slate-100" id="res-temp-f">77.00 °F</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Kelvin (K):</span>
+                  <span class="font-bold text-slate-100" id="res-temp-k">298.15 K</span>
+                </div>
+              </div>
             </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Tax Payable:</span>
-              <span class="font-semibold text-amber-600 dark:text-amber-400">$<span id="res-tax-amount">0.00</span></span>
-            </div>
-            <div class="pt-3 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
-              <span class="font-bold text-base">Final Total:</span>
-              <span class="font-bold text-xl text-blue-600 dark:text-blue-400">$<span id="res-final-price">0.00</span></span>
-            </div>
+
+            <article class="pt-6 border-t border-slate-700/60 text-xs text-slate-400 leading-relaxed space-y-2">
+              <h4 class="text-sm font-bold text-slate-200">Thermal Scale Reference</h4>
+              <p>Celsius is widely used globally, Fahrenheit is standard in the US, and Kelvin is the official SI unit for thermodynamic measurements.</p>
+            </article>
           </div>
+
+          <!-- TAB 3: WEIGHT -->
+          <div id="panel-weight" class="tab-panel hidden space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-100">Mass & Weight Converter</h3>
+                <div>
+                  <label for="weight-input" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Value</label>
+                  <input type="number" id="weight-input" value="1" oninput="convertWeightUS()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+                </div>
+                <div>
+                  <label for="weight-from" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">From Unit</label>
+                  <select id="weight-from" onchange="convertWeightUS()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
+                    <option value="kg">Kilogram (kg)</option>
+                    <option value="g">Gram (g)</option>
+                    <option value="lbs">Pound (lbs)</option>
+                    <option value="oz">Ounce (oz)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-700/80 space-y-3 flex flex-col justify-center">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Gram (g):</span>
+                  <span class="font-bold text-slate-100" id="res-weight-g">1000.00 g</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Kilogram (kg):</span>
+                  <span class="font-bold text-slate-100" id="res-weight-kg">1.0000 kg</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Pound (lbs):</span>
+                  <span class="font-bold text-slate-100" id="res-weight-lbs">2.20 lbs</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Ounce (oz):</span>
+                  <span class="font-bold text-slate-100" id="res-weight-oz">35.27 oz</span>
+                </div>
+              </div>
+            </div>
+
+            <article class="pt-6 border-t border-slate-700/60 text-xs text-slate-400 leading-relaxed space-y-2">
+              <h4 class="text-sm font-bold text-slate-200">Mass Metrics Overview</h4>
+              <p>Easily convert weight measurements between international metric standards and US Imperial customary units.</p>
+            </article>
+          </div>
+
+          <!-- TAB 4: LENGTH -->
+          <div id="panel-length" class="tab-panel hidden space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-100">Length & Distance Converter</h3>
+                <div>
+                  <label for="length-input" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Value</label>
+                  <input type="number" id="length-input" value="10" oninput="convertLengthUS()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" />
+                </div>
+                <div>
+                  <label for="length-from" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">From Unit</label>
+                  <select id="length-from" onchange="convertLengthUS()" class="w-full px-4 py-3 rounded-xl border border-slate-600 bg-slate-900/80 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition">
+                    <option value="m">Meter (m)</option>
+                    <option value="cm">Centimeter (cm)</option>
+                    <option value="km">Kilometer (km)</option>
+                    <option value="inch">Inch (in)</option>
+                    <option value="ft">Foot (ft)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-700/80 space-y-3 flex flex-col justify-center">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Meter (m):</span>
+                  <span class="font-bold text-slate-100" id="res-length-m">10.00 m</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Centimeter (cm):</span>
+                  <span class="font-bold text-slate-100" id="res-length-cm">1000.00 cm</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Kilometer (km):</span>
+                  <span class="font-bold text-slate-100" id="res-length-km">0.0100 km</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Inch (in):</span>
+                  <span class="font-bold text-slate-100" id="res-length-inch">393.70 in</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-slate-400">Foot (ft):</span>
+                  <span class="font-bold text-slate-100" id="res-length-ft">32.81 ft</span>
+                </div>
+              </div>
+            </div>
+
+            <article class="pt-6 border-t border-slate-700/60 text-xs text-slate-400 leading-relaxed space-y-2">
+              <h4 class="text-sm font-bold text-slate-200">Linear Distance Conversion</h4>
+              <p>Convert linear dimensions seamlessly between metric system units (m, cm, km) and imperial customary units (inches, feet).</p>
+            </article>
+          </div>
+
         </div>
-
-        <!-- SEO Article Content for Tax & Discount -->
-        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Understanding Combined Discount and Sales Tax Calculations</h3>
-          <p>
-            Calculating the true final price during promotional campaigns or retail purchasing requires factoring both promotional markdowns and local value-added or sales taxes. In most fiscal jurisdictions, statutory sales taxes apply exclusively to the adjusted subtotal—after promotional discounts have been applied—rather than the original retail manufacturer price.
-          </p>
-          <p>
-            <strong>Mathematical Formula:</strong><br />
-            1. <em>Discount Amount</em> = Base Price × (Discount Rate / 100)<br />
-            2. <em>Discounted Subtotal</em> = Base Price - Discount Amount<br />
-            3. <em>Tax Amount</em> = Discounted Subtotal × (Tax Rate / 100)<br />
-            4. <em>Final Price</em> = Discounted Subtotal + Tax Amount
-          </p>
-        </article>
-      </section>
-
-      <!-- SECTION 2: TEMPERATURE CONVERTER -->
-      <section id="temperature" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
-        <div class="max-w-3xl">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Temperature Unit Converter</h2>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Convert seamlessly between Celsius, Fahrenheit, and absolute Kelvin scale.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Input Form -->
-          <div class="space-y-4">
-            <div>
-              <label for="temp-input" class="block text-sm font-medium mb-1">Temperature Value</label>
-              <input type="number" id="temp-input" value="25" oninput="convertTempUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
-            </div>
-            <div>
-              <label for="temp-from" class="block text-sm font-medium mb-1">From Unit</label>
-              <select id="temp-from" onchange="convertTempUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none">
-                <option value="C">Celsius (°C)</option>
-                <option value="F">Fahrenheit (°F)</option>
-                <option value="K">Kelvin (K)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Output Results -->
-          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Celsius Scale:</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-temp-c">25.00 °C</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Fahrenheit Scale:</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-temp-f">77.00 °F</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Absolute Kelvin:</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-temp-k">298.15 K</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEO Article Content for Temperature -->
-        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Thermal Metrics: Celsius, Fahrenheit, and Thermodynamic Temperature</h3>
-          <p>
-            Thermal measurement systems vary significantly across industrial applications, scientific research, and international geography. The Metric system utilizes Celsius (°C), defined by the freezing and boiling thresholds of distilled water at sea level. The Imperial standard relies on Fahrenheit (°F), commonly applied in meteorological reporting across North America.
-          </p>
-          <p>
-            In scientific computing and thermodynamic physics, Kelvin (K) serves as the primary SI unit, originating from absolute zero—the theoretical state where thermal motion ceases completely.
-          </p>
-        </article>
-      </section>
-
-      <!-- In-Feed Ad Placement -->
-      <div class="w-full my-6 flex justify-center min-h-[90px] bg-gray-100 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 items-center text-xs text-gray-400">
-        <!-- Google AdSense In-Feed / Banner Tag -->
-        <span>Advertisement Area</span>
       </div>
 
-      <!-- SECTION 3: WEIGHT CONVERTER -->
-      <section id="weight" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
-        <div class="max-w-3xl">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Mass & Weight Converter</h2>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Convert metrics between Grams, Kilograms, Pounds, and Ounces instantly.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Input Form -->
-          <div class="space-y-4">
-            <div>
-              <label for="weight-input" class="block text-sm font-medium mb-1">Weight / Mass Value</label>
-              <input type="number" id="weight-input" value="1" oninput="convertWeightUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
-            </div>
-            <div>
-              <label for="weight-from" class="block text-sm font-medium mb-1">From Unit</label>
-              <select id="weight-from" onchange="convertWeightUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none">
-                <option value="kg">Kilogram (kg)</option>
-                <option value="g">Gram (g)</option>
-                <option value="lbs">Pound (lbs)</option>
-                <option value="oz">Ounce (oz)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Output Results -->
-          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Gram (g):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-g">1000.00 g</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Kilogram (kg):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-kg">1.0000 kg</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Pound (lbs):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-lbs">2.20 lbs</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Ounce (oz):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-oz">35.27 oz</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEO Article Content for Weight -->
-        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Precision Mass Conversion in Commerce & Engineering</h3>
-          <p>
-            Converting weight accurately is critical across global logistics, culinary formulation, and mechanical engineering. International trade universally standards around the kilogram (kg), whereas consumer commercial markets in North America rely heavily on Avoirdupois weight standards such as pounds (lbs) and ounces (oz).
-          </p>
-          <p>
-            1 International Avoirdupois Pound is precisely equivalent to 0.45359237 kilograms, divided into 16 individual ounces.
-          </p>
-        </article>
-      </section>
-
-      <!-- SECTION 4: LENGTH CONVERTER -->
-      <section id="length" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
-        <div class="max-w-3xl">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Distance & Length Converter</h2>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Convert linear measurements across Metric and Imperial length units.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Input Form -->
-          <div class="space-y-4">
-            <div>
-              <label for="length-input" class="block text-sm font-medium mb-1">Length Value</label>
-              <input type="number" id="length-input" value="10" oninput="convertLengthUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
-            </div>
-            <div>
-              <label for="length-from" class="block text-sm font-medium mb-1">From Unit</label>
-              <select id="length-from" onchange="convertLengthUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none">
-                <option value="m">Meter (m)</option>
-                <option value="cm">Centimeter (cm)</option>
-                <option value="km">Kilometer (km)</option>
-                <option value="inch">Inch (in)</option>
-                <option value="ft">Foot (ft)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Output Results -->
-          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Meter (m):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-m">10.00 m</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Centimeter (cm):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-cm">1000.00 cm</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Kilometer (km):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-km">0.0100 km</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Inch (in):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-inch">393.70 in</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-gray-500">Foot (ft):</span>
-              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-ft">32.81 ft</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEO Article Content for Length -->
-        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Linear Measurements & Metric-Imperial Compatibility</h3>
-          <p>
-            Dimensional length conversion plays an irreplaceable role in digital design, architecture, spatial planning, and global manufacturing. Linear dimensions require strict unit precision to eliminate compounding errors when scaling vector graphics, building schematics, or structural components.
-          </p>
-        </article>
-      </section>
+      <!-- In-Feed Ad Banner -->
+      <div class="w-full flex justify-center min-h-[90px] bg-slate-800/50 rounded-xl border border-slate-700/60 items-center text-xs text-slate-500">
+        <!-- Google AdSense Code -->
+        <span>Advertisement Area</span>
+      </div>
 
     </main>
 
-    <!-- Footer Area -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 dark:text-gray-400 space-y-4 sm:space-y-0">
+    <!-- Footer -->
+    <footer class="bg-slate-800/80 border-t border-slate-700/80 py-6 text-xs text-slate-400">
+      <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p>&copy; DevTools Converter. All rights reserved.</p>
         <div class="flex space-x-6">
-          <a href="privacy.html" class="hover:underline">Privacy Policy</a>
-          <a href="terms.html" class="hover:underline">Terms of Service</a>
-          <a href="contact.html" class="hover:underline">Contact Us</a>
+          <a href="privacy.html" class="hover:text-blue-400 transition">Privacy Policy</a>
+          <a href="terms.html" class="hover:text-blue-400 transition">Terms of Service</a>
+          <a href="contact.html" class="hover:text-blue-400 transition">Contact Us</a>
         </div>
       </div>
     </footer>
 
-    <!-- Script External Call -->
+    <!-- CSS Helpers for Dynamic Tabs -->
+    <style>
+      .active-tab {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+      }
+      .inactive-tab {
+        background-color: rgba(15, 23, 42, 0.6);
+        color: #94a3b8;
+      }
+      .inactive-tab:hover {
+        background-color: rgba(30, 41, 59, 0.8);
+        color: #f1f5f9;
+      }
+    </style>
+
+    <!-- Script External -->
     <script src="js/converters.js"></script>
   </body>
 </html>
