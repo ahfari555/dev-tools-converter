@@ -342,7 +342,119 @@
       </div>
     </footer>
 
-    <!-- External Script -->
-    <script src="js/converters.js"></script>
+    <!-- INLINE JAVASCRIPT DIRECTLY EMBEDDED -->
+    <script>
+      function switchTab(tabId) {
+        var panels = document.querySelectorAll('.tab-panel');
+        panels.forEach(function(panel) {
+          panel.classList.add('tab-panel-hidden');
+        });
+
+        var buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(function(btn) {
+          btn.classList.remove('active-tab');
+          btn.classList.add('inactive-tab');
+        });
+
+        var targetPanel = document.getElementById('panel-' + tabId);
+        if (targetPanel) {
+          targetPanel.classList.remove('tab-panel-hidden');
+        }
+
+        var targetBtn = document.getElementById('tab-btn-' + tabId);
+        if (targetBtn) {
+          targetBtn.classList.remove('inactive-tab');
+          targetBtn.classList.add('active-tab');
+        }
+      }
+
+      function calculateTaxAndDiscount() {
+        var originalPrice = parseFloat(document.getElementById('calc-price').value) || 0;
+        var discountPercent = parseFloat(document.getElementById('calc-discount').value) || 0;
+        var taxPercent = parseFloat(document.getElementById('calc-tax').value) || 0;
+
+        var discountAmount = originalPrice * (discountPercent / 100);
+        var priceAfterDiscount = originalPrice - discountAmount;
+        var taxAmount = priceAfterDiscount * (taxPercent / 100);
+        var finalPrice = priceAfterDiscount + taxAmount;
+
+        document.getElementById('res-discount-amount').textContent = discountAmount.toFixed(2);
+        document.getElementById('res-tax-amount').textContent = taxAmount.toFixed(2);
+        document.getElementById('res-final-price').textContent = finalPrice.toFixed(2);
+      }
+
+      function convertTempUS() {
+        var inputVal = parseFloat(document.getElementById('temp-input').value);
+        var unitFrom = document.getElementById('temp-from').value;
+
+        if (isNaN(inputVal)) return;
+
+        var celsius = 0;
+        if (unitFrom === 'C') celsius = inputVal;
+        else if (unitFrom === 'F') celsius = (inputVal - 32) * (5 / 9);
+        else if (unitFrom === 'K') celsius = inputVal - 273.15;
+
+        var fahrenheit = (celsius * 9 / 5) + 32;
+        var kelvin = celsius + 273.15;
+
+        document.getElementById('res-temp-c').textContent = celsius.toFixed(2) + ' °C';
+        document.getElementById('res-temp-f').textContent = fahrenheit.toFixed(2) + ' °F';
+        document.getElementById('res-temp-k').textContent = kelvin.toFixed(2) + ' K';
+      }
+
+      function convertWeightUS() {
+        var inputVal = parseFloat(document.getElementById('weight-input').value);
+        var unitFrom = document.getElementById('weight-from').value;
+
+        if (isNaN(inputVal)) return;
+
+        var grams = 0;
+        if (unitFrom === 'g') grams = inputVal;
+        else if (unitFrom === 'kg') grams = inputVal * 1000;
+        else if (unitFrom === 'lbs') grams = inputVal * 453.592;
+        else if (unitFrom === 'oz') grams = inputVal * 28.3495;
+
+        var kg = grams / 1000;
+        var lbs = grams / 453.592;
+        var oz = grams / 28.3495;
+
+        document.getElementById('res-weight-g').textContent = grams.toFixed(2) + ' g';
+        document.getElementById('res-weight-kg').textContent = kg.toFixed(4) + ' kg';
+        document.getElementById('res-weight-lbs').textContent = lbs.toFixed(2) + ' lbs';
+        document.getElementById('res-weight-oz').textContent = oz.toFixed(2) + ' oz';
+      }
+
+      function convertLengthUS() {
+        var inputVal = parseFloat(document.getElementById('length-input').value);
+        var unitFrom = document.getElementById('length-from').value;
+
+        if (isNaN(inputVal)) return;
+
+        var meters = 0;
+        if (unitFrom === 'm') meters = inputVal;
+        else if (unitFrom === 'cm') meters = inputVal / 100;
+        else if (unitFrom === 'km') meters = inputVal * 1000;
+        else if (unitFrom === 'inch') meters = inputVal * 0.0254;
+        else if (unitFrom === 'ft') meters = inputVal * 0.3048;
+
+        var cm = meters * 100;
+        var km = meters / 1000;
+        var inch = meters / 0.0254;
+        var ft = meters / 0.3048;
+
+        document.getElementById('res-length-m').textContent = meters.toFixed(2) + ' m';
+        document.getElementById('res-length-cm').textContent = cm.toFixed(2) + ' cm';
+        document.getElementById('res-length-km').textContent = km.toFixed(4) + ' km';
+        document.getElementById('res-length-inch').textContent = inch.toFixed(2) + ' in';
+        document.getElementById('res-length-ft').textContent = ft.toFixed(2) + ' ft';
+      }
+
+      window.onload = function() {
+        calculateTaxAndDiscount();
+        convertTempUS();
+        convertWeightUS();
+        convertLengthUS();
+      };
+    </script>
   </body>
 </html>
