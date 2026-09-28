@@ -2,28 +2,28 @@
  * DevTools Converter - Core Logic & Tab Controller
  */
 
-// Pasang switchTab langsung pada objek window
+// Tab Switching Function linked to Global Window
 window.switchTab = function(tabId) {
-    // 1. Sembunyikan semua panel
+    // 1. Hide all tab panels
     const panels = document.querySelectorAll('.tab-panel');
     panels.forEach(panel => {
         panel.classList.add('tab-panel-hidden');
     });
 
-    // 2. Reset tampilan tombol
+    // 2. Reset buttons styling
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(btn => {
         btn.classList.remove('active-tab');
         btn.classList.add('inactive-tab');
     });
 
-    // 3. Tampilkan panel yang diklik
+    // 3. Show target panel
     const targetPanel = document.getElementById('panel-' + tabId);
     if (targetPanel) {
         targetPanel.classList.remove('tab-panel-hidden');
     }
 
-    // 4. Aktifkan status tombol yang diklik
+    // 4. Highlight target button
     const targetBtn = document.getElementById('tab-btn-' + tabId);
     if (targetBtn) {
         targetBtn.classList.remove('inactive-tab');
@@ -135,7 +135,7 @@ window.convertLengthUS = function() {
     if (elFt) elFt.textContent = ft.toFixed(2) + ' ft';
 };
 
-// Run initial calculations
+// Run initial conversions on load
 document.addEventListener('DOMContentLoaded', () => {
     window.calculateTaxAndDiscount();
     window.convertTempUS();
