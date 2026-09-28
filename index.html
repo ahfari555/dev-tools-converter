@@ -1,827 +1,324 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Google AdSense Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2805918301542012"
-     crossorigin="anonymous"></script>
-
-  <!-- SEO Meta Tags -->
-  <title>OmniConvert - Free Online Unit & Developer Converter Tools</title>
-  <meta name="description" content="Free online unit converter tools for developers, designers, and daily tasks. Convert PX to REM, Base64, JSON formatter, aspect ratio, live currency exchange rates, US sales tax, and metric units instantly.">
-  <meta name="keywords" content="px to rem converter, base64 encoder decoder, json formatter, aspect ratio calculator, hex to rgb, currency converter, US sales tax calculator, unit converter, developer tools">
-  <meta name="author" content="OmniConvert">
-  <meta name="robots" content="index, follow">
-
-  <!-- Open Graph / Social Media Meta Tags -->
-  <meta property="og:title" content="OmniConvert - Free Online Unit & Developer Tools">
-  <meta property="og:description" content="Fast, precise, and 100% free online conversion tools processed right in your browser.">
-  <meta property="og:type" content="website">
-
-  <!-- Favicon SVG (Lightning Icon ⚡) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-
-  <!-- Google Font: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    html.light body {
-      background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #faf5ff 100%);
-      color: #1e293b;
-    }
-    html.dark body {
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #111827 100%);
-      color: #f8fafc;
-    }
-    .pastel-card {
-      transition: all 0.3s ease;
-    }
-    html.light .pastel-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.15);
-    }
-    html.dark .pastel-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #a855f7 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  </style>
-</head>
-<body class="font-sans min-h-screen flex flex-col antialiased selection:bg-purple-200 selection:text-purple-900">
-
-  <!-- TOP NAVBAR -->
-  <header class="sticky top-0 z-50 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md border-b border-purple-100/80 dark:border-slate-800 px-6 py-4">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 via-indigo-400 to-pink-400 flex items-center justify-center font-black text-xl text-white shadow-md shadow-indigo-200 dark:shadow-none">
-          ⚡
-        </div>
-        <span class="text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">Omni<span class="gradient-text">Convert</span></span>
-      </a>
-      
-      <!-- Nav Tabs (Desktop) -->
-      <nav class="hidden md:flex items-center gap-1 bg-purple-50/80 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-purple-100 dark:border-slate-700">
-        <button onclick="switchTab('dev')" id="tab-dev" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm border border-purple-100 dark:border-transparent">💻 Dev & Design</button>
-        <button onclick="switchTab('finance')" id="tab-finance" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-all duration-200">💵 Finance & Tax</button>
-        <button onclick="switchTab('units')" id="tab-units" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition-all duration-200">📐 US & Metric Units</button>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <!-- Dark Mode Toggle Button -->
-        <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-          <span id="themeIcon">🌙</span>
-        </button>
-
-        <!-- Share Button -->
-        <button onclick="shareWebsite()" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-100 transition border border-indigo-100 dark:border-indigo-800">
-          🚀 Share
-        </button>
-
-        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live
-        </span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev Tools & Utility Converters - Free Online Calculation Tools</title>
+    <meta
+      name="description"
+      content="Comprehensive suite of free online calculation tools: Tax & Discount Calculator, Temperature Converter, Weight Converter, and Length Converter with instant calculations."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                500: '#0ea5e9',
+                600: '#0284c7',
+                700: '#0369a1',
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- AdSense Auto Ads / Script Placeholder -->
+    <!-- Insert your google adsense script tag here -->
+  </head>
+  <body class="font-sans min-h-screen flex flex-col antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
+    
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur border-b border-gray-200 dark:border-gray-700">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="index.html" class="flex items-center space-x-3">
+          <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            DevTools Converter
+          </span>
+        </a>
+        <nav class="flex items-center space-x-6 text-sm font-medium">
+          <a href="#tax-discount" class="hover:text-blue-600 transition">Tax & Discount</a>
+          <a href="#temperature" class="hover:text-blue-600 transition">Temperature</a>
+          <a href="#weight" class="hover:text-blue-600 transition">Weight</a>
+          <a href="#length" class="hover:text-blue-600 transition">Length</a>
+        </nav>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- MOBILE NAV -->
-  <div class="md:hidden flex overflow-x-auto gap-2 p-4 bg-white/80 dark:bg-slate-900/80 border-b border-purple-100 dark:border-slate-800 no-scrollbar">
-    <button onclick="switchTab('dev')" id="mob-tab-dev" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 dark:bg-indigo-600 text-indigo-700 dark:text-white">💻 Dev & Design</button>
-    <button onclick="switchTab('finance')" id="mob-tab-finance" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800">💵 Finance & Tax</button>
-    <button onclick="switchTab('units')" id="mob-tab-units" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800">📐 US & Metric Units</button>
-  </div>
+    <!-- Main Content Grid -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
-  <!-- HERO SECTION WITH SEARCH BAR -->
-  <section class="max-w-7xl mx-auto px-6 pt-8 pb-4 text-center">
-    <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-800 dark:text-white mb-3">
-      Fast. Precise. <span class="gradient-text">100% Free Online Tools.</span>
-    </h1>
-    <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-medium mb-6">
-      Essential developer, financial, and unit conversion tools designed for creators and daily productivity. 100% private and browser-based.
-    </p>
+      <!-- Hero Banner -->
+      <section class="text-center max-w-3xl mx-auto space-y-4">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          Fast, Accurate & Modern Conversion Tools
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400 text-lg">
+          Perform complex financial calculations and unit conversions seamlessly directly from your browser with instant zero-latency processing.
+        </p>
+      </section>
 
-    <!-- UNIVERSAL SEARCH BAR -->
-    <div class="max-w-md mx-auto relative">
-      <input type="text" id="toolSearch" oninput="filterTools()" placeholder="🔍 Search any tool (e.g. PX, Base64, Tax, Currency)..." class="w-full bg-white dark:bg-slate-800/90 border border-purple-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm transition">
-    </div>
-  </section>
+      <!-- Top Ad Banner Placement -->
+      <div class="w-full my-6 flex justify-center min-h-[90px] bg-gray-100 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 items-center text-xs text-gray-400">
+        <!-- Google AdSense Horizontal Leaderboard Tag -->
+        <span>Advertisement Area</span>
+      </div>
 
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-6 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
-
-    <!-- LEFT / MAIN CONTENT AREA (3 COLS) -->
-    <div class="lg:col-span-3 space-y-8">
-
-      <!-- ================= CATEGORY 1: DEV & DESIGN ================= -->
-      <div id="sec-dev" class="space-y-8">
-
-        <!-- TOOL 1: PX to REM -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="px rem em css converter unit font size">
-          <div class="flex items-center justify-between mb-6">
-            <div>
-              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
-                <span class="p-2.5 bg-sky-100 dark:bg-sky-900/60 text-sky-600 dark:text-sky-300 rounded-2xl text-lg">📏</span> PX to REM / EM Converter
-              </h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Convert CSS pixels to relative units for modern web design</p>
-            </div>
-            <span class="text-xs px-3 py-1 bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 rounded-full font-mono font-semibold border border-sky-100 dark:border-sky-800">CSS Unit</span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Base Font Size (PX)</label>
-              <input type="number" id="basePx" value="16" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Target Pixels (PX)</label>
-              <input type="number" id="inputPx" value="24" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold transition" oninput="convertPx()">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Result (REM)</label>
-              <div class="relative">
-                <input type="text" id="resultRem" readonly class="w-full bg-sky-50/70 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 rounded-2xl px-4 py-3 text-sky-700 dark:text-sky-300 font-mono font-extrabold pr-20">
-                <button onclick="copyToClipboard('resultRem')" class="absolute right-2 top-2 bottom-2 bg-sky-500 hover:bg-sky-600 text-white px-3.5 text-xs font-semibold rounded-xl transition shadow-sm">Copy</button>
-              </div>
-            </div>
-          </div>
+      <!-- SECTION 1: TAX & DISCOUNT CALCULATOR -->
+      <section id="tax-discount" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Tax & Discount Calculator</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Calculate sales tax, merchant fees, and percentage discounts simultaneously.</p>
         </div>
 
-        <!-- TOOL 2: BASE64 ENCODER / DECODER -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="base64 encode decode binary string text crypto">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
-                <span class="p-2.5 bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 rounded-2xl text-lg">🔒</span> Base64 Encoder & Decoder
-              </h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Encode plain text to Base64 format or decode it back instantly</p>
-            </div>
-            <span class="text-xs px-3 py-1 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 rounded-full font-mono font-semibold border border-blue-100 dark:border-blue-800">Encoding</span>
-          </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Input Form -->
           <div class="space-y-4">
-            <textarea id="base64Input" rows="3" placeholder="Type or paste plain text or Base64 code here..." class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-300 font-mono text-sm transition"></textarea>
-            
-            <div class="flex gap-3">
-              <button onclick="processBase64('encode')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-sm">Encode to Base64</button>
-              <button onclick="processBase64('decode')" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Decode from Base64</button>
+            <div>
+              <label for="calc-price" class="block text-sm font-medium mb-1">Original Price ($)</label>
+              <input type="number" id="calc-price" value="100" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="calc-discount" class="block text-sm font-medium mb-1">Discount (%)</label>
+                <input type="number" id="calc-discount" value="10" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
+              </div>
+              <div>
+                <label for="calc-tax" class="block text-sm font-medium mb-1">Tax / VAT (%)</label>
+                <input type="number" id="calc-tax" value="11" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
+              </div>
+            </div>
+          </div>
 
-            <div class="relative">
-              <textarea id="base64Output" readonly rows="3" placeholder="Result will appear here..." class="w-full bg-blue-50/50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 rounded-2xl p-4 text-blue-900 dark:text-blue-200 font-mono text-sm font-medium focus:outline-none"></textarea>
-              <button onclick="copyToClipboard('base64Output')" class="absolute right-3 top-3 bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-700 text-blue-600 dark:text-blue-300 hover:bg-blue-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
+          <!-- Output Results -->
+          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Discount Saved:</span>
+              <span class="font-semibold text-emerald-600 dark:text-emerald-400">$<span id="res-discount-amount">0.00</span></span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Tax Payable:</span>
+              <span class="font-semibold text-amber-600 dark:text-amber-400">$<span id="res-tax-amount">0.00</span></span>
+            </div>
+            <div class="pt-3 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+              <span class="font-bold text-base">Final Total:</span>
+              <span class="font-bold text-xl text-blue-600 dark:text-blue-400">$<span id="res-final-price">0.00</span></span>
             </div>
           </div>
         </div>
 
-        <!-- TOOL 3: JSON FORMATTER & VALIDATOR -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="json formatter validator beautify minify parse object array">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
-                <span class="p-2.5 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 rounded-2xl text-lg">⚙️</span> JSON Formatter & Validator
-              </h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Format, beautify, and validate JSON data structures</p>
-            </div>
-            <span id="jsonStatus" class="text-xs px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full font-mono font-semibold">Ready</span>
-          </div>
+        <!-- SEO Article Content for Tax & Discount -->
+        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Understanding Combined Discount and Sales Tax Calculations</h3>
+          <p>
+            Calculating the true final price during promotional campaigns or retail purchasing requires factoring both promotional markdowns and local value-added or sales taxes. In most fiscal jurisdictions, statutory sales taxes apply exclusively to the adjusted subtotal—after promotional discounts have been applied—rather than the original retail manufacturer price.
+          </p>
+          <p>
+            <strong>Mathematical Formula:</strong><br />
+            1. <em>Discount Amount</em> = Base Price × (Discount Rate / 100)<br />
+            2. <em>Discounted Subtotal</em> = Base Price - Discount Amount<br />
+            3. <em>Tax Amount</em> = Discounted Subtotal × (Tax Rate / 100)<br />
+            4. <em>Final Price</em> = Discounted Subtotal + Tax Amount
+          </p>
+        </article>
+      </section>
 
+      <!-- SECTION 2: TEMPERATURE CONVERTER -->
+      <section id="temperature" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Temperature Unit Converter</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Convert seamlessly between Celsius, Fahrenheit, and absolute Kelvin scale.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Input Form -->
           <div class="space-y-4">
-            <textarea id="jsonInput" rows="4" placeholder='Paste unformatted JSON here (e.g. {"name":"Omni","active":true})' class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 font-mono text-sm transition"></textarea>
-            
-            <div class="flex gap-3">
-              <button onclick="formatJSON()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition shadow-sm">Beautify JSON</button>
-              <button onclick="minifyJSON()" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-semibold px-5 py-2.5 rounded-xl text-xs transition">Minify JSON</button>
+            <div>
+              <label for="temp-input" class="block text-sm font-medium mb-1">Temperature Value</label>
+              <input type="number" id="temp-input" value="25" oninput="convertTempUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
+            <div>
+              <label for="temp-from" class="block text-sm font-medium mb-1">From Unit</label>
+              <select id="temp-from" onchange="convertTempUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none">
+                <option value="C">Celsius (°C)</option>
+                <option value="F">Fahrenheit (°F)</option>
+                <option value="K">Kelvin (K)</option>
+              </select>
+            </div>
+          </div>
 
-            <div class="relative">
-              <textarea id="jsonOutput" readonly rows="5" placeholder="Formatted JSON output..." class="w-full bg-emerald-50/50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-4 text-emerald-950 dark:text-emerald-200 font-mono text-sm font-medium focus:outline-none"></textarea>
-              <button onclick="copyToClipboard('jsonOutput')" class="absolute right-3 top-3 bg-white dark:bg-slate-800 border border-emerald-200 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 px-3 py-1.5 text-xs font-semibold rounded-lg transition shadow-sm">Copy</button>
+          <!-- Output Results -->
+          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Celsius Scale:</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-temp-c">25.00 °C</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Fahrenheit Scale:</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-temp-f">77.00 °F</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Absolute Kelvin:</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-temp-k">298.15 K</span>
             </div>
           </div>
         </div>
 
-        <!-- TOOL 4: ASPECT RATIO CALCULATOR -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="aspect ratio calculator width height image video 16:9 4:3 dimension">
-          <div class="flex items-center justify-between mb-6">
+        <!-- SEO Article Content for Temperature -->
+        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Thermal Metrics: Celsius, Fahrenheit, and Thermodynamic Temperature</h3>
+          <p>
+            Thermal measurement systems vary significantly across industrial applications, scientific research, and international geography. The Metric system utilizes Celsius (°C), defined by the freezing and boiling thresholds of distilled water at sea level. The Imperial standard relies on Fahrenheit (°F), commonly applied in meteorological reporting across North America.
+          </p>
+          <p>
+            In scientific computing and thermodynamic physics, Kelvin (K) serves as the primary SI unit, originating from absolute zero—the theoretical state where thermal motion ceases completely.
+          </p>
+        </article>
+      </section>
+
+      <!-- In-Feed Ad Placement -->
+      <div class="w-full my-6 flex justify-center min-h-[90px] bg-gray-100 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300 dark:border-gray-700 items-center text-xs text-gray-400">
+        <!-- Google AdSense In-Feed / Banner Tag -->
+        <span>Advertisement Area</span>
+      </div>
+
+      <!-- SECTION 3: WEIGHT CONVERTER -->
+      <section id="weight" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Mass & Weight Converter</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Convert metrics between Grams, Kilograms, Pounds, and Ounces instantly.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Input Form -->
+          <div class="space-y-4">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
-                <span class="p-2.5 bg-pink-100 dark:bg-pink-900/60 text-pink-600 dark:text-pink-300 rounded-2xl text-lg">📐</span> Aspect Ratio Calculator
-              </h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Calculate missing dimensions while preserving image & video aspect ratios</p>
+              <label for="weight-input" class="block text-sm font-medium mb-1">Weight / Mass Value</label>
+              <input type="number" id="weight-input" value="1" oninput="convertWeightUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
-            <span class="text-xs px-3 py-1 bg-pink-50 dark:bg-pink-950 text-pink-700 dark:text-pink-300 rounded-full font-mono font-semibold border border-pink-100 dark:border-pink-800">Design</span>
+            <div>
+              <label for="weight-from" class="block text-sm font-medium mb-1">From Unit</label>
+              <select id="weight-from" onchange="convertWeightUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none">
+                <option value="kg">Kilogram (kg)</option>
+                <option value="g">Gram (g)</option>
+                <option value="lbs">Pound (lbs)</option>
+                <option value="oz">Ounce (oz)</option>
+              </select>
+            </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Original Width (W1)</label>
-              <input type="number" id="ratioW1" value="1920" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calcAspectRatio()">
+          <!-- Output Results -->
+          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Gram (g):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-g">1000.00 g</span>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Original Height (H1)</label>
-              <input type="number" id="ratioH1" value="1080" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calcAspectRatio()">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Kilogram (kg):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-kg">1.0000 kg</span>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">New Width (W2)</label>
-              <input type="number" id="ratioW2" value="1280" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calcAspectRatio()">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Pound (lbs):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-lbs">2.20 lbs</span>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">New Height (H2)</label>
-              <input type="text" id="ratioH2Result" readonly class="w-full bg-pink-50/70 dark:bg-pink-950/60 border border-pink-200 dark:border-pink-800 rounded-2xl px-4 py-3 text-pink-700 dark:text-pink-300 font-mono font-extrabold">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Ounce (oz):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-weight-oz">35.27 oz</span>
             </div>
           </div>
         </div>
 
-        <!-- TOOL 5: COLOR CONVERTER -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="hex rgb hsl color picker converter code design">
-          <div class="flex items-center justify-between mb-6">
+        <!-- SEO Article Content for Weight -->
+        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Precision Mass Conversion in Commerce & Engineering</h3>
+          <p>
+            Converting weight accurately is critical across global logistics, culinary formulation, and mechanical engineering. International trade universally standards around the kilogram (kg), whereas consumer commercial markets in North America rely heavily on Avoirdupois weight standards such as pounds (lbs) and ounces (oz).
+          </p>
+          <p>
+            1 International Avoirdupois Pound is precisely equivalent to 0.45359237 kilograms, divided into 16 individual ounces.
+          </p>
+        </article>
+      </section>
+
+      <!-- SECTION 4: LENGTH CONVERTER -->
+      <section id="length" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Distance & Length Converter</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Convert linear measurements across Metric and Imperial length units.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Input Form -->
+          <div class="space-y-4">
             <div>
-              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
-                <span class="p-2.5 bg-indigo-100 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 rounded-2xl text-lg">🎨</span> HEX to RGB & HSL Converter
-              </h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Convert HEX color codes to RGB/HSL with real-time preview</p>
+              <label for="length-input" class="block text-sm font-medium mb-1">Length Value</label>
+              <input type="number" id="length-input" value="10" oninput="convertLengthUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
-            <div id="colorPreview" class="w-10 h-10 rounded-2xl border-2 border-white shadow-md transition-all duration-300"></div>
+            <div>
+              <label for="length-from" class="block text-sm font-medium mb-1">From Unit</label>
+              <select id="length-from" onchange="convertLengthUS()" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none">
+                <option value="m">Meter (m)</option>
+                <option value="cm">Centimeter (cm)</option>
+                <option value="km">Kilometer (km)</option>
+                <option value="inch">Inch (in)</option>
+                <option value="ft">Foot (ft)</option>
+              </select>
+            </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Pick or Input HEX Code</label>
-              <div class="flex gap-3">
-                <input type="color" id="colorPicker" value="#6366f1" class="h-12 w-16 rounded-2xl cursor-pointer border-0 bg-transparent" onchange="convertColorFromPicker()">
-                <input type="text" id="hexInput" value="#6366f1" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-mono uppercase focus:outline-none focus:ring-2 focus:ring-indigo-300 font-semibold transition" oninput="convertColor()">
-              </div>
+          <!-- Output Results -->
+          <div class="bg-gray-50 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-100 dark:border-gray-800 space-y-3 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Meter (m):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-m">10.00 m</span>
             </div>
-
-            <div class="space-y-3">
-              <div>
-                <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">RGB Output</label>
-                <div class="relative">
-                  <input type="text" id="rgbResult" readonly class="w-full bg-indigo-50/50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-800 rounded-xl px-4 py-2 text-indigo-800 dark:text-indigo-300 font-mono text-sm font-semibold pr-16">
-                  <button onclick="copyToClipboard('rgbResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
-                </div>
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">HSL Output</label>
-                <div class="relative">
-                  <input type="text" id="hslResult" readonly class="w-full bg-indigo-50/50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-800 rounded-xl px-4 py-2 text-indigo-800 dark:text-indigo-300 font-mono text-sm font-semibold pr-16">
-                  <button onclick="copyToClipboard('hslResult')" class="absolute right-1.5 top-1.5 bottom-1.5 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 px-2.5 text-xs font-semibold rounded-lg transition">Copy</button>
-                </div>
-              </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Centimeter (cm):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-cm">1000.00 cm</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Kilometer (km):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-km">0.0100 km</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Inch (in):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-inch">393.70 in</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-500">Foot (ft):</span>
+              <span class="font-semibold text-gray-800 dark:text-gray-200" id="res-length-ft">32.81 ft</span>
             </div>
           </div>
         </div>
 
-        <!-- TOOL 6: TEXT CASE -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl transition duration-300 hover:shadow-lg" data-keywords="text case uppercase lowercase titlecase slug generator url transform">
-          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2.5">
-            <span class="p-2.5 bg-purple-100 dark:bg-purple-900/60 text-purple-600 dark:text-purple-300 rounded-2xl text-lg">🔤</span> Text Case Converter & URL Slug Generator
-          </h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">Transform text capitalization and generate clean URL slugs</p>
+        <!-- SEO Article Content for Length -->
+        <article class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 leading-relaxed space-y-4">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">Linear Measurements & Metric-Imperial Compatibility</h3>
+          <p>
+            Dimensional length conversion plays an irreplaceable role in digital design, architecture, spatial planning, and global manufacturing. Linear dimensions require strict unit precision to eliminate compounding errors when scaling vector graphics, building schematics, or structural components.
+          </p>
+        </article>
+      </section>
 
-          <textarea id="caseInput" rows="3" placeholder="Paste or type your text here..." class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-300 font-medium transition mb-4"></textarea>
+    </main>
 
-          <div class="flex flex-wrap gap-2 mb-4">
-            <button onclick="transformText('upper')" class="bg-slate-100 dark:bg-slate-800 hover:bg-purple-500 hover:text-white text-slate-700 dark:text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold transition">UPPERCASE</button>
-            <button onclick="transformText('lower')" class="bg-slate-100 dark:bg-slate-800 hover:bg-purple-500 hover:text-white text-slate-700 dark:text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold transition">lowercase</button>
-            <button onclick="transformText('title')" class="bg-slate-100 dark:bg-slate-800 hover:bg-purple-500 hover:text-white text-slate-700 dark:text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold transition">Title Case</button>
-            <button onclick="transformText('slug')" class="bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 hover:bg-purple-500 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold transition">url-slug-case</button>
-          </div>
-
-          <div class="relative">
-            <input type="text" id="caseResult" readonly placeholder="Output string..." class="w-full bg-purple-50/60 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 rounded-2xl px-4 py-3 text-purple-900 dark:text-purple-200 font-mono text-sm font-semibold pr-20">
-            <button onclick="copyToClipboard('caseResult')" class="absolute right-2 top-2 bottom-2 bg-purple-500 hover:bg-purple-600 text-white px-3.5 text-xs font-semibold rounded-xl transition shadow-sm">Copy</button>
-          </div>
+    <!-- Footer Area -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 dark:text-gray-400 space-y-4 sm:space-y-0">
+        <p>&copy; DevTools Converter. All rights reserved.</p>
+        <div class="flex space-x-6">
+          <a href="privacy.html" class="hover:underline">Privacy Policy</a>
+          <a href="terms.html" class="hover:underline">Terms of Service</a>
+          <a href="contact.html" class="hover:underline">Contact Us</a>
         </div>
-
       </div>
+    </footer>
 
-      <!-- ================= CATEGORY 2: FINANCE ================= -->
-      <div id="sec-finance" class="space-y-8 hidden">
-
-        <!-- TOOL: CURRENCY CONVERTER -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl shadow-sm" data-keywords="currency converter usd eur gbp usd exchange live rate money dollar">
-          <div class="flex items-center justify-between mb-6">
-            <div>
-              <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
-                <span class="p-2.5 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 rounded-2xl text-lg">💵</span> Live USD Currency Converter
-              </h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Convert US Dollars against global foreign currencies with live API rates</p>
-            </div>
-            <span class="text-xs px-3 py-1 bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-full font-semibold">Live Rates</span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Amount</label>
-              <input type="number" id="currencyAmount" value="100" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-300 font-semibold transition" oninput="convertCurrency()">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">From / To</label>
-              <div class="flex gap-2 items-center">
-                <select id="fromCurrency" class="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-3 py-3 text-slate-800 dark:text-white text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
-                  <option value="USD">USD ($)</option>
-                  <option value="EUR">EUR (€)</option>
-                  <option value="GBP">GBP (£)</option>
-                  <option value="CAD">CAD ($)</option>
-                  <option value="MXN">MXN ($)</option>
-                  <option value="JPY">JPY (¥)</option>
-                </select>
-                <span class="text-slate-400 font-bold">➔</span>
-                <select id="toCurrency" class="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-3 py-3 text-slate-800 dark:text-white text-sm font-semibold w-full focus:outline-none" onchange="convertCurrency()">
-                  <option value="EUR">EUR (€)</option>
-                  <option value="USD">USD ($)</option>
-                  <option value="GBP">GBP (£)</option>
-                  <option value="CAD">CAD ($)</option>
-                  <option value="MXN">MXN ($)</option>
-                  <option value="JPY">JPY (¥)</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Converted Amount</label>
-              <input type="text" id="currencyResult" readonly placeholder="Fetching rates..." class="w-full bg-emerald-50/70 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded-2xl px-4 py-3 text-emerald-700 dark:text-emerald-300 font-mono font-extrabold">
-            </div>
-          </div>
-        </div>
-
-        <!-- TOOL: TAX & TIP CALCULATOR -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl shadow-sm" data-keywords="us sales tax tip discount calculator shopping bill cost">
-          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2.5">
-            <span class="p-2.5 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 rounded-2xl text-lg">🏷️</span> US Sales Tax, Tip & Discount Calculator
-          </h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">Calculate shopping discounts, US state sales tax, and restaurant tips</p>
-
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Bill Amount ($)</label>
-              <input type="number" id="priceInput" value="85" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Discount (%)</label>
-              <input type="number" id="discountInput" value="10" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Sales Tax (%)</label>
-              <input type="number" id="taxInput" value="7.25" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-2">Tip Rate (%)</label>
-              <input type="number" id="tipInput" value="18" class="w-full bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 text-slate-800 dark:text-white font-semibold focus:outline-none" oninput="calculateTaxAndDiscount()">
-            </div>
-          </div>
-
-          <div class="p-5 bg-emerald-50/50 dark:bg-emerald-950/40 rounded-2xl border border-emerald-100 dark:border-emerald-800 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-            <div>
-              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Discount Savings</span>
-              <span id="discountSavings" class="font-bold text-emerald-600 dark:text-emerald-400 text-base">$0.00</span>
-            </div>
-            <div>
-              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Sales Tax Amount</span>
-              <span id="taxAmount" class="font-bold text-amber-600 dark:text-amber-400 text-base">$0.00</span>
-            </div>
-            <div>
-              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Tip Amount</span>
-              <span id="tipAmount" class="font-bold text-indigo-600 dark:text-indigo-400 text-base">$0.00</span>
-            </div>
-            <div class="md:border-l md:border-emerald-200 dark:md:border-emerald-800 md:pl-4">
-              <span class="text-slate-500 dark:text-slate-400 text-xs font-medium block mb-1">Total Final Cost</span>
-              <span id="finalPrice" class="font-black text-slate-900 dark:text-white text-xl">$0.00</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ================= CATEGORY 3: UNITS ================= -->
-      <div id="sec-units" class="space-y-8 hidden">
-
-        <!-- TOOL: US IMPERIAL CONVERTERS -->
-        <div class="tool-card pastel-card p-6 md:p-8 rounded-3xl shadow-sm" data-keywords="us imperial metric unit converter fahrenheit celsius pounds kg inches cm weight height temperature">
-          <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2.5">
-            <span class="p-2.5 bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 rounded-2xl text-lg">⚖️</span> US Customary & Metric Unit Converter
-          </h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 font-medium">Convert temperature, weights, and height between US Imperial and Metric systems</p>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Temperature -->
-            <div class="space-y-4 p-5 bg-amber-50/40 dark:bg-amber-950/40 rounded-2xl border border-amber-100 dark:border-amber-800">
-              <h3 class="font-bold text-sm text-amber-800 dark:text-amber-300">Fahrenheit ↔ Celsius</h3>
-              <div>
-                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Fahrenheit (°F)</label>
-                <input type="number" id="tempF_input" value="72" class="w-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-800 dark:text-white font-semibold" oninput="convertTempUS()">
-              </div>
-              <div>
-                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Celsius (°C)</label>
-                <input type="text" id="tempC_output" readonly class="w-full bg-amber-100/60 dark:bg-amber-900/60 border border-amber-200 dark:border-amber-800 rounded-xl p-2.5 text-amber-900 dark:text-amber-200 font-mono font-bold">
-              </div>
-            </div>
-
-            <!-- Weight -->
-            <div class="space-y-4 p-5 bg-amber-50/40 dark:bg-amber-950/40 rounded-2xl border border-amber-100 dark:border-amber-800">
-              <h3 class="font-bold text-sm text-amber-800 dark:text-amber-300">Pounds (lbs) ↔ Kilograms</h3>
-              <div>
-                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Pounds (lbs)</label>
-                <input type="number" id="weightLbs_input" value="150" class="w-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-800 dark:text-white font-semibold" oninput="convertWeightUS()">
-              </div>
-              <div>
-                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Kilograms (kg)</label>
-                <input type="text" id="weightKg_output" readonly class="w-full bg-amber-100/60 dark:bg-amber-900/60 border border-amber-200 dark:border-amber-800 rounded-xl p-2.5 text-amber-900 dark:text-amber-200 font-mono font-bold">
-              </div>
-            </div>
-
-            <!-- Height/Length -->
-            <div class="space-y-4 p-5 bg-amber-50/40 dark:bg-amber-950/40 rounded-2xl border border-amber-100 dark:border-amber-800">
-              <h3 class="font-bold text-sm text-amber-800 dark:text-amber-300">Inches ↔ Centimeters</h3>
-              <div>
-                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Height in Inches (in)</label>
-                <input type="number" id="lengthInches_input" value="70" class="w-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-800 dark:text-white font-semibold" oninput="convertLengthUS()">
-              </div>
-              <div>
-                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Centimeters (cm)</label>
-                <input type="text" id="lengthCm_output" readonly class="w-full bg-amber-100/60 dark:bg-amber-900/60 border border-amber-200 dark:border-amber-800 rounded-xl p-2.5 text-amber-900 dark:text-amber-200 font-mono font-bold">
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- RIGHT / SIDEBAR MONETIZATION & ADS AREA (1 COL) -->
-    <aside class="space-y-6">
-
-      <!-- SPONSORED / ADS CARD 1 -->
-      <div class="pastel-card p-5 rounded-3xl border border-sky-200 dark:border-slate-700 relative overflow-hidden group">
-        <span class="text-[10px] font-bold tracking-wider uppercase bg-sky-100 dark:bg-sky-900 text-sky-700 dark:text-sky-300 px-2.5 py-0.5 rounded-full mb-3 inline-block">Sponsor Deal</span>
-        <h3 class="text-sm font-bold text-slate-800 dark:text-white mb-1">Need Fast Cloud Hosting?</h3>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 font-medium">Get up to 75% OFF NVMe cloud hosting with free SSL & domain.</p>
-        <a href="#" class="block text-center bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400 hover:opacity-90 text-white text-xs font-bold py-2.5 rounded-2xl transition shadow-sm">Claim Discount 🔥</a>
-      </div>
-
-      <!-- DONATION / SUPPORT CARD -->
-      <div class="pastel-card p-5 rounded-3xl text-center">
-        <div class="w-12 h-12 bg-pink-100 dark:bg-pink-950 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl shadow-sm">☕</div>
-        <h3 class="text-sm font-bold text-slate-800 dark:text-white mb-1">Enjoying OmniConvert?</h3>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 font-medium">Support our server costs to keep these tools 100% free forever.</p>
-        <a href="https://buymeacoffee.com" target="_blank" class="inline-flex items-center justify-center gap-2 w-full bg-white dark:bg-slate-800 hover:bg-pink-50 dark:hover:bg-slate-700 text-pink-600 dark:text-pink-400 border border-pink-200 dark:border-slate-700 text-xs font-bold py-2.5 rounded-2xl transition">Buy Me a Coffee ☕</a>
-      </div>
-
-      <!-- ADSENSE DISPLAY BANNER UNIT -->
-      <div class="pastel-card p-4 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 text-center min-h-[250px] flex flex-col items-center justify-center overflow-hidden">
-        <!-- Google AdSense Responsive Unit -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2805918301542012"
-             data-ad-slot="auto"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
-
-    </aside>
-
-  </main>
-
-  <!-- FOOTER WITH LEGAL LINKS -->
-  <footer class="border-t border-purple-100/80 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 mt-12 py-8 text-center text-xs text-slate-500 dark:text-slate-400 font-medium">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p>© 2026 OmniConvert. All rights reserved.</p>
-      <div class="flex gap-6">
-        <a href="privacy.html" class="hover:text-slate-800 dark:hover:text-white transition">Privacy Policy</a>
-        <a href="terms.html" class="hover:text-slate-800 dark:hover:text-white transition">Terms of Service</a>
-        <a href="contact.html" class="hover:text-slate-800 dark:hover:text-white transition">Contact Us</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- JAVASCRIPT LOGIC -->
-  <script>
-    // 0. Dark / Light Mode Toggle
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-        document.getElementById('themeIcon').innerText = '☀️';
-      } else {
-        document.documentElement.classList.add('light');
-        document.documentElement.classList.remove('dark');
-        document.getElementById('themeIcon').innerText = '🌙';
-      }
-    }
-
-    function toggleDarkMode() {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-        localStorage.setItem('theme', 'light');
-        document.getElementById('themeIcon').innerText = '🌙';
-      } else {
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-        document.getElementById('themeIcon').innerText = '☀️';
-      }
-    }
-
-    // Universal Search Bar
-    function filterTools() {
-      const query = document.getElementById('toolSearch').value.toLowerCase().trim();
-      
-      // Temporary show all tabs so search works across all sections
-      if (query !== "") {
-        ['dev', 'finance', 'units'].forEach(t => document.getElementById(`sec-${t}`).classList.remove('hidden'));
-      }
-
-      const cards = document.querySelectorAll('.tool-card');
-      cards.forEach(card => {
-        const keywords = card.getAttribute('data-keywords') || "";
-        const title = card.querySelector('h2') ? card.querySelector('h2').innerText.toLowerCase() : "";
-        
-        if (title.includes(query) || keywords.includes(query)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      if (query === "") {
-        switchTab('dev'); // Reset to default active tab when search is cleared
-      }
-    }
-
-    // Share Website
-    function shareWebsite() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'OmniConvert - Free Online Tools',
-          text: 'Check out these fast, 100% free online conversion tools for web developers & daily productivity!',
-          url: window.location.href,
-        }).catch(() => {});
-      } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert('Website URL copied to clipboard!');
-      }
-    }
-
-    // Tab Navigation
-    function switchTab(tab) {
-      // Clear search if active
-      document.getElementById('toolSearch').value = "";
-      document.querySelectorAll('.tool-card').forEach(c => c.style.display = "block");
-
-      ['dev', 'finance', 'units'].forEach(t => {
-        document.getElementById(`sec-${t}`).classList.add('hidden');
-        
-        const btn = document.getElementById(`tab-${t}`);
-        if(btn) {
-          btn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white";
-        }
-        
-        const mobBtn = document.getElementById(`mob-tab-${t}`);
-        if(mobBtn) {
-          mobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800";
-        }
-      });
-
-      document.getElementById(`sec-${tab}`).classList.remove('hidden');
-
-      const activeBtn = document.getElementById(`tab-${tab}`);
-      if(activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm border border-purple-100 dark:border-transparent";
-
-      const activeMobBtn = document.getElementById(`mob-tab-${tab}`);
-      if(activeMobBtn) activeMobBtn.className = "px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-purple-100 dark:bg-indigo-600 text-indigo-700 dark:text-white";
-    }
-
-    // 1. PX to REM
-    function convertPx() {
-      const base = parseFloat(document.getElementById('basePx').value) || 16;
-      const px = parseFloat(document.getElementById('inputPx').value) || 0;
-      const rem = (px / base).toFixed(4).replace(/\.?0+$/, "");
-      document.getElementById('resultRem').value = `${rem} rem`;
-    }
-
-    // 2. Base64 Encoder / Decoder
-    function processBase64(mode) {
-      const input = document.getElementById('base64Input').value;
-      const output = document.getElementById('base64Output');
-      try {
-        if (mode === 'encode') {
-          output.value = btoa(unescape(encodeURIComponent(input)));
-        } else {
-          output.value = decodeURIComponent(escape(atob(input)));
-        }
-      } catch (err) {
-        output.value = "Error: Invalid input for Base64 " + mode;
-      }
-    }
-
-    // 3. JSON Formatter & Minifier
-    function formatJSON() {
-      const input = document.getElementById('jsonInput').value;
-      const status = document.getElementById('jsonStatus');
-      try {
-        const parsed = JSON.parse(input);
-        document.getElementById('jsonOutput').value = JSON.stringify(parsed, null, 2);
-        status.innerText = "Valid JSON";
-        status.className = "text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded-full font-mono font-semibold";
-      } catch (err) {
-        document.getElementById('jsonOutput').value = "Invalid JSON structure:\n" + err.message;
-        status.innerText = "Invalid JSON";
-        status.className = "text-xs px-3 py-1 bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-full font-mono font-semibold";
-      }
-    }
-
-    function minifyJSON() {
-      const input = document.getElementById('jsonInput').value;
-      const status = document.getElementById('jsonStatus');
-      try {
-        const parsed = JSON.parse(input);
-        document.getElementById('jsonOutput').value = JSON.stringify(parsed);
-        status.innerText = "Minified";
-        status.className = "text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded-full font-mono font-semibold";
-      } catch (err) {
-        document.getElementById('jsonOutput').value = "Invalid JSON structure:\n" + err.message;
-        status.innerText = "Invalid JSON";
-        status.className = "text-xs px-3 py-1 bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-full font-mono font-semibold";
-      }
-    }
-
-    // 4. Aspect Ratio Calculator
-    function calcAspectRatio() {
-      const w1 = parseFloat(document.getElementById('ratioW1').value) || 0;
-      const h1 = parseFloat(document.getElementById('ratioH1').value) || 0;
-      const w2 = parseFloat(document.getElementById('ratioW2').value) || 0;
-      if (w1 > 0 && h1 > 0 && w2 > 0) {
-        const h2 = (w2 * h1) / w1;
-        document.getElementById('ratioH2Result').value = `${Math.round(h2)} px`;
-      } else {
-        document.getElementById('ratioH2Result').value = "0 px";
-      }
-    }
-
-    // 5. Color Converter
-    function convertColorFromPicker() {
-      document.getElementById('hexInput').value = document.getElementById('colorPicker').value;
-      convertColor();
-    }
-
-    function convertColor() {
-      let hex = document.getElementById('hexInput').value.trim();
-      if (!hex.startsWith('#')) hex = '#' + hex;
-      if (/^#[0-9A-F]{6}$/i.test(hex)) {
-        document.getElementById('colorPicker').value = hex;
-        document.getElementById('colorPreview').style.backgroundColor = hex;
-        
-        const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
-        document.getElementById('rgbResult').value = `rgb(${r}, ${g}, ${b})`;
-
-        const rN = r / 255, gN = g / 255, bN = b / 255;
-        const max = Math.max(rN, gN, bN), min = Math.min(rN, gN, bN);
-        let h, s, l = (max + min) / 2;
-        if (max === min) { h = s = 0; } else {
-          const d = max - min;
-          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-          switch (max) {
-            case rN: h = (gN - bN) / d + (gN < bN ? 6 : 0); break;
-            case gN: h = (bN - rN) / d + 2; break;
-            case bN: h = (rN - gN) / d + 4; break;
-          }
-          h /= 6;
-        }
-        document.getElementById('hslResult').value = `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
-      }
-    }
-
-    // 6. Text Case & Slug
-    function transformText(type) {
-      const text = document.getElementById('caseInput').value;
-      let result = '';
-      if (type === 'upper') result = text.toUpperCase();
-      if (type === 'lower') result = text.toLowerCase();
-      if (type === 'title') {
-        result = text.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-      }
-      if (type === 'slug') {
-        result = text.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
-      }
-      document.getElementById('caseResult').value = result;
-    }
-
-    // 7. US Currency
-    async function convertCurrency() {
-      const amount = parseFloat(document.getElementById('currencyAmount').value) || 0;
-      const from = document.getElementById('fromCurrency').value;
-      const to = document.getElementById('toCurrency').value;
-      const resultEl = document.getElementById('currencyResult');
-
-      if (from === to) {
-        resultEl.value = `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })} ${to}`;
-        return;
-      }
-
-      try {
-        const res = await fetch(`https://open.er-api.com/v6/latest/${from}`);
-        const data = await res.json();
-        const rate = data.rates[to];
-        const converted = (amount * rate).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        resultEl.value = `${converted} ${to}`;
-      } catch (err) {
-        resultEl.value = "Error fetching rates";
-      }
-    }
-
-    // 8. US Tax, Discount & Tip Calculator
-    function calculateTaxAndDiscount() {
-      const price = parseFloat(document.getElementById('priceInput').value) || 0;
-      const discountPercent = parseFloat(document.getElementById('discountInput').value) || 0;
-      const taxPercent = parseFloat(document.getElementById('taxInput').value) || 0;
-      const tipPercent = parseFloat(document.getElementById('tipInput').value) || 0;
-
-      const discountAmount = price * (discountPercent / 100);
-      const priceAfterDiscount = price - discountAmount;
-      const taxAmount = priceAfterDiscount * (taxPercent / 100);
-      const tipAmount = priceAfterDiscount * (tipPercent / 100);
-      const total = priceAfterDiscount + taxAmount + tipAmount;
-
-      const fmt = (num) => '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-      document.getElementById('discountSavings').innerText = fmt(discountAmount);
-      document.getElementById('taxAmount').innerText = fmt(taxAmount);
-      document.getElementById('tipAmount').innerText = fmt(tipAmount);
-      document.getElementById('finalPrice').innerText = fmt(total);
-    }
-
-    // 9. US Units Converters
-    function convertTempUS() {
-      const f = parseFloat(document.getElementById('tempF_input').value) || 0;
-      const c = (f - 32) * (5/9);
-      document.getElementById('tempC_output').value = `${c.toFixed(1)} °C`;
-    }
-
-    function convertWeightUS() {
-      const lbs = parseFloat(document.getElementById('weightLbs_input').value) || 0;
-      const kg = lbs * 0.453592;
-      document.getElementById('weightKg_output').value = `${kg.toFixed(2)} kg`;
-    }
-
-    function convertLengthUS() {
-      const inches = parseFloat(document.getElementById('lengthInches_input').value) || 0;
-      const cm = inches * 2.54;
-      document.getElementById('lengthCm_output').value = `${cm.toFixed(1)} cm`;
-    }
-
-    // Clipboard Copy
-    function copyToClipboard(id) {
-      const input = document.getElementById(id);
-      if (input.value) {
-        navigator.clipboard.writeText(input.value);
-        alert('Copied to clipboard!');
-      }
-    }
-
-    // Init
-    initTheme();
-    convertPx();
-    calcAspectRatio();
-    convertColor();
-    convertCurrency();
-    calculateTaxAndDiscount();
-    convertTempUS();
-    convertWeightUS();
-    convertLengthUS();
-  </script>
-</body>
+    <!-- Script External Call -->
+    <script src="js/converters.js"></script>
+  </body>
 </html>
