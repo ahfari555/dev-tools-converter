@@ -17,19 +17,11 @@
             colors: {
               pastel: {
                 bg: '#FAF7F5',
-                card: '#FFFFFF',
                 rose: '#FDE2E4',
-                roseDark: '#9C4146',
                 mint: '#E2F0CB',
-                mintDark: '#3B6025',
-                lavender: '#E8E8E4',
-                lavenderDark: '#4A4E69',
                 amber: '#FFF1E6',
-                amberDark: '#8C5E3C',
                 sky: '#E0F2FE',
-                skyDark: '#0369A1',
-                purple: '#F3E8FF',
-                purpleDark: '#6B21A8'
+                purple: '#F3E8FF'
               }
             }
           }
@@ -40,7 +32,7 @@
   <body class="font-sans min-h-screen flex flex-col antialiased bg-pastel-bg text-slate-700 selection:bg-pink-200">
     
     <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-rose-100 shadow-sm">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-pink-100 shadow-sm">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="index.html" class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-300 via-purple-300 to-indigo-300 flex items-center justify-center font-extrabold text-white shadow-md">
@@ -65,13 +57,12 @@
           Smart Utilities & Converters
         </h1>
         <p class="text-slate-500 text-sm sm:text-base max-w-xl mx-auto">
-          Pilih alat konversi instan di bawah ini untuk memulai kalkulasi cepat tanpa *delay*.
+          Pilih alat konversi instan di bawah ini untuk memulai kalkulasi cepat tanpa delay.
         </p>
       </section>
 
       <!-- AdSense Top Leaderboard Banner -->
-      <div class="w-full flex justify-center min-h-[90px] bg-white/60 rounded-2xl border border-dashed border-rose-200 items-center text-xs text-rose-400/70 shadow-sm">
-        <!-- Google AdSense Code -->
+      <div class="w-full flex justify-center min-h-[90px] bg-white/60 rounded-2xl border border-dashed border-pink-200 items-center text-xs text-pink-400/70 shadow-sm">
         <span>Advertisement Area</span>
       </div>
 
@@ -82,33 +73,29 @@
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pb-6 border-b border-slate-100" id="tab-headers">
           <button
             type="button"
-            onclick="switchTab('tax-discount')"
             id="tab-btn-tax-discount"
-            class="tab-btn active-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2"
+            class="tab-btn active-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
           >
             <span>💰 Tax & Discount</span>
           </button>
           <button
             type="button"
-            onclick="switchTab('temperature')"
             id="tab-btn-temperature"
-            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2"
+            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
           >
             <span>🌡️ Temperature</span>
           </button>
           <button
             type="button"
-            onclick="switchTab('weight')"
             id="tab-btn-weight"
-            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2"
+            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
           >
             <span>⚖️ Weight</span>
           </button>
           <button
             type="button"
-            onclick="switchTab('length')"
             id="tab-btn-length"
-            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2"
+            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
           >
             <span>📏 Length</span>
           </button>
@@ -122,9 +109,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <!-- Inputs -->
               <div class="space-y-4">
-                <h3 class="text-lg font-bold text-slate-800 flex items-center space-x-2">
-                  <span>Calculate Discount & Sales Tax</span>
-                </h3>
+                <h3 class="text-lg font-bold text-slate-800">Calculate Discount & Sales Tax</h3>
                 <div>
                   <label for="calc-price" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Original Price ($)</label>
                   <input type="number" id="calc-price" value="100" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 focus:bg-white focus:ring-2 focus:ring-pink-300 focus:border-pink-300 outline-none transition" />
@@ -164,11 +149,6 @@
               <p>
                 When calculating retail markdowns, the standard commercial sequence applies percentage discounts to the original price <strong>before</strong> computing local sales tax or Value Added Tax (VAT). This mathematical order protects buyers from paying tax on the un-discounted nominal value.
               </p>
-              <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 font-mono text-xs text-slate-700 space-y-1">
-                <p>1. Reduced Subtotal = Base Price × (1 - Discount Rate)</p>
-                <p>2. Calculated Tax = Reduced Subtotal × Tax Rate</p>
-                <p>3. Final Total = Reduced Subtotal + Calculated Tax</p>
-              </div>
             </article>
           </div>
 
@@ -212,9 +192,6 @@
               <h4 class="text-base font-bold text-slate-800">Thermodynamic Scale Fundamentals</h4>
               <p>
                 Temperature metrics serve crucial roles across global engineering, cooking, and meteorological research. The Metric standard relies on Celsius (°C), defined around the freezing and boiling points of water. In North America, Fahrenheit (°F) remains the prevailing standard for public weather reporting.
-              </p>
-              <p>
-                In scientific research and physics, Kelvin (K) serves as the primary SI base unit. Unlike Celsius and Fahrenheit, Kelvin starts at absolute zero (0 K), the point where molecular kinetic movement ceases.
               </p>
             </article>
           </div>
@@ -264,9 +241,6 @@
               <h4 class="text-base font-bold text-slate-800">Metric and Imperial Mass Conversion Standards</h4>
               <p>
                 Mass conversion is fundamental to global trade, logistics, and recipe scaling. International commerce relies primarily on metric measures like grams and kilograms, while commercial retail sectors in the United States operate under Avoirdupois customary units including pounds (lbs) and ounces (oz).
-              </p>
-              <p>
-                Standard ratio definition: 1 International Avoirdupois Pound equals exactly 0.45359237 kilograms (or 453.592 grams).
               </p>
             </article>
           </div>
@@ -320,7 +294,7 @@
             <article class="pt-8 border-t border-slate-100 text-slate-600 space-y-4 text-xs sm:text-sm leading-relaxed">
               <h4 class="text-base font-bold text-slate-800">Linear Metric and Imperial Distances</h4>
               <p>
-                Linear distance conversions are essential in architectural designs, web UI design (pixels to inches/feet conversions), and international engineering projects. Precision unit mapping prevents compounding error margins when scaling schematics or digital assets.
+                Linear distance conversions are essential in architectural designs, web UI design (pixels to inches/feet conversions), and international engineering projects.
               </p>
             </article>
           </div>
@@ -329,15 +303,14 @@
       </div>
 
       <!-- In-Feed Ad Banner -->
-      <div class="w-full flex justify-center min-h-[90px] bg-white/60 rounded-2xl border border-dashed border-rose-200 items-center text-xs text-rose-400/70 shadow-sm">
-        <!-- Google AdSense Code -->
+      <div class="w-full flex justify-center min-h-[90px] bg-white/60 rounded-2xl border border-dashed border-pink-200 items-center text-xs text-pink-400/70 shadow-sm">
         <span>Advertisement Area</span>
       </div>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-rose-100 py-8 text-xs text-slate-500">
+    <footer class="bg-white border-t border-pink-100 py-8 text-xs text-slate-500">
       <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p>&copy; DevTools Converter. All rights reserved.</p>
         <div class="flex space-x-6">
@@ -348,7 +321,6 @@
       </div>
     </footer>
 
-    <!-- CSS Helpers for Dynamic Pastel Tabs -->
     <style>
       .active-tab {
         background-color: #FDE2E4 !important;
