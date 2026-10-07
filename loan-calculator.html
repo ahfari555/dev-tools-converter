@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan & Mortgage EMI Calculator - DevTools Converter</title>
+    <meta
+      name="description"
+      content="Free online loan, mortgage, and EMI payment calculator. Estimate monthly installment amounts, total interest payable, and amortization schedules."
+    />
+    <link rel="canonical" href="https://dev-tools-converter-alpha.vercel.app/loan-calculator.html" />
+    
+    <!-- Google AdSense Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2805918301542012" crossorigin="anonymous"></script>
+
+    <!-- Schema.org FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is a monthly mortgage payment calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mortgage payments are calculated using the principal loan amount, monthly interest rate, and total number of monthly payments over the loan term."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a shorter loan term reduce total interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. While monthly payments are higher on shorter terms, the total cumulative interest paid over the life of the loan is significantly lower."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="font-sans min-h-screen flex flex-col antialiased bg-[#FAF7F5] text-slate-700">
+    
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-pink-100 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="index.html" class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-300 via-purple-300 to-indigo-300 flex items-center justify-center font-extrabold text-white shadow-md">D</div>
+          <span class="text-xl font-extrabold bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent">DevTools Converter</span>
+        </a>
+        <a href="index.html" class="text-xs font-bold px-4 py-2 rounded-xl bg-pink-100 text-pink-700 hover:bg-pink-200 transition">← Back to Home</a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-10 space-y-8">
+      
+      <section class="text-center space-y-2">
+        <h1 class="text-3xl font-extrabold text-slate-800">Loan & Mortgage EMI Calculator</h1>
+        <p class="text-slate-500 text-sm">Calculate monthly loan installments, total interest liability, and amortization breakdowns instantly.</p>
+      </section>
+
+      <!-- Calculator Box -->
+      <div class="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 sm:p-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <div>
+              <label for="calc-amount" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Loan Principal Amount ($)</label>
+              <input type="number" id="calc-amount" value="200000" oninput="calculateLoan()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-amber-300" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="calc-interest" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Interest Rate (%)</label>
+                <input type="number" id="calc-interest" value="6.5" step="0.1" oninput="calculateLoan()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-amber-300" />
+              </div>
+              <div>
+                <label for="calc-years" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Term (Years)</label>
+                <input type="number" id="calc-years" value="30" oninput="calculateLoan()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-amber-300" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-amber-50/60 p-6 rounded-3xl border border-amber-200/50 space-y-4 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-amber-900/70 font-medium">Monthly Payment (EMI):</span>
+              <span class="font-extrabold text-amber-800 text-xl">$<span id="res-monthly">1,264.14</span></span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-amber-900/70 font-medium">Total Interest Payable:</span>
+              <span class="font-bold text-slate-700 text-sm">$<span id="res-total-interest">255,091.20</span></span>
+            </div>
+            <div class="pt-4 border-t border-amber-200/80 flex justify-between items-center">
+              <span class="font-bold text-amber-900">Total Payment (Principal + Interest):</span>
+              <span class="font-extrabold text-lg text-pink-600">$<span id="res-total-payment">455,091.20</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK REFERENCE CHEAT SHEET TABLE -->
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">📊 Mortgage Term Comparison Reference ($200k Principal at 6.5%)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700">
+                  <th class="p-3 rounded-l-xl">Loan Term</th>
+                  <th class="p-3">Monthly Payment</th>
+                  <th class="p-3">Total Interest</th>
+                  <th class="p-3 rounded-r-xl">Total Cost</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td class="p-3 font-medium">15 Years</td>
+                  <td class="p-3 font-bold text-pink-600">$1,742.82</td>
+                  <td class="p-3">$113,707</td>
+                  <td class="p-3">$313,707</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium">30 Years</td>
+                  <td class="p-3 font-bold text-pink-600">$1,264.14</td>
+                  <td class="p-3">$255,091</td>
+                  <td class="p-3">$455,091</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SEO Article Content -->
+        <article class="pt-6 border-t border-slate-100 text-slate-600 space-y-4 text-sm leading-relaxed">
+          <h2 class="text-lg font-bold text-slate-800">Understanding Loan Amortization and Mortgage Calculations</h2>
+          <p>
+            Securing a mortgage or commercial loan requires careful analysis of borrowing costs. An Equated Monthly Installment (EMI) combines both principal repayment and accrued interest over a fixed amortization schedule. Evaluating these metrics helps borrowers plan long-term financial commitments efficiently.
+          </p>
+        </article>
+
+        <!-- FAQ SECTION -->
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">Frequently Asked Questions</h3>
+          <div class="space-y-3">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">How is monthly mortgage calculated?</h4>
+              <p class="text-xs text-slate-600">Calculated using principal, monthly interest rate, and total payment months.</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">Does shorter term reduce interest?</h4>
+              <p class="text-xs text-slate-600">Yes, shortening the loan term drastically decreases total cumulative interest paid.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-pink-100 py-6 text-xs text-slate-500 text-center">
+      <p>&copy; DevTools Converter. All rights reserved. | <a href="index.html" class="text-pink-600 hover:underline">Home</a> | <a href="guides.html" class="text-pink-600 hover:underline">Guides</a></p>
+    </footer>
+
+    <script>
+      function calculateLoan() {
+        var principal = parseFloat(document.getElementById('calc-amount').value) || 0;
+        var annualRate = parseFloat(document.getElementById('calc-interest').value) || 0;
+        var years = parseFloat(document.getElementById('calc-years').value) || 0;
+
+        if (principal <= 0 || years <= 0) return;
+
+        var monthlyRate = (annualRate / 100) / 12;
+        var totalMonths = years * 12;
+
+        var monthlyPayment = 0;
+        if (monthlyRate === 0) {
+          monthlyPayment = principal / totalMonths;
+        } else {
+          monthlyPayment = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1);
+        }
+
+        var totalPayment = monthlyPayment * totalMonths;
+        var totalInterest = totalPayment - principal;
+
+        document.getElementById('res-monthly').textContent = monthlyPayment.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('res-total-interest').textContent = totalInterest.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('res-total-payment').textContent = totalPayment.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      }
+      window.onload = calculateLoan;
+    </script>
+  </body>
+</html>

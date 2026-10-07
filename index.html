@@ -6,7 +6,7 @@
     <title>DevTools Converter - Free Online Utility & Unit Calculation Suite</title>
     <meta
       name="description"
-      content="Instant zero-latency online calculation tools: Commercial Tax & Discount Calculator, BMI & Calorie Calculator, Thermal Temperature Unit Converter, and Mass & Weight Converter."
+      content="Instant zero-latency online calculation tools: Commercial Tax & Discount, BMI & Calorie, GPA Grade Calculator, Loan Mortgage EMI, and Unit Converters."
     />
 
     <!-- Google Site Verification Tag -->
@@ -17,7 +17,7 @@
 
     <!-- Open Graph Metadata for Social Sharing & SEO -->
     <meta property="og:title" content="DevTools Converter - Free Online Calculation Suite" />
-    <meta property="og:description" content="Calculate sales tax, BMI, calories, mass, length, and thermal scales instantly in your browser." />
+    <meta property="og:description" content="Calculate sales tax, BMI, GPA, loans, mass, length, and thermal scales instantly in your browser." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dev-tools-converter-alpha.vercel.app/" />
 
@@ -31,7 +31,7 @@
       "@type": "WebApplication",
       "name": "DevTools Converter",
       "url": "https://dev-tools-converter-alpha.vercel.app/",
-      "description": "A comprehensive suite of free web utilities including tax calculators, health BMI tools, and unit converters.",
+      "description": "A comprehensive suite of free web utilities including tax calculators, health BMI tools, GPA calculators, loan tools, and unit converters.",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "All",
       "offers": {
@@ -55,7 +55,8 @@
                 amber: '#FFF1E6',
                 sky: '#E0F2FE',
                 purple: '#F3E8FF',
-                emerald: '#ECFDF5'
+                emerald: '#ECFDF5',
+                indigo: '#EEF2FF'
               }
             }
           }
@@ -97,9 +98,9 @@
           </span>
         </a>
         <div class="flex items-center space-x-3">
-          <a href="guides.html" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100 hover:bg-indigo-100 transition">Guides Hub</a>
+          <a href="guides.html" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100 hover:bg-indigo-100 transition">📚 Guides Hub</a>
           <span class="text-xs font-semibold px-3 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200 hidden sm:inline-block">
-            v2.8 Multi-Tool
+            v3.0 Multi-Tool SEO
           </span>
         </div>
       </div>
@@ -111,33 +112,53 @@
       <!-- Hero Header -->
       <section class="text-center space-y-2 py-2">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-800">
-          Smart Utilities & Calculators
+          Smart Utilities & Multi-Tool Calculators
         </h1>
         <p class="text-slate-500 text-sm sm:text-base max-w-xl mx-auto">
-          Select a professional calculation tool or resource guide below to perform instant evaluations.
+          Select a specialized conversion tool or resource guide below to perform instant calculations without server latency.
         </p>
       </section>
 
-      <!-- FEATURED MULTI-TOOL QUICK ACCESS GRID -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <!-- Tax Calculator Link Card -->
-        <a href="tax-calculator.html" class="bg-white p-6 rounded-3xl border border-pink-100 shadow-md hover:shadow-xl hover:border-pink-300 transition flex items-center justify-between group">
-          <div class="space-y-1">
-            <span class="text-xs font-bold text-pink-600 uppercase tracking-wider">Financial Tool</span>
-            <h2 class="text-lg font-bold text-slate-800 group-hover:text-pink-600 transition">Tax & Discount Calculator</h2>
-            <p class="text-xs text-slate-500">Calculate markdowns & VAT instantly.</p>
+      <!-- MULTI-TOOL DIRECTORY GRID (Menampilkan Seluruh Kalkulator Terpisah) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Tax Calculator Card -->
+        <a href="tax-calculator.html" class="bg-white p-5 rounded-3xl border border-pink-100 shadow-sm hover:shadow-lg hover:border-pink-300 transition flex flex-col justify-between group">
+          <div class="space-y-2">
+            <span class="text-[10px] font-bold text-pink-600 uppercase tracking-wider bg-pink-50 px-2.5 py-1 rounded-full">Financial</span>
+            <h2 class="text-sm font-bold text-slate-800 group-hover:text-pink-600 transition">Tax & Discount</h2>
+            <p class="text-xs text-slate-500">Retail price markdowns & VAT calculation.</p>
           </div>
-          <span class="w-10 h-10 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold text-lg group-hover:bg-pink-100 transition">→</span>
+          <span class="mt-4 text-xs font-bold text-pink-600 group-hover:translate-x-1 transition inline-flex items-center space-x-1"><span>Open Tool</span> <span>→</span></span>
         </a>
 
-        <!-- BMI Calculator Link Card -->
-        <a href="bmi-calculator.html" class="bg-white p-6 rounded-3xl border border-emerald-100 shadow-md hover:shadow-xl hover:border-emerald-300 transition flex items-center justify-between group">
-          <div class="space-y-1">
-            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Health Tool</span>
-            <h2 class="text-lg font-bold text-slate-800 group-hover:text-emerald-600 transition">BMI & Calorie Calculator</h2>
-            <p class="text-xs text-slate-500">Evaluate body mass index & energy.</p>
+        <!-- BMI Calculator Card -->
+        <a href="bmi-calculator.html" class="bg-white p-5 rounded-3xl border border-emerald-100 shadow-sm hover:shadow-lg hover:border-emerald-300 transition flex flex-col justify-between group">
+          <div class="space-y-2">
+            <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2.5 py-1 rounded-full">Health</span>
+            <h2 class="text-sm font-bold text-slate-800 group-hover:text-emerald-600 transition">BMI & Calories</h2>
+            <p class="text-xs text-slate-500">Body mass index & energy expenditure.</p>
           </div>
-          <span class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:bg-emerald-100 transition">→</span>
+          <span class="mt-4 text-xs font-bold text-emerald-600 group-hover:translate-x-1 transition inline-flex items-center space-x-1"><span>Open Tool</span> <span>→</span></span>
+        </a>
+
+        <!-- GPA Calculator Card -->
+        <a href="gpa-calculator.html" class="bg-white p-5 rounded-3xl border border-indigo-100 shadow-sm hover:shadow-lg hover:border-indigo-300 transition flex flex-col justify-between group">
+          <div class="space-y-2">
+            <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2.5 py-1 rounded-full">Education</span>
+            <h2 class="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition">GPA Calculator</h2>
+            <p class="text-xs text-slate-500">Semester grade point average & credits.</p>
+          </div>
+          <span class="mt-4 text-xs font-bold text-indigo-600 group-hover:translate-x-1 transition inline-flex items-center space-x-1"><span>Open Tool</span> <span>→</span></span>
+        </a>
+
+        <!-- Loan Calculator Card -->
+        <a href="loan-calculator.html" class="bg-white p-5 rounded-3xl border border-amber-100 shadow-sm hover:shadow-lg hover:border-amber-300 transition flex flex-col justify-between group">
+          <div class="space-y-2">
+            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider bg-amber-50 px-2.5 py-1 rounded-full">Finance</span>
+            <h2 class="text-sm font-bold text-slate-800 group-hover:text-amber-600 transition">Loan & Mortgage</h2>
+            <p class="text-xs text-slate-500">Monthly EMI & interest amortization.</p>
+          </div>
+          <span class="mt-4 text-xs font-bold text-amber-600 group-hover:translate-x-1 transition inline-flex items-center space-x-1"><span>Open Tool</span> <span>→</span></span>
         </a>
       </div>
 
@@ -150,8 +171,8 @@
             Learn professional strategies for managing personal budgets, optimizing commercial discounts, and tracking expenses.
           </p>
         </div>
-        <a href="financial-guide.html" class="whitespace-nowrap bg-white text-indigo-600 font-bold px-6 py-3 rounded-2xl shadow-md hover:bg-pink-50 transition transform hover:-translate-y-0.5 text-sm">
-          Read Guide →
+        <a href="guides.html" class="whitespace-nowrap bg-white text-indigo-600 font-bold px-6 py-3 rounded-2xl shadow-md hover:bg-pink-50 transition transform hover:-translate-y-0.5 text-sm">
+          Explore Guides Hub →
         </a>
       </section>
 
@@ -367,10 +388,12 @@
         <p>&copy; DevTools Converter. All rights reserved.</p>
         <div class="flex flex-wrap space-x-6 gap-y-2">
           <a href="guides.html" class="hover:text-pink-500 transition font-bold text-pink-600">Guides Hub</a>
-          <a href="financial-guide.html" class="hover:text-pink-500 transition">Financial Guide</a>
+          <a href="tax-calculator.html" class="hover:text-pink-500 transition">Tax Calculator</a>
+          <a href="bmi-calculator.html" class="hover:text-pink-500 transition">BMI Calculator</a>
+          <a href="gpa-calculator.html" class="hover:text-pink-500 transition">GPA Calculator</a>
+          <a href="loan-calculator.html" class="hover:text-pink-500 transition">Loan Calculator</a>
           <a href="privacy.html" class="hover:text-pink-500 transition">Privacy Policy</a>
           <a href="terms.html" class="hover:text-pink-500 transition">Terms of Service</a>
-          <a href="contact.html" class="hover:text-pink-500 transition">Contact Us</a>
         </div>
       </div>
     </footer>

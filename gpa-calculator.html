@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPA & Grade Point Calculator - DevTools Converter</title>
+    <meta
+      name="description"
+      content="Free online GPA calculator for college and university students. Calculate semester grade point averages, credit weights, and cumulative metrics instantly."
+    />
+    <link rel="canonical" href="https://dev-tools-converter-alpha.vercel.app/gpa-calculator.html" />
+    
+    <!-- Google AdSense Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2805918301542012" crossorigin="anonymous"></script>
+
+    <!-- Schema.org FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is GPA calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GPA is calculated by multiplying the grade point equivalent by the course credit hours, summing those products, and dividing by the total number of credit hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a standard 4.0 GPA scale?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In a standard 4.0 scale, an A equals 4.0, a B equals 3.0, a C equals 2.0, a D equals 1.0, and an F equals 0.0."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="font-sans min-h-screen flex flex-col antialiased bg-[#FAF7F5] text-slate-700">
+    
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-pink-100 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="index.html" class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-300 via-purple-300 to-indigo-300 flex items-center justify-center font-extrabold text-white shadow-md">D</div>
+          <span class="text-xl font-extrabold bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent">DevTools Converter</span>
+        </a>
+        <a href="index.html" class="text-xs font-bold px-4 py-2 rounded-xl bg-pink-100 text-pink-700 hover:bg-pink-200 transition">← Back to Home</a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-10 space-y-8">
+      
+      <section class="text-center space-y-2">
+        <h1 class="text-3xl font-extrabold text-slate-800">GPA & Grade Point Calculator</h1>
+        <p class="text-slate-500 text-sm">Calculate your semester grade point average (GPA) using standard 4.0 credit weight scales.</p>
+      </section>
+
+      <!-- Calculator Box -->
+      <div class="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 sm:p-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <div>
+              <label for="calc-credits" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Total Course Credits</label>
+              <input type="number" id="calc-credits" value="15" oninput="calculateGPA()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-indigo-300" />
+            </div>
+            <div>
+              <label for="calc-grade-points" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Total Quality Points (Grade × Credits)</label>
+              <input type="number" id="calc-grade-points" value="54" oninput="calculateGPA()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-indigo-300" />
+            </div>
+          </div>
+
+          <div class="bg-indigo-50/60 p-6 rounded-3xl border border-indigo-200/50 space-y-4 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-indigo-900/70 font-medium">Calculated GPA:</span>
+              <span class="font-extrabold text-indigo-700 text-2xl" id="res-gpa">3.60</span>
+            </div>
+            <div class="pt-4 border-t border-indigo-200/80 flex justify-between items-center">
+              <span class="font-bold text-indigo-900">Standing Academic Honor:</span>
+              <span class="font-bold text-emerald-600 text-sm" id="res-standing">Cum Laude / Dean's List</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK REFERENCE CHEAT SHEET TABLE -->
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">📊 Standard 4.0 Grade Point Scale Reference</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700">
+                  <th class="p-3 rounded-l-xl">Letter Grade</th>
+                  <th class="p-3">Percentage Range</th>
+                  <th class="p-3 rounded-r-xl">Quality Points</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td class="p-3 font-medium text-emerald-600">A</td>
+                  <td class="p-3">90% – 100%</td>
+                  <td class="p-3 font-bold">4.0</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium text-sky-600">B</td>
+                  <td class="p-3">80% – 89%</td>
+                  <td class="p-3 font-bold">3.0</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium text-amber-600">C</td>
+                  <td class="p-3">70% – 79%</td>
+                  <td class="p-3 font-bold">2.0</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium text-rose-600">D / F</td>
+                  <td class="p-3">&lt; 70%</td>
+                  <td class="p-3 font-bold">1.0 / 0.0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SEO Article Content -->
+        <article class="pt-6 border-t border-slate-100 text-slate-600 space-y-4 text-sm leading-relaxed">
+          <h2 class="text-lg font-bold text-slate-800">Understanding Academic Grade Point Averages (GPA)</h2>
+          <p>
+            A Grade Point Average (GPA) serves as the primary quantitative summary of a student's academic performance in secondary or higher education institutions. By weighting course credit hours against letter grade numerical equivalents, academic advisors and prospective employers evaluate scholarly diligence consistently.
+          </p>
+        </article>
+
+        <!-- FAQ SECTION -->
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">Frequently Asked Questions</h3>
+          <div class="space-y-3">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">How is GPA calculated?</h4>
+              <p class="text-xs text-slate-600">Divide total quality points earned by total credit hours attempted.</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">What constitutes a high GPA?</h4>
+              <p class="text-xs text-slate-600">A GPA of 3.5 or higher generally qualifies students for academic honors.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-pink-100 py-6 text-xs text-slate-500 text-center">
+      <p>&copy; DevTools Converter. All rights reserved. | <a href="index.html" class="text-pink-600 hover:underline">Home</a> | <a href="guides.html" class="text-pink-600 hover:underline">Guides</a></p>
+    </footer>
+
+    <script>
+      function calculateGPA() {
+        var credits = parseFloat(document.getElementById('calc-credits').value) || 0;
+        var points = parseFloat(document.getElementById('calc-grade-points').value) || 0;
+
+        if (credits <= 0) {
+          document.getElementById('res-gpa').textContent = "0.00";
+          document.getElementById('res-standing').textContent = "N/A";
+          return;
+        }
+
+        var gpa = points / credits;
+        var standing = "Good Standing";
+        if (gpa >= 3.7) standing = "Summa Cum Laude";
+        else if (gpa >= 3.5) standing = "Magna Cum Laude / Dean's List";
+        else if (gpa >= 3.0) standing = "Cum Laude / Honor Roll";
+
+        document.getElementById('res-gpa').textContent = gpa.toFixed(2);
+        document.getElementById('res-standing').textContent = standing;
+      }
+      window.onload = calculateGPA;
+    </script>
+  </body>
+</html>
