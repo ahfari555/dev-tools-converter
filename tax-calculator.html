@@ -6,7 +6,7 @@
     <title>Commercial Tax & Discount Calculator - DevTools Converter</title>
     <meta
       name="description"
-      content="Instant online commercial tax, VAT, and promotional discount calculator with detailed formulas, examples, and FAQs."
+      content="Instant online commercial tax, VAT, and promotional discount calculator with reference cheat sheets, detailed formulas, and FAQs."
     />
     <link rel="canonical" href="https://dev-tools-converter-alpha.vercel.app/tax-calculator.html" />
     
@@ -33,14 +33,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Not at all. All calculations run instantly and securely on the client-side within your browser. No financial data is ever saved or transmitted to external servers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I manually calculate sales tax?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Multiply the discounted subtotal by the decimal tax rate (e.g., $200 subtotal multiplied by 0.11 equals $22 in tax liability)."
           }
         }
       ]
@@ -106,29 +98,62 @@
           </div>
         </div>
 
+        <!-- QUICK REFERENCE CHEAT SHEET TABLE -->
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">📊 Quick Reference Cheat Sheet ($100 Base Price)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700">
+                  <th class="p-3 rounded-l-xl">Discount Rate</th>
+                  <th class="p-3">Discounted Subtotal</th>
+                  <th class="p-3">Tax (11% VAT)</th>
+                  <th class="p-3 rounded-r-xl">Final Total Price</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td class="p-3 font-medium">10% Off</td>
+                  <td class="p-3">$90.00</td>
+                  <td class="p-3">$9.90</td>
+                  <td class="p-3 font-bold text-pink-600">$99.90</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium">20% Off</td>
+                  <td class="p-3">$80.00</td>
+                  <td class="p-3">$8.80</td>
+                  <td class="p-3 font-bold text-pink-600">$88.80</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium">50% Off</td>
+                  <td class="p-3">$50.00</td>
+                  <td class="p-3">$5.50</td>
+                  <td class="p-3 font-bold text-pink-600">$55.50</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <!-- SEO Article Content -->
-        <article class="pt-8 border-t border-slate-100 text-slate-600 space-y-6 text-sm leading-relaxed">
-          <h2 class="text-xl font-bold text-slate-800">Mastering Commercial Calculations: Understanding Sales Tax and Markdowns</h2>
+        <article class="pt-6 border-t border-slate-100 text-slate-600 space-y-4 text-sm leading-relaxed">
+          <h2 class="text-lg font-bold text-slate-800">Understanding Sales Tax and Markdowns</h2>
           <p>
-            Navigating retail transactions during seasonal promotional campaigns requires a grounded understanding of how percentage markdowns interact with state or local statutory consumption taxes. Whether shopping in brick-and-mortar storefronts or completing online checkouts, consumers frequently encounter confusing price tags where promotional discounts and value-added taxes (VAT) collide.
+            Navigating retail transactions during seasonal promotional campaigns requires a clear understanding of how percentage markdowns interact with statutory consumption taxes. Promotional discounts are always deducted from the original item cost prior to computing percentage sales tax.
           </p>
         </article>
 
         <!-- FAQ SECTION -->
-        <section class="pt-8 border-t border-slate-100 space-y-6">
-          <h3 class="text-lg font-bold text-slate-800">Frequently Asked Questions (FAQ)</h3>
-          <div class="space-y-4">
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/60 space-y-2">
-              <h4 class="font-bold text-slate-800 text-sm">1. Is the discount deducted before sales tax is calculated?</h4>
-              <p class="text-xs text-slate-600 leading-relaxed">Yes. According to global commercial retail standards, promotional discounts are always deducted from the original price before the sales tax or VAT percentage is applied.</p>
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">Frequently Asked Questions</h3>
+          <div class="space-y-3">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">Is the discount deducted before sales tax?</h4>
+              <p class="text-xs text-slate-600">Yes, discounts are subtracted from the gross price before statutory tax or VAT is calculated.</p>
             </div>
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/60 space-y-2">
-              <h4 class="font-bold text-slate-800 text-sm">2. Are my price inputs and financial data stored on a server?</h4>
-              <p class="text-xs text-slate-600 leading-relaxed">Not at all. All calculations run instantly and securely on the client-side within your browser. No financial data is ever saved or transmitted to external servers.</p>
-            </div>
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/60 space-y-2">
-              <h4 class="font-bold text-slate-800 text-sm">3. How do I manually calculate sales tax?</h4>
-              <p class="text-xs text-slate-600 leading-relaxed">Multiply the discounted subtotal by the decimal tax rate (e.g., $200 subtotal multiplied by 0.11 equals $22 in tax liability).</p>
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">Are my financial inputs saved?</h4>
+              <p class="text-xs text-slate-600">No, all calculations happen securely and instantly on your client-side browser.</p>
             </div>
           </div>
         </section>
@@ -137,8 +162,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-pink-100 py-8 text-xs text-slate-500 text-center">
-      <p>&copy; DevTools Converter. All rights reserved. | <a href="privacy.html" class="text-pink-600 hover:underline">Privacy Policy</a></p>
+    <footer class="bg-white border-t border-pink-100 py-6 text-xs text-slate-500 text-center">
+      <p>&copy; DevTools Converter. All rights reserved. | <a href="index.html" class="text-pink-600 hover:underline">Home</a></p>
     </footer>
 
     <script>
