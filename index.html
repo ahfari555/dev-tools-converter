@@ -6,7 +6,7 @@
     <title>DevTools Converter - Free Online Utility & Unit Calculation Suite</title>
     <meta
       name="description"
-      content="Instant zero-latency online calculation tools: Commercial Tax & Discount Calculator, Thermal Temperature Unit Converter, Mass & Weight Converter, and Linear Length Unit Converter."
+      content="Instant zero-latency online calculation tools: Commercial Tax & Discount Calculator, BMI & Calorie Calculator, Thermal Temperature Unit Converter, and Mass & Weight Converter."
     />
 
     <!-- Google Site Verification Tag -->
@@ -17,7 +17,7 @@
 
     <!-- Open Graph Metadata for Social Sharing & SEO -->
     <meta property="og:title" content="DevTools Converter - Free Online Calculation Suite" />
-    <meta property="og:description" content="Calculate sales tax, markdowns, mass, length, and thermal scales instantly in your browser." />
+    <meta property="og:description" content="Calculate sales tax, BMI, calories, mass, length, and thermal scales instantly in your browser." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dev-tools-converter-alpha.vercel.app/" />
 
@@ -31,7 +31,7 @@
       "@type": "WebApplication",
       "name": "DevTools Converter",
       "url": "https://dev-tools-converter-alpha.vercel.app/",
-      "description": "A comprehensive suite of free web utilities including tax calculators and unit converters for weight, temperature, and length.",
+      "description": "A comprehensive suite of free web utilities including tax calculators, health BMI tools, and unit converters.",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "All",
       "offers": {
@@ -54,7 +54,8 @@
                 mint: '#E2F0CB',
                 amber: '#FFF1E6',
                 sky: '#E0F2FE',
-                purple: '#F3E8FF'
+                purple: '#F3E8FF',
+                emerald: '#ECFDF5'
               }
             }
           }
@@ -95,9 +96,12 @@
             DevTools Converter
           </span>
         </a>
-        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
-          v2.6 Multi-Page SEO
-        </span>
+        <div class="flex items-center space-x-3">
+          <a href="guides.html" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100 hover:bg-indigo-100 transition">Guides Hub</a>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200 hidden sm:inline-block">
+            v2.8 Multi-Tool
+          </span>
+        </div>
       </div>
     </header>
 
@@ -107,20 +111,43 @@
       <!-- Hero Header -->
       <section class="text-center space-y-2 py-2">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-800">
-          Smart Utilities & Converters
+          Smart Utilities & Calculators
         </h1>
         <p class="text-slate-500 text-sm sm:text-base max-w-xl mx-auto">
-          Select a conversion tool below to perform instant calculations without server latency.
+          Select a professional calculation tool or resource guide below to perform instant evaluations.
         </p>
       </section>
 
-      <!-- FEATURED GUIDES BANNER (PROMINENTLY DISPLAYED IN BODY) -->
+      <!-- FEATURED MULTI-TOOL QUICK ACCESS GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Tax Calculator Link Card -->
+        <a href="tax-calculator.html" class="bg-white p-6 rounded-3xl border border-pink-100 shadow-md hover:shadow-xl hover:border-pink-300 transition flex items-center justify-between group">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-pink-600 uppercase tracking-wider">Financial Tool</span>
+            <h2 class="text-lg font-bold text-slate-800 group-hover:text-pink-600 transition">Tax & Discount Calculator</h2>
+            <p class="text-xs text-slate-500">Calculate markdowns & VAT instantly.</p>
+          </div>
+          <span class="w-10 h-10 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold text-lg group-hover:bg-pink-100 transition">→</span>
+        </a>
+
+        <!-- BMI Calculator Link Card -->
+        <a href="bmi-calculator.html" class="bg-white p-6 rounded-3xl border border-emerald-100 shadow-md hover:shadow-xl hover:border-emerald-300 transition flex items-center justify-between group">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Health Tool</span>
+            <h2 class="text-lg font-bold text-slate-800 group-hover:text-emerald-600 transition">BMI & Calorie Calculator</h2>
+            <p class="text-xs text-slate-500">Evaluate body mass index & energy.</p>
+          </div>
+          <span class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:bg-emerald-100 transition">→</span>
+        </a>
+      </div>
+
+      <!-- FEATURED GUIDES BANNER -->
       <section class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl p-6 sm:p-8 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6">
         <div class="space-y-2 text-center sm:text-left">
-          <span class="bg-white/20 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Featured Resource</span>
+          <span class="bg-white/20 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Resource Center</span>
           <h2 class="text-xl sm:text-2xl font-bold">Smart Budgeting & Financial Planning Guide</h2>
           <p class="text-white/80 text-xs sm:text-sm max-w-xl">
-            Learn professional strategies for managing personal budgets, optimizing commercial discounts, and tracking expenses efficiently.
+            Learn professional strategies for managing personal budgets, optimizing commercial discounts, and tracking expenses.
           </p>
         </div>
         <a href="financial-guide.html" class="whitespace-nowrap bg-white text-indigo-600 font-bold px-6 py-3 rounded-2xl shadow-md hover:bg-pink-50 transition transform hover:-translate-y-0.5 text-sm">
@@ -141,17 +168,11 @@
         </script>
       </div>
 
-      <!-- MAIN TAB SWITCHER CONTAINER -->
+      <!-- MAIN TAB SWITCHER CONTAINER (Temperature, Weight, Length) -->
       <div class="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-pink-500/5 p-4 sm:p-8">
         
         <!-- Tab Navigation Buttons -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pb-6 border-b border-slate-100">
-          <a
-            href="tax-calculator.html"
-            class="py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 bg-pink-100 text-pink-700 border border-pink-200 shadow-sm hover:bg-pink-200 cursor-pointer"
-          >
-            <span>💰 Tax & Discount ↗</span>
-          </a>
+        <div class="grid grid-cols-3 gap-3 pb-6 border-b border-slate-100">
           <button
             type="button"
             onclick="switchTab('temperature')"
@@ -181,7 +202,7 @@
         <!-- TAB PANELS -->
         <div class="pt-8">
           
-          <!-- TAB 2: TEMPERATURE -->
+          <!-- TAB 1: TEMPERATURE -->
           <div id="panel-temperature" class="tab-panel space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="space-y-4">
@@ -228,7 +249,7 @@
             </article>
           </div>
 
-          <!-- TAB 3: WEIGHT -->
+          <!-- TAB 2: WEIGHT -->
           <div id="panel-weight" class="tab-panel tab-panel-hidden space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="space-y-4">
@@ -279,7 +300,7 @@
             </article>
           </div>
 
-          <!-- TAB 4: LENGTH -->
+          <!-- TAB 3: LENGTH -->
           <div id="panel-length" class="tab-panel tab-panel-hidden space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="space-y-4">
@@ -345,6 +366,8 @@
       <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p>&copy; DevTools Converter. All rights reserved.</p>
         <div class="flex flex-wrap space-x-6 gap-y-2">
+          <a href="guides.html" class="hover:text-pink-500 transition font-bold text-pink-600">Guides Hub</a>
+          <a href="financial-guide.html" class="hover:text-pink-500 transition">Financial Guide</a>
           <a href="privacy.html" class="hover:text-pink-500 transition">Privacy Policy</a>
           <a href="terms.html" class="hover:text-pink-500 transition">Terms of Service</a>
           <a href="contact.html" class="hover:text-pink-500 transition">Contact Us</a>
