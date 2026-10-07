@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compound Interest & Investment Growth Calculator - DevTools Converter</title>
+    <meta
+      name="description"
+      content="Free online compound interest calculator. Project investment growth, annual returns, and exponential asset accumulation over time."
+    />
+    <link rel="canonical" href="https://dev-tools-converter-alpha.vercel.app/compound-calculator.html" />
+    
+    <!-- Google AdSense Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2805918301542012" crossorigin="anonymous"></script>
+
+    <!-- Schema.org FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is compound interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Compound interest is the addition of interest to the principal sum of a loan or deposit, resulting in exponential growth over successive periods."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does compounding frequency affect total returns?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "More frequent compounding periods (such as monthly instead of annually) result in higher total investment yields due to interest generating interest sooner."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="font-sans min-h-screen flex flex-col antialiased bg-[#FAF7F5] text-slate-700">
+    
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-pink-100 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="index.html" class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-300 via-purple-300 to-indigo-300 flex items-center justify-center font-extrabold text-white shadow-md">D</div>
+          <span class="text-xl font-extrabold bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent">DevTools Converter</span>
+        </a>
+        <a href="index.html" class="text-xs font-bold px-4 py-2 rounded-xl bg-pink-100 text-pink-700 hover:bg-pink-200 transition">← Back to Home</a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-10 space-y-8">
+      
+      <section class="text-center space-y-2">
+        <h1 class="text-3xl font-extrabold text-slate-800">Compound Interest Investment Calculator</h1>
+        <p class="text-slate-500 text-sm">Project long-term asset accumulation and exponential wealth growth instantly.</p>
+      </section>
+
+      <!-- Calculator Box -->
+      <div class="bg-white rounded-3xl border border-slate-100 shadow-xl p-6 sm:p-8 space-y-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <div>
+              <label for="calc-principal" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Initial Principal ($)</label>
+              <input type="number" id="calc-principal" value="5000" oninput="calculateCompound()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-indigo-300" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="calc-rate" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Annual Rate (%)</label>
+                <input type="number" id="calc-rate" value="7.0" step="0.1" oninput="calculateCompound()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-indigo-300" />
+              </div>
+              <div>
+                <label for="calc-years" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Time (Years)</label>
+                <input type="number" id="calc-years" value="10" oninput="calculateCompound()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 outline-none focus:ring-2 focus:ring-indigo-300" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-indigo-50/60 p-6 rounded-3xl border border-indigo-200/50 space-y-4 flex flex-col justify-center">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-indigo-900/70 font-medium">Future Value:</span>
+              <span class="font-extrabold text-indigo-700 text-2xl">$<span id="res-future-value">9,835.76</span></span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-indigo-900/70 font-medium">Total Interest Earned:</span>
+              <span class="font-bold text-emerald-700 text-base">$<span id="res-interest-earned">4,835.76</span></span>
+            </div>
+            <div class="pt-4 border-t border-indigo-200/80 flex justify-between items-center">
+              <span class="font-bold text-indigo-900">Principal Investment:</span>
+              <span class="font-bold text-slate-700 text-sm">$<span id="res-principal-display">5,000.00</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK REFERENCE CHEAT SHEET TABLE -->
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">📊 Growth Reference Chart ($10,000 Initial at 8% Annual Return)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700">
+                  <th class="p-3 rounded-l-xl">Time Horizon</th>
+                  <th class="p-3">Principal Amount</th>
+                  <th class="p-3">Interest Earned</th>
+                  <th class="p-3 rounded-r-xl">Total Portfolio Value</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-600">
+                <tr>
+                  <td class="p-3 font-medium">5 Years</td>
+                  <td class="p-3">$10,000</td>
+                  <td class="p-3">$4,693</td>
+                  <td class="p-3 font-bold text-indigo-600">$14,693</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium">10 Years</td>
+                  <td class="p-3">$10,000</td>
+                  <td class="p-3">$21,589</td>
+                  <td class="p-3 font-bold text-indigo-600">$31,589</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium">20 Years</td>
+                  <td class="p-3">$10,000</td>
+                  <td class="p-3">$36,610</td>
+                  <td class="p-3 font-bold text-indigo-600">$46,610</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SEO Article Content -->
+        <article class="pt-6 border-t border-slate-100 text-slate-600 space-y-4 text-sm leading-relaxed">
+          <h2 class="text-lg font-bold text-slate-800">The Power of Exponential Growth: Understanding Compound Interest</h2>
+          <p>
+            Often termed the "eighth wonder of the world," compound interest is the financial phenomenon where investment earnings generate their own returns over subsequent periods. Unlike simple interest—which calculates yields solely on the original principal—compounding accelerates wealth accumulation exponentially across time horizons.
+          </p>
+        </article>
+
+        <!-- FAQ SECTION -->
+        <section class="pt-6 border-t border-slate-100 space-y-4">
+          <h3 class="text-base font-bold text-slate-800">Frequently Asked Questions</h3>
+          <div class="space-y-3">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">What is compound interest?</h4>
+              <p class="text-xs text-slate-600">Interest calculated on both initial principal and accumulated interest from prior periods.</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 space-y-1">
+              <h4 class="font-bold text-slate-800 text-xs">Why is time horizon critical?</h4>
+              <p class="text-xs text-slate-600">Longer time frames allow exponential growth curves to compound earnings dramatically.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-pink-100 py-6 text-xs text-slate-500 text-center">
+      <p>&copy; DevTools Converter. All rights reserved. | <a href="index.html" class="text-pink-600 hover:underline">Home</a> | <a href="guides.html" class="text-pink-600 hover:underline">Guides</a></p>
+    </footer>
+
+    <script>
+      function calculateCompound() {
+        var principal = parseFloat(document.getElementById('calc-principal').value) || 0;
+        var annualRate = parseFloat(document.getElementById('calc-rate').value) || 0;
+        var years = parseFloat(document.getElementById('calc-years').value) || 0;
+
+        if (principal < 0 || years < 0) return;
+
+        var rateDecimal = annualRate / 100;
+        var futureValue = principal * Math.pow(1 + rateDecimal, years);
+        var interestEarned = futureValue - principal;
+
+        document.getElementById('res-future-value').textContent = futureValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('res-interest-earned').textContent = interestEarned.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('res-principal-display').textContent = principal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      }
+      window.onload = calculateCompound;
+    </script>
+  </body>
+</html>
