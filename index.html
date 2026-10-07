@@ -15,7 +15,7 @@
     <!-- Canonical Tag -->
     <link rel="canonical" href="https://dev-tools-converter-alpha.vercel.app/" />
 
-    <!-- Open Graph Metadata -->
+    <!-- Open Graph Metadata for Social Sharing & SEO -->
     <meta property="og:title" content="DevTools Converter - Free Online Calculation Suite" />
     <meta property="og:description" content="Calculate sales tax, markdowns, mass, length, and thermal scales instantly in your browser." />
     <meta property="og:type" content="website" />
@@ -24,7 +24,7 @@
     <!-- Google AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2805918301542012" crossorigin="anonymous"></script>
 
-    <!-- Schema.org Structured Data -->
+    <!-- Schema.org Structured Data for GSC Rich Snippets -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -62,7 +62,9 @@
       };
     </script>
     <style>
-      .tab-panel-hidden { display: none !important; }
+      .tab-panel-hidden {
+        display: none !important;
+      }
       .active-tab {
         background-color: #FDE2E4 !important;
         color: #9C4146 !important;
@@ -94,7 +96,7 @@
           </span>
         </a>
         <span class="text-xs font-semibold px-3 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
-          v2.3 Optimized SEO & UX
+          v2.4 Multi-Page SEO
         </span>
       </div>
     </header>
@@ -105,28 +107,59 @@
       <!-- Hero Header -->
       <section class="text-center space-y-2 py-2">
         <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-800">
-          Smart Utilities & Conversion Suite
+          Smart Utilities & Converters
         </h1>
         <p class="text-slate-500 text-sm sm:text-base max-w-xl mx-auto">
-          Perform high-precision calculations and unit conversions instantly directly inside your browser window with zero server delays.
+          Select a conversion tool below to perform instant calculations without server latency.
         </p>
       </section>
+
+      <!-- Ad Placement Top Leaderboard -->
+      <div class="w-full flex justify-center min-h-[90px] bg-white/60 rounded-2xl border border-dashed border-pink-200 items-center text-xs text-pink-400/70 shadow-sm overflow-hidden">
+        <ins class="adsbygoogle"
+             style="display:block; width:100%; text-align:center;"
+             data-ad-client="ca-pub-2805918301542012"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
 
       <!-- MAIN TAB SWITCHER CONTAINER -->
       <div class="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-pink-500/5 p-4 sm:p-8">
         
-        <!-- Tab Navigation Buttons -->
+        <!-- Tab Navigation Buttons (Tax & Discount sekarang menjadi Link ke halaman terpisah) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pb-6 border-b border-slate-100">
-          <button type="button" onclick="switchTab('tax-discount')" id="tab-btn-tax-discount" class="tab-btn active-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer">
-            <span>💰 Tax & Discount</span>
-          </button>
-          <button type="button" onclick="switchTab('temperature')" id="tab-btn-temperature" class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer">
+          <a
+            href="tax-calculator.html"
+            class="py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 bg-pink-100 text-pink-700 border border-pink-200 shadow-sm hover:bg-pink-200 cursor-pointer"
+          >
+            <span>💰 Tax & Discount ↗</span>
+          </a>
+          <button
+            type="button"
+            onclick="switchTab('temperature')"
+            id="tab-btn-temperature"
+            class="tab-btn active-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
+          >
             <span>🌡️ Temperature</span>
           </button>
-          <button type="button" onclick="switchTab('weight')" id="tab-btn-weight" class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer">
+          <button
+            type="button"
+            onclick="switchTab('weight')"
+            id="tab-btn-weight"
+            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
+          >
             <span>⚖️ Weight</span>
           </button>
-          <button type="button" onclick="switchTab('length')" id="tab-btn-length" class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer">
+          <button
+            type="button"
+            onclick="switchTab('length')"
+            id="tab-btn-length"
+            class="tab-btn inactive-tab py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer"
+          >
             <span>📏 Length</span>
           </button>
         </div>
@@ -134,57 +167,8 @@
         <!-- TAB PANELS -->
         <div class="pt-8">
           
-          <!-- TAB 1: TAX & DISCOUNT -->
-          <div id="panel-tax-discount" class="tab-panel space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div class="space-y-4">
-                <h3 class="text-lg font-bold text-slate-800">Calculate Discount & Sales Tax</h3>
-                <div>
-                  <label for="calc-price" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Original Price ($)</label>
-                  <input type="number" id="calc-price" value="100" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 focus:bg-white focus:ring-2 focus:ring-pink-300 outline-none transition" />
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label for="calc-discount" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Discount (%)</label>
-                    <input type="number" id="calc-discount" value="10" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 focus:bg-white focus:ring-2 focus:ring-pink-300 outline-none transition" />
-                  </div>
-                  <div>
-                    <label for="calc-tax" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tax / VAT (%)</label>
-                    <input type="number" id="calc-tax" value="11" oninput="calculateTaxAndDiscount()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-800 focus:bg-white focus:ring-2 focus:ring-pink-300 outline-none transition" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-pastel-amber/60 p-6 rounded-3xl border border-amber-200/50 space-y-4 flex flex-col justify-center">
-                <div class="flex justify-between items-center text-sm">
-                  <span class="text-amber-800/70 font-medium">Discount Saved:</span>
-                  <span class="font-bold text-emerald-700 text-base">$<span id="res-discount-amount">10.00</span></span>
-                </div>
-                <div class="flex justify-between items-center text-sm">
-                  <span class="text-amber-800/70 font-medium">Tax Payable:</span>
-                  <span class="font-bold text-amber-700 text-base">$<span id="res-tax-amount">9.90</span></span>
-                </div>
-                <div class="pt-4 border-t border-amber-200/80 flex justify-between items-center">
-                  <span class="font-bold text-amber-900">Final Payable Price:</span>
-                  <span class="font-extrabold text-2xl text-pink-600">$<span id="res-final-price">99.90</span></span>
-                </div>
-              </div>
-            </div>
-
-            <!-- SEO ARTICLE -->
-            <article class="pt-8 border-t border-slate-100 text-slate-600 space-y-6 text-sm leading-relaxed">
-              <header class="space-y-2">
-                <h2 class="text-xl font-bold text-slate-800">Mastering Commercial Calculations: Understanding Sales Tax and Markdowns</h2>
-                <p class="text-xs text-slate-400">Comprehensive Guide to Financial Precision for Retail Consumers and E-Commerce Merchants</p>
-              </header>
-              <p>
-                Navigating retail transactions during seasonal promotional campaigns requires a grounded understanding of how percentage markdowns interact with state or local statutory consumption taxes. Whether shopping in brick-and-mortar storefronts or completing online checkouts, consumers frequently encounter confusing price tags where promotional discounts and value-added taxes (VAT) collide.
-              </p>
-            </article>
-          </div>
-
           <!-- TAB 2: TEMPERATURE -->
-          <div id="panel-temperature" class="tab-panel tab-panel-hidden space-y-8">
+          <div id="panel-temperature" class="tab-panel space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="space-y-4">
                 <h3 class="text-lg font-bold text-slate-800">Temperature Converter</h3>
@@ -201,12 +185,33 @@
                   </select>
                 </div>
               </div>
+
               <div class="bg-pastel-sky/60 p-6 rounded-3xl border border-sky-200/60 space-y-3 flex flex-col justify-center">
-                <div class="flex justify-between items-center text-sm"><span class="text-sky-900/70 font-medium">Celsius (°C):</span><span class="font-bold text-sky-900 text-base" id="res-temp-c">25.00 °C</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-sky-900/70 font-medium">Fahrenheit (°F):</span><span class="font-bold text-sky-900 text-base" id="res-temp-f">77.00 °F</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-sky-900/70 font-medium">Absolute Kelvin (K):</span><span class="font-bold text-sky-900 text-base" id="res-temp-k">298.15 K</span></div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-sky-900/70 font-medium">Celsius (°C):</span>
+                  <span class="font-bold text-sky-900 text-base" id="res-temp-c">25.00 °C</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-sky-900/70 font-medium">Fahrenheit (°F):</span>
+                  <span class="font-bold text-sky-900 text-base" id="res-temp-f">77.00 °F</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-sky-900/70 font-medium">Absolute Kelvin (K):</span>
+                  <span class="font-bold text-sky-900 text-base" id="res-temp-k">298.15 K</span>
+                </div>
               </div>
             </div>
+
+            <!-- SEO ARTICLE -->
+            <article class="pt-8 border-t border-slate-100 text-slate-600 space-y-6 text-sm leading-relaxed">
+              <header class="space-y-2">
+                <h2 class="text-xl font-bold text-slate-800">Thermodynamic Metrics: Navigating Celsius, Fahrenheit, and Absolute Kelvin</h2>
+                <p class="text-xs text-slate-400">Technical Overview of Thermal Measurement Systems in Science, Industry, and Meteorology</p>
+              </header>
+              <p>
+                Thermal energy measurement represents one of the most fundamental requirements in physical sciences, culinary preparation, HVAC engineering, and meteorological forecasting. However, global standards remain split between two major scales—Celsius and Fahrenheit—while advanced physical research relies on absolute thermodynamic temperature measured in Kelvin.
+              </p>
+            </article>
           </div>
 
           <!-- TAB 3: WEIGHT -->
@@ -228,13 +233,36 @@
                   </select>
                 </div>
               </div>
+
               <div class="bg-pastel-mint/60 p-6 rounded-3xl border border-emerald-200/60 space-y-3 flex flex-col justify-center">
-                <div class="flex justify-between items-center text-sm"><span class="text-emerald-900/70 font-medium">Gram (g):</span><span class="font-bold text-emerald-900 text-base" id="res-weight-g">1000.00 g</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-emerald-900/70 font-medium">Kilogram (kg):</span><span class="font-bold text-emerald-900 text-base" id="res-weight-kg">1.0000 kg</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-emerald-900/70 font-medium">Pound (lbs):</span><span class="font-bold text-emerald-900 text-base" id="res-weight-lbs">2.20 lbs</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-emerald-900/70 font-medium">Ounce (oz):</span><span class="font-bold text-emerald-900 text-base" id="res-weight-oz">35.27 oz</span></div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-emerald-900/70 font-medium">Gram (g):</span>
+                  <span class="font-bold text-emerald-900 text-base" id="res-weight-g">1000.00 g</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-emerald-900/70 font-medium">Kilogram (kg):</span>
+                  <span class="font-bold text-emerald-900 text-base" id="res-weight-kg">1.0000 kg</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-emerald-900/70 font-medium">Pound (lbs):</span>
+                  <span class="font-bold text-emerald-900 text-base" id="res-weight-lbs">2.20 lbs</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-emerald-900/70 font-medium">Ounce (oz):</span>
+                  <span class="font-bold text-emerald-900 text-base" id="res-weight-oz">35.27 oz</span>
+                </div>
               </div>
             </div>
+
+            <article class="pt-8 border-t border-slate-100 text-slate-600 space-y-6 text-sm leading-relaxed">
+              <header class="space-y-2">
+                <h2 class="text-xl font-bold text-slate-800">Precision Mass and Weight Conversion in Global Trade and Engineering</h2>
+                <p class="text-xs text-slate-400">An In-Depth Analytical Guide to Metric and Avoirdupois Mass Standards</p>
+              </header>
+              <p>
+                Mass conversion is a foundational pillar of modern global commerce, international freight shipping, pharmaceutical manufacturing, and fitness nutrition tracking.
+              </p>
+            </article>
           </div>
 
           <!-- TAB 4: LENGTH -->
@@ -257,14 +285,40 @@
                   </select>
                 </div>
               </div>
+
               <div class="bg-pastel-purple/60 p-6 rounded-3xl border border-purple-200/60 space-y-3 flex flex-col justify-center">
-                <div class="flex justify-between items-center text-sm"><span class="text-purple-900/70 font-medium">Meter (m):</span><span class="font-bold text-purple-900 text-base" id="res-length-m">10.00 m</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-purple-900/70 font-medium">Centimeter (cm):</span><span class="font-bold text-purple-900 text-base" id="res-length-cm">1000.00 cm</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-purple-900/70 font-medium">Kilometer (km):</span><span class="font-bold text-purple-900 text-base" id="res-length-km">0.0100 km</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-purple-900/70 font-medium">Inch (in):</span><span class="font-bold text-purple-900 text-base" id="res-length-inch">393.70 in</span></div>
-                <div class="flex justify-between items-center text-sm"><span class="text-purple-900/70 font-medium">Foot (ft):</span><span class="font-bold text-purple-900 text-base" id="res-length-ft">32.81 ft</span></div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-purple-900/70 font-medium">Meter (m):</span>
+                  <span class="font-bold text-purple-900 text-base" id="res-length-m">10.00 m</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-purple-900/70 font-medium">Centimeter (cm):</span>
+                  <span class="font-bold text-purple-900 text-base" id="res-length-cm">1000.00 cm</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-purple-900/70 font-medium">Kilometer (km):</span>
+                  <span class="font-bold text-purple-900 text-base" id="res-length-km">0.0100 km</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-purple-900/70 font-medium">Inch (in):</span>
+                  <span class="font-bold text-purple-900 text-base" id="res-length-inch">393.70 in</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                  <span class="text-purple-900/70 font-medium">Foot (ft):</span>
+                  <span class="font-bold text-purple-900 text-base" id="res-length-ft">32.81 ft</span>
+                </div>
               </div>
             </div>
+
+            <article class="pt-8 border-t border-slate-100 text-slate-600 space-y-6 text-sm leading-relaxed">
+              <header class="space-y-2">
+                <h2 class="text-xl font-bold text-slate-800">Linear Measurement Systems: Bridging Metric and Imperial Length Standards</h2>
+                <p class="text-xs text-slate-400">Technical Analysis for Architecture, Spatial Engineering, and Digital Interface Layouts</p>
+              </header>
+              <p>
+                Linear dimension conversion is fundamental across physical structural engineering, geographic mapping, product manufacturing, and modern digital user interface (UI) design.
+              </p>
+            </article>
           </div>
 
         </div>
@@ -288,26 +342,26 @@
     <script>
       function switchTab(tabId) {
         var panels = document.querySelectorAll('.tab-panel');
-        panels.forEach(function(panel) { panel.classList.add('tab-panel-hidden'); });
-        var buttons = document.querySelectorAll('.tab-btn');
-        buttons.forEach(function(btn) { btn.classList.remove('active-tab'); btn.classList.add('inactive-tab'); });
-        var targetPanel = document.getElementById('panel-' + tabId);
-        if (targetPanel) targetPanel.classList.remove('tab-panel-hidden');
-        var targetBtn = document.getElementById('tab-btn-' + tabId);
-        if (targetBtn) { targetBtn.classList.remove('inactive-tag', 'inactive-tab'); targetBtn.classList.add('active-tab'); }
-      }
+        panels.forEach(function(panel) {
+          panel.classList.add('tab-panel-hidden');
+        });
 
-      function calculateTaxAndDiscount() {
-        var originalPrice = parseFloat(document.getElementById('calc-price').value) || 0;
-        var discountPercent = parseFloat(document.getElementById('calc-discount').value) || 0;
-        var taxPercent = parseFloat(document.getElementById('calc-tax').value) || 0;
-        var discountAmount = originalPrice * (discountPercent / 100);
-        var priceAfterDiscount = originalPrice - discountAmount;
-        var taxAmount = priceAfterDiscount * (taxPercent / 100);
-        var finalPrice = priceAfterDiscount + taxAmount;
-        document.getElementById('res-discount-amount').textContent = discountAmount.toFixed(2);
-        document.getElementById('res-tax-amount').textContent = taxAmount.toFixed(2);
-        document.getElementById('res-final-price').textContent = finalPrice.toFixed(2);
+        var buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(function(btn) {
+          btn.classList.remove('active-tab');
+          btn.classList.add('inactive-tab');
+        });
+
+        var targetPanel = document.getElementById('panel-' + tabId);
+        if (targetPanel) {
+          targetPanel.classList.remove('tab-panel-hidden');
+        }
+
+        var targetBtn = document.getElementById('tab-btn-' + tabId);
+        if (targetBtn) {
+          targetBtn.classList.remove('inactive-tab');
+          targetBtn.classList.add('active-tab');
+        }
       }
 
       function convertTempUS() {
@@ -344,7 +398,6 @@
       }
 
       window.onload = function() {
-        calculateTaxAndDiscount();
         convertTempUS();
         convertWeightUS();
         convertLengthUS();
